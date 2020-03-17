@@ -38,7 +38,7 @@ public class MemberDAO {
 			pre.executeUpdate();
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace(); // 예외 추적
 		}
 	}//insertMember
 	
@@ -64,7 +64,7 @@ public class MemberDAO {
 	 		}
 		 	
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace(); // 예외 추적
 		}
 		
 		return check;
