@@ -93,11 +93,11 @@
 <fieldset>
 <legend>Optional</legend>
 <label>Address</label>
-<input type="text" id="postcode" placeholder="우편번호">
+<input type="text" id="postcode" placeholder="우편번호" name="postcode">
 <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-<label></label><input type="text" id="address" placeholder="주소" style="width:300px;"><br>
-<label></label><input type="text" id="detailAddress" placeholder="상세주소">
-<input type="text" id="extraAddress" placeholder="참고항목"><br>
+<label></label><input type="text" id="address" placeholder="주소" style="width:300px;" name="address"><br>
+<label></label><input type="text" id="detailAddress" placeholder="상세주소" name="detailAddress">
+<input type="text" id="extraAddress" placeholder="참고항목" name="extraAddress"><br>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>

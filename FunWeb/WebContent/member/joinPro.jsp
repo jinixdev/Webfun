@@ -17,6 +17,9 @@ request.setCharacterEncoding("utf-8");
 //request 파라미터값 가져와서 변수에저장
 Timestamp reg_date = new Timestamp(System.currentTimeMillis());
 
+String code = request.getParameter("postcode");
+System.out.print(code);
+
 MemberBean mb = new MemberBean();
 mb.setId(request.getParameter("id"));
 mb.setPass(request.getParameter("pass"));
@@ -34,7 +37,7 @@ MemberDAO mDAO = new MemberDAO();
 mDAO.insertMember(mb);
 %>
 <script type="text/javascript">
-location.href="main/main.jsp";
+location.href="../main/main.jsp";
 </script>
 </body>
 </html>

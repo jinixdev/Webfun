@@ -25,7 +25,7 @@ public class MemberDAO {
 	public void insertMember(MemberBean mb) {
 		try { //예외가 발생할 것같은 구문
 			Connection con = getConnection();
-		 	String sql = "insert into member(id,pass,name,email,address,phone,mobile,reg_date) values(?,?,?,?,?,?,?,?)";
+		 	String sql = "insert into member(id,pass,name,email,address,phone,mobile,reg_date,postcode,detailAddress,extraAddress) values(?,?,?,?,?,?,?,?)";
 			PreparedStatement pre = con.prepareStatement(sql);
 			pre.setString(1, mb.getId());
 			pre.setString(2, mb.getPass());
@@ -35,6 +35,9 @@ public class MemberDAO {
 			pre.setInt(6, mb.getPhone());
 			pre.setInt(7, mb.getMobile());
 			pre.setTimestamp(8, mb.getReg_date());
+			pre.setString(9, mb.getPostcode());
+			pre.setString(10, mb.getDetailAddress());
+			pre.setString(11, mb.getExtraAddress());
 			pre.executeUpdate();
 			
 		} catch (Exception e) {
