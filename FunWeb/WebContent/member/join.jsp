@@ -46,6 +46,31 @@
 			
 			return false;
 		}
+		if(document.fr.getElementById("pass").value==""){
+			alert("패스워드를 입력하세요");
+			document.fr.pass.focus();
+			
+			return false;
+		}
+		if(document.fr.getElementById("pass").value==""){
+			alert("패스워드를 입력하세요");
+			document.fr.pass.focus();
+			
+			return false;
+		}
+		
+		
+		
+		
+		
+ }
+ 
+ function retype(){
+	 if(document.fr.getElementById("pass").value==document.fr.getElementById("pass2").value){
+		 document.fr.getElementById("same")
+	 }else{
+		 
+	 }
  }
 </script>
  
@@ -79,9 +104,9 @@
 <input type="text" name="id" class="id" id="id">
 <input type="button" value="dup. check" class="dup" onclick="userDupCheck()"><br>
 <label>Password</label>
-<input type="password" name="pass"><br>
+<input type="password" name="pass" ><br>
 <label>Retype Password</label>
-<input type="password" name="pass2"><br>
+<input type="password" name="pass2" onmouseout="retype()">&nbsp <span id="same"></span><br>
 <label>Name</label>
 <input type="text" name="name"><br>
 <label>E-Mail</label>
