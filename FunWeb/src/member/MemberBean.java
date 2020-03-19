@@ -6,7 +6,7 @@ public class MemberBean {
 
 	private String id,pass,name,email;
 	private String postcode,address,detailAddress,extraAddress;
-	private int phone,mobile;
+	private String phone,mobile;
 	private Timestamp reg_date;
 	
 	public String getId() {
@@ -39,16 +39,16 @@ public class MemberBean {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public int getMobile() {
+	public String getMobile() {
 		return mobile;
 	}
-	public void setMobile(int mobile) {
+	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
 	public String getPostcode() {

@@ -32,8 +32,8 @@ public class MemberDAO {
 			pre.setString(3, mb.getName());
 			pre.setString(4, mb.getEmail());
 			pre.setString(5, mb.getAddress());
-			pre.setInt(6, mb.getPhone());
-			pre.setInt(7, mb.getMobile());
+			pre.setString(6, mb.getPhone());
+			pre.setString(7, mb.getMobile());
 			pre.setTimestamp(8, mb.getReg_date());
 			pre.setString(9, mb.getPostcode());
 			pre.setString(10, mb.getDetailAddress());
