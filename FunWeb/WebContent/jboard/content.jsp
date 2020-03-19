@@ -44,6 +44,7 @@ JBoardBean jbb= jbDAO.getboardContent(num);
 <tr><td>비밀번호</td><td><input type="password" name="pass"></td>
 <% session.setAttribute("num", jbb.getNum());
 %>
+된거야안된거야~~
 <td><button type="submit" value="확인">확인</button></td></tr>
 </table>
 </form>
