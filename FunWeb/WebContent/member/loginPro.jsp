@@ -24,7 +24,7 @@ if(check ==1){
 session.setAttribute("id", request.getParameter("id"));%>
 <script type="text/javascript">
 alert("환영합니다");
-location.href("../main/main.jsp");
+location.href="../main/main.jsp";
 </script>
 <%
 }else if(check==0){%>
