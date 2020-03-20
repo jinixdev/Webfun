@@ -126,7 +126,7 @@
 <input type="password" id="pass" name="pass" onchange="retype()"><span id="passcheck"></span><br>
 <label>Retype Password</label>
 <input type="password" id="pass2" name="pass2" onchange="retype()"> <span id="passsame"></span><br>
-<label>*Name</label>
+<label>**Name</label>
 <input type="text" name="name"><br>
 <label>E-Mail</label>
 <input type="email" id="email" name="email"><br>
