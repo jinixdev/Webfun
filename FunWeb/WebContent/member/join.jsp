@@ -26,29 +26,74 @@
  </script>
  <![endif]-->
  <script type="text/javascript">
- 
+
  function submitCheck(){
-		if(document.fr.getElementById("id").value==""){
+		if(document.getElementById('id').value==""){
 			alert("아이디를 입력하세요");
 			document.fr.id.focus();
 			return false; //
 		}
 		
-		if(document.fr.getElementById("pass").value==""){
+		if(document.getElementById("pass").value==""){
 			alert("패스워드를 입력하세요");
 			document.fr.pass.focus();
 			
 			return false;
 		}
+
+		if(document.getElementById("phone").value==""){
+			alert("전화번호 입력하세요");
+			document.fr.pass.focus();
+			
+			return false;
+		}
+		if(document.getElementById("mobile").value==""){
+			alert("mobile 입력하세요.");
+			document.fr.pass.focus();
+
 		
 		if(document.fr.getElementById("idDuplication").value=="idUncheck"){
 			alert("아이디 중복체크해주세요.");
 			document.fr.idUncheck.focus();
+
 			
 			return false;
 		}
 		
 		
+
+		
+		
+		
+ }
+ 
+ function retype(){
+	
+	 if(document.getElementById("pass").value.length>5){
+		 document.getElementById("passcheck").innerHTML="";
+		if(document.getElementById("pass").value!="" &&document.getElementById("pass2").value!=""){
+			 if(document.getElementById("pass").value==document.getElementById("pass2").value){
+		 		document.getElementById("passsame").innerHTML="<font color=green>비밀번호가 일치합니다.</font>";
+		 	}else{
+				document.getElementById("passsame").innerHTML="<font color=red>비밀번호가 일치하지 않습니다.</font>";
+	 		}
+		 }
+	 }else{
+		 document.getElementById("passcheck").innerHTML="<font color=red>비밀번호를 5자이상 입력해 주십시오.</font>";
+		 
+	 }
+	 
+	 
+	 if(document.getElementById("email").value!="" && document.getElementById("email2").value!=""){
+	 	if(document.getElementById("email").value==document.getElementById("email2").value){
+		 document.getElementById("emailsame").innerHTML="<font color=green>일치합니다.</font>";
+		 }else{
+		 document.getElementById("emailsame").innerHTML="<font color=red>이메일이 일치하지 않습니다.</font>";
+		 }
+	 }
+	 
+
+
  }
  
  function userDupCheck(){
@@ -97,30 +142,36 @@
 <!-- form태그에서만 post -->
 <fieldset>
 <legend>Basic Info</legend>
-<label>User ID</label>
+<label>*User ID</label>
 <input type="text" name="id" class="id" id="id">
+
+<input type="button" value="dup. check" class="dup" onclick="userDupCheck()"><br>
+<label>*Password</label>
+<input type="password" id="pass" name="pass" onchange="retype()"><span id="passcheck"></span><br>
+
 <input type="button" value="dup. check" class="dup" onclick="userDupCheck()">
 <input type="hidden" id="idDuplication" value="idUncheck" ><br>
 <label>Password</label>
 <input type="password" name="pass"><br>
+
 <label>Retype Password</label>
-<input type="password" name="pass2"><br>
-<label>Name</label>
+<input type="password" id="pass2" name="pass2" onchange="retype()"> <span id="passsame"></span><br>
+<label>**Name</label>
 <input type="text" name="name"><br>
 <label>E-Mail</label>
-<input type="email" name="email"><br>
+<input type="email" id="email" name="email"><br>
 <label>Retype E-Mail</label>
-<input type="email" name="email2"><br>
+<input type="email" id="email2" name="email2" onchange="retype()"> <span id="emailsame"></span><br>
 </fieldset>
 
 <fieldset>
 <legend>Optional</legend>
 <label>Address</label>
-<input type="text" id="postcode" placeholder="우편번호">
+<input type="text" id="postcode" placeholder="우편번호" name="postcode">
 <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-<label></label><input type="text" id="address" placeholder="주소" style="width:300px;"><br>
-<label></label><input type="text" id="detailAddress" placeholder="상세주소">
-<input type="text" id="extraAddress" placeholder="참고항목"><br>
+<label></label><input type="text" id="address" placeholder="주소" style="width:300px;" name="address"><br>
+<label></label><input type="text" id="detailAddress" placeholder="상세주소" name="detailAddress">
+<input type="text" id="extraAddress" placeholder="참고항목" name="extraAddress"><br>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>

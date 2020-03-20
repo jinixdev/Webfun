@@ -26,29 +26,23 @@ public class MemberDAO {
 	}
 	
 
-
-	public void insertMember(MemberBean jmb) { 
-		
-		
-		try {
-			//1단계
-			Class.forName("com.mysql.jdbc.Driver");
-			//2단계 : 경로설정
-		 	String dburl = "jdbc:mysql://localhost:3306/jspdb1";
-		 	String dbUser = "jspid";
-		 	String dbPass = "jsppass";
-		 	//3단계
-		 	Connection con = DriverManager.getConnection(dburl, dbUser, dbPass);
-			String sql = "insert into member(id,pass,name,age,gender,email,reg_date) values(?,?,?,?,?,?,?)";
+	public void insertMember(MemberBean mb) {
+		try { //예외가 발생할 것같은 구문
+			Connection con = getConnection();
+		 	String sql = "insert into member(id,pass,name,email,address,phone,mobile,reg_date,postcode,detailAddress,extraAddress) values(?,?,?,?,?,?,?,?)";
 			PreparedStatement pre = con.prepareStatement(sql);
-			pre.setString(1, jmb.getId());
-			pre.setString(2, jmb.getPass());
-			pre.setString(3, jmb.getName());
-			pre.setInt(4, jmb.getAge());
-			pre.setString(5, jmb.getGender());
-			pre.setString(6, jmb.getEmail());
-			pre.setTimestamp(7, jmb.getReg_date());
-			
+			pre.setString(1, mb.getId());
+			pre.setString(2, mb.getPass());
+			pre.setString(3, mb.getName());
+			pre.setString(4, mb.getEmail());
+			pre.setString(5, mb.getAddress());
+			pre.setString(6, mb.getPhone());
+			pre.setString(7, mb.getMobile());
+			pre.setTimestamp(8, mb.getReg_date());
+			pre.setString(9, mb.getPostcode());
+			pre.setString(10, mb.getDetailAddress());
+			pre.setString(11, mb.getExtraAddress());
+
 			pre.executeUpdate();
 			
 		} catch (Exception e) {
