@@ -1,3 +1,6 @@
+<%@page import="comment.commentBean"%>
+<%@page import="java.util.List"%>
+<%@page import="comment.commentDAO"%>
 <%@page import="com.sun.xml.internal.txw2.Document"%>
 <%@page import="jboard.JBoardBean"%>
 <%@page import="jboard.JBoardDAO"%>
@@ -36,18 +39,48 @@ JBoardBean jbb= jbDAO.getboardContent(num);
 <tr><td>내용</td><td colspan="3"><%=jbb.getContent() %></td></tr>
 <tr><td colspan="4"> <input type="button" value="글수정" onclick="location.href='updateForm.jsp?num=<%=jbb.getNum()%>'">
 <input type="button" value="글삭제" onclick="showhide();">
+
 <input type="button" value="글목록" onclick="location.href='list.jsp'"></td></tr>
 </table>
+
+<!-- delete code -->
 <div id="showtable" style="display:none;">
 <form action="deletePro.jsp" method="post">
 <table>
 <tr><td>비밀번호</td><td><input type="password" name="pass"></td>
-<% session.setAttribute("num", jbb.getNum());
-%>
-된거야안된거야~~
+<% session.setAttribute("num", jbb.getNum());%>
 <td><button type="submit" value="확인">확인</button></td></tr>
 </table>
 </form>
 </div>
+
+<hr>
+<!-- comment code -->
+
+<form action="contentPro.jsp">
+<input type="hidden" name="id" value="<%=jbb.getName()%>">
+<textarea name="content" cols="50" rows="2"></textarea>
+<input type="hidden" name="ref" value="<%=num%>">
+<input type="submit">
+</form>
+
+<%
+commentDAO comDAO = new commentDAO();
+List comList= comDAO.getCommentList(num);%>
+<table border="1">
+<% for(int i=0;i<comList.size();i++){
+	commentBean cb = (commentBean)comList.get(i);
+	%>
+<tr><td><%=cb.getId() %></td><td><%=cb.getContent() %></td></tr>
+<%} %>
+</table>
+
+
+
+
+
+
+
+
 </body>
 </html>

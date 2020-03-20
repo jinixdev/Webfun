@@ -34,7 +34,7 @@ MemberDAO mDAO = new MemberDAO();
 mDAO.insertMember(mb);
 %>
 <script type="text/javascript">
-location.href="main/main.jsp";
+location.href="../main/main.jsp";
 </script>
 </body>
 </html>

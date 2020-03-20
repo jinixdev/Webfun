@@ -7,6 +7,13 @@ public class JBoardBean {
 	private String name,pass,subject,content;
 	private Timestamp date;
 
+	public Timestamp getDate() {
+		return date;
+	}
+
+	public void setDate(Timestamp date) {
+		this.date = date;
+	}
 
 	private int num,readcount;
 
@@ -58,12 +65,8 @@ public class JBoardBean {
 		this.content = content;
 	}
 
-	public Timestamp getDate() {
-		return date;
-	}
+	
 
-	public void setDate(Timestamp date) {
-		this.date = date;
-	}
+
 
 }
