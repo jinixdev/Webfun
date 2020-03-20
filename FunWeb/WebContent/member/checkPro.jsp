@@ -21,11 +21,12 @@ int check = mDAO.userDupCheck(id);%>
 <%switch(check){
 case 1:  %>
 존재하는 아이디 입니다.<br>
+<input type="hidden" name="sender" value="0">
 <input type="button" value="확인" onclick="window.close()">
 <%break;
 case 0:%>
 사용할 수 있는 아이디 입니다.<br>
-<input type="button" value="사용" onclick="window.close()">
+<input type="hidden" name="sender" value="1">
 <input type="button" value="확인" onclick="window.close()">
 <%break;}%>
 </form>

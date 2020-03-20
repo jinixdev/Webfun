@@ -12,16 +12,17 @@
 <%
 String id = (String)session.getAttribute("id"); 
 %>
-<form action="writePro.jsp" method="post">
-<table border="1"><%
-if(id==null){%>
-<tr><td>글쓴이</td><td><input type="text" name="name"></td></tr>
-<tr><td>비밀번호</td><td><input type="text" name="pass"></td></tr>
+<%if(id==null){%>
+<script type="text/javascript">
+alert("글쓰기는 회원만 이용가능합니다.");
+</script>
 <%}else{ 
 	JMemberDAO jmDAO = new JMemberDAO();
 	JMemberBean jmb = jmDAO.getMember(id);
 	System.out.println("jmb.getId() : " +jmb.getId());
 %>
+<form action="writePro.jsp" method="post">
+<table border="1">
 <tr><td>글쓴이</td><td><input type="text" name="name" value="<%=jmb.getName()%>"></td></tr>
 <tr><td>비밀번호</td><td><input type="text" name="pass" value="<%=jmb.getPass()%>"></td></tr>
 <tr><td>제목</td><td><input type="text" name="subject"></td></tr>

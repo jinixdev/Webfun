@@ -1,3 +1,6 @@
+<%@page import="jboard.JBoardBean"%>
+<%@page import="java.util.List"%>
+<%@page import="jboard.JBoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -47,47 +50,38 @@
 <!-- 게시판 -->
 <article>
 <h1>Notice</h1>
+<%
+JBoardDAO jbDAO= new JBoardDAO();
+
+List boardlist = jbDAO.getboardList();
+%>
 <table id="notice">
 <tr><th class="tno">No.</th>
     <th class="ttitle">Title</th>
     <th class="twrite">Writer</th>
     <th class="tdate">Date</th>
     <th class="tread">Read</th></tr>
-<tr><td>15</td><td class="left">Vivanus viveer portitor commodo.</td>
-    <td>Host Admin</td><td>2012.11.06</td><td>15</td></tr>
-<tr><td>14</td><td class="left">Vivanus viveer portitor commodo.</td>
-    <td>Host Admin</td><td>2012.11.06</td><td>15</td></tr>
-<tr><td>13</td><td class="left">Vivanus viveer portitor commodo.</td>
-    <td>Host Admin</td><td>2012.11.06</td><td>15</td></tr>
-<tr><td>12</td><td class="left">Vivanus viveer portitor commodo.</td>
-    <td>Host Admin</td><td>2012.11.06</td><td>15</td></tr>
-<tr><td>11</td><td class="left">Vivanus viveer portitor commodo.</td>
-    <td>Host Admin</td><td>2012.11.06</td><td>15</td></tr>
-<tr><td>10</td><td class="left">Vivanus viveer portitor commodo.</td>
-    <td>Host Admin</td><td>2012.11.06</td><td>15</td></tr>
-<tr><td>9</td><td class="left">Vivanus viveer portitor commodo.</td>
-    <td>Host Admin</td><td>2012.11.06</td><td>15</td></tr>
-<tr><td>8</td><td class="left">Vivanus viveer portitor commodo.</td>
-    <td>Host Admin</td><td>2012.11.06</td><td>15</td></tr>
-<tr><td>7</td><td class="left">Vivanus viveer portitor commodo.</td>
-    <td>Host Admin</td><td>2012.11.06</td><td>15</td></tr>
-<tr><td>6</td><td class="left">Vivanus viveer portitor commodo.</td>
-    <td>Host Admin</td><td>2012.11.06</td><td>15</td></tr>
-<tr><td>5</td><td class="left">Vivanus viveer portitor commodo.</td>
-    <td>Host Admin</td><td>2012.11.06</td><td>15</td></tr>
-<tr><td>4</td><td class="left">Vivanus viveer portitor commodo.</td>
-    <td>Host Admin</td><td>2012.11.06</td><td>15</td></tr>
-<tr><td>3</td><td class="left">Vivanus viveer portitor commodo.</td>
-    <td>Host Admin</td><td>2012.11.06</td><td>15</td></tr>
-<tr><td>2</td><td class="left">Vivanus viveer portitor commodo.</td>
-    <td>Host Admin</td><td>2012.11.06</td><td>15</td></tr>
-<tr><td>1</td><td class="left">Vivanus viveer portitor commodo.</td>
-    <td>Host Admin</td><td>2012.11.06</td><td>15</td></tr>    
+<% for(int i =0;i<boardlist.size();i++){
+	JBoardBean jbb = (JBoardBean)boardlist.get(i);%>   
+<tr><td><%=jbb.getNum() %></td><td class="left"><a href="../board/content.jsp?num=<%=jbb.getNum()%>"><%= jbb.getSubject() %></a></td>
+    <td><%=jbb.getName() %></td><td><%=jbb.getDate() %></td><td><%=jbb.getReadcount() %></td></tr>
+
+
+
+<%}%> 
+
+
 </table>
 <div id="table_search">
 <input type="text" name="search" class="input_box">
 <input type="button" value="search" class="btn">
+<%String id = (String)session.getAttribute("id"); 
+if(id!=null){%>
+<input type="button" value="글작성" class="btn" onclick="location.href='writeForm.jsp'">
+<%} %>
 </div>
+
+
 <div class="clear"></div>
 <div id="page_control">
 <a href="#">Prev</a>

@@ -26,9 +26,11 @@ for(int i =0;i<boardlist.size();i++){
 	<td><a href="content.jsp?num=<%=jbb.getNum()%>"><%= jbb.getSubject() %></a></td>
 	<td><%=jbb.getContent() %></td><td><%=jbb.getDate() %></td>
 	</tr>
-<%} %>
+<%} 
+String id = (String)session.getAttribute("id"); 
+if(id!=null){%>
 <tr><td><input type="button" value="글작성" onclick="location.href='writeForm.jsp'"></td></tr>
-
+<%} %>
 </table>
 </body>
 </html>

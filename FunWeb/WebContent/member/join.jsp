@@ -26,17 +26,11 @@
  </script>
  <![endif]-->
  <script type="text/javascript">
- function userDupCheck(){
-	 var id = document.fr.id.value;
-		 window.open("checkPro.jsp?id="+id,
-                 "chkForm", "width=400, height=300, resizable = no, scrollbars = no");  
-	 
- }
+
  function submitCheck(){
 		if(document.getElementById('id').value==""){
 			alert("아이디를 입력하세요");
 			document.fr.id.focus();
-			
 			return false; //
 		}
 		
@@ -46,6 +40,7 @@
 			
 			return false;
 		}
+
 		if(document.getElementById("phone").value==""){
 			alert("전화번호 입력하세요");
 			document.fr.pass.focus();
@@ -55,11 +50,18 @@
 		if(document.getElementById("mobile").value==""){
 			alert("mobile 입력하세요.");
 			document.fr.pass.focus();
+
+		
+		if(document.fr.getElementById("idDuplication").value=="idUncheck"){
+			alert("아이디 중복체크해주세요.");
+			document.fr.idUncheck.focus();
+
 			
 			return false;
 		}
 		
 		
+
 		
 		
 		
@@ -90,11 +92,32 @@
 		 }
 	 }
 	 
+
+
  }
+ 
+ function userDupCheck(){
+	 var id = document.fr.id.value;
+	 window.open("checkPro.jsp?id="+id,"chkForm", "width=500, height=300, resizable = no, scrollbars = no"); 
+	document.fr.receiver.value=checkPro.document.fr.sender.value;
+	
+	if(checkPro.document.fr.sender.value="1"){
+		checkPro.document.fr.idDuplication.value="check";
+
+	}else{
+		checkPro.document.fr.idDuplication.value="idUncheck";
+	}
+ }
+ 
+ 
+ 
+
+
 </script>
  
 </head>
 <body>
+
 <div id="wrap">
 <!-- 헤더들어가는 곳 -->
 <jsp:include page="../inc/top.jsp"></jsp:include>
@@ -121,9 +144,16 @@
 <legend>Basic Info</legend>
 <label>*User ID</label>
 <input type="text" name="id" class="id" id="id">
+
 <input type="button" value="dup. check" class="dup" onclick="userDupCheck()"><br>
 <label>*Password</label>
 <input type="password" id="pass" name="pass" onchange="retype()"><span id="passcheck"></span><br>
+
+<input type="button" value="dup. check" class="dup" onclick="userDupCheck()">
+<input type="hidden" id="idDuplication" value="idUncheck" ><br>
+<label>Password</label>
+<input type="password" name="pass"><br>
+
 <label>Retype Password</label>
 <input type="password" id="pass2" name="pass2" onchange="retype()"> <span id="passsame"></span><br>
 <label>**Name</label>
