@@ -25,7 +25,7 @@ JBoardBean jbb= jbDAO.getboardContent(num);
 <tr><td>내용</td><td colspan="3"><input type="text" name="content" value="<%=jbb.getContent() %>"></td></tr>
 <tr><td>내용2</td><td colspan="3"><input type="text" name="content2"></td></tr>
 <tr><td colspan="4"> <input type="submit" value="확인">
-<input type="button" value="취소" onclick="location.href='list.jsp'"></td></tr>
+<input type="button" value="취소" onclick="location.href='../center/notice.jsp'"></td></tr>
 	
 </table>
 </form>

@@ -77,7 +77,7 @@ List boardlist = jbDAO.getboardList();
 <input type="button" value="search" class="btn">
 <%String id = (String)session.getAttribute("id"); 
 if(id!=null){%>
-<input type="button" value="글작성" class="btn" onclick="location.href='writeForm.jsp'">
+<input type="button" value="글작성" class="btn" onclick="location.href='../board/writeForm.jsp'">
 <%} %>
 </div>
 

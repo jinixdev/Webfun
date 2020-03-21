@@ -19,7 +19,7 @@ jbb.setContent(request.getParameter("content"));
 JBoardDAO jbDAO = new JBoardDAO();
 jbDAO.updateBoard(num, jbb); 
 
-response.sendRedirect("list.jsp");
+response.sendRedirect("../center/notice.jsp");
 
 %>
 </body>

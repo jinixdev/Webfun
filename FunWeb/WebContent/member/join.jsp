@@ -28,7 +28,7 @@
  <script type="text/javascript">
 
  function submitCheck(){
-		if(document.getElementById('id').value==""){
+		if(document.getElementById("id").value==""){
 			alert("아이디를 입력하세요");
 			document.fr.id.focus();
 			return false; //
@@ -40,52 +40,69 @@
 			
 			return false;
 		}
-
-		if(document.getElementById("phone").value==""){
-			alert("전화번호 입력하세요");
-			document.fr.pass.focus();
+		
+		if(document.getElementById("name").value==""){
+			alert("이름을 입력하세요");
+			document.fr.name.focus();
 			
 			return false;
 		}
-		if(document.getElementById("mobile").value==""){
-			alert("mobile 입력하세요.");
-			document.fr.pass.focus();
 
 		
-		if(document.fr.getElementById("idDuplication").value=="idUncheck"){
+		
+		if(document.getElementById("idDuplication").value=="idUncheck"){
 			alert("아이디 중복체크해주세요.");
-			document.fr.idUncheck.focus();
-
-			
+			document.fr.id.focus();
+			return false;
+		}
+		
+		if(document.getElementById("passDuplication").value=="passUncheck"){
+			alert("비밀번호 중복체크해주세요.");
+			document.fr.pass.focus();
+			return false;
+		}
+		if(document.getElementById("emailDuplication").value=="emailUncheck"){
+			alert("이메일 중복체크해주세요.");
+			document.fr.email.focus();
 			return false;
 		}
 		
 		
-
 		
 		
 		
- }
+ }//submitCheck
  
  function retype(){
-	
-	 if(document.getElementById("pass").value.length>5){
-		 document.getElementById("passcheck").innerHTML="";
-		if(document.getElementById("pass").value!="" &&document.getElementById("pass2").value!=""){
-			 if(document.getElementById("pass").value==document.getElementById("pass2").value){
-		 		document.getElementById("passsame").innerHTML="<font color=green>비밀번호가 일치합니다.</font>";
-		 	}else{
-				document.getElementById("passsame").innerHTML="<font color=red>비밀번호가 일치하지 않습니다.</font>";
-	 		}
-		 }
+	 var pass =document.getElementById("pass").value;
+	 var pass2=document.getElementById("pass2").value;
+	 var email =document.getElementById("email").value;
+	 var email2=document.getElementById("email2").value;
+	 
+	 document.getElementById("passcheck").innerHTML="";
+	 if(pass.length>3){
+		 if(pass!="" && pass2!=""){
+				document.getElementById("passcheck").innerHTML="";
+				 if(pass==pass2){
+					 document.getElementById("passDuplication").value ="check";
+			 		document.getElementById("passsame").innerHTML="<font color=green>비밀번호가 일치합니다.</font>";
+			 	}else{
+					document.getElementById("passsame").innerHTML="<font color=red>비밀번호가 일치하지 않습니다.</font>";
+		 		}
+			 }
 	 }else{
-		 document.getElementById("passcheck").innerHTML="<font color=red>비밀번호를 5자이상 입력해 주십시오.</font>";
+		 document.getElementById("passcheck").innerHTML="<font color=red>비밀번호를 4자이상 입력해 주십시오.</font>";
 		 
 	 }
 	 
+	
+		
+	 document.getElementById("emailsame").innerHTML="";
 	 
-	 if(document.getElementById("email").value!="" && document.getElementById("email2").value!=""){
-	 	if(document.getElementById("email").value==document.getElementById("email2").value){
+	 if(email!="" && email2!=""){
+		 
+	 	if(email==email2){
+	 		document.getElementById("emailDuplication").value ="check";
 		 document.getElementById("emailsame").innerHTML="<font color=green>일치합니다.</font>";
 		 }else{
 		 document.getElementById("emailsame").innerHTML="<font color=red>이메일이 일치하지 않습니다.</font>";
@@ -94,19 +111,14 @@
 	 
 
 
- }
+ }//retype
+ 
+ var checkpro;
  
  function userDupCheck(){
 	 var id = document.fr.id.value;
-	 window.open("checkPro.jsp?id="+id,"chkForm", "width=500, height=300, resizable = no, scrollbars = no"); 
-	document.fr.receiver.value=checkPro.document.fr.sender.value;
-	
-	if(checkPro.document.fr.sender.value="1"){
-		checkPro.document.fr.idDuplication.value="check";
-
-	}else{
-		checkPro.document.fr.idDuplication.value="idUncheck";
-	}
+// 	window.name = "checkPro";
+	checkpro=window.open("checkPro.jsp?id="+id,"chkpro", "width=500, height=300, resizable = no, scrollbars = no");
  }
  
  
@@ -127,14 +139,11 @@
 <!-- 본문메인이미지 -->
 <div id="sub_img_member"></div>
 <!-- 본문메인이미지 -->
+
 <!-- 왼쪽메뉴 -->
-<nav id="sub_menu">
-<ul>
-<li><a href="#">Join us</a></li>
-<li><a href="#">Privacy policy</a></li>
-</ul>
-</nav>
+<jsp:include page="../inc/info_sub_menu.jsp"></jsp:include>
 <!-- 왼쪽메뉴 -->
+
 <!-- 본문내용 -->
 <article>
 <h1>Join Us</h1>
@@ -144,24 +153,23 @@
 <legend>Basic Info</legend>
 <label>*User ID</label>
 <input type="text" name="id" class="id" id="id">
-
 <input type="button" value="dup. check" class="dup" onclick="userDupCheck()"><br>
-<label>*Password</label>
-<input type="password" id="pass" name="pass" onchange="retype()"><span id="passcheck"></span><br>
+<input type="hidden" name="idDuplication" id="idDuplication" value="idUncheck" ><br>
 
-<input type="button" value="dup. check" class="dup" onclick="userDupCheck()">
-<input type="hidden" id="idDuplication" value="idUncheck" ><br>
-<label>Password</label>
-<input type="password" name="pass"><br>
+
+<label>*Password</label>
+<input type="password" id="pass" name="pass" onkeyup="retype()"><span id="passcheck"></span><br>
 
 <label>Retype Password</label>
-<input type="password" id="pass2" name="pass2" onchange="retype()"> <span id="passsame"></span><br>
+<input type="password" id="pass2" name="pass2" onkeyup="retype()"> <span id="passsame"></span>
+<input type="hidden"  id="passDuplication" value="passUncheck" ><br>
 <label>**Name</label>
-<input type="text" name="name"><br>
+<input type="text" id="name" name="name"><br>
 <label>E-Mail</label>
-<input type="email" id="email" name="email"><br>
+<input type="email" id="email" name="email" onkeyup="retype()"><br>
 <label>Retype E-Mail</label>
-<input type="email" id="email2" name="email2" onchange="retype()"> <span id="emailsame"></span><br>
+<input type="email" id="email2" name="email2" onkeyup="retype()"> <span id="emailsame"></span>
+<input type="hidden"  id="emailDuplication" value="emailUncheck" ><br>
 </fieldset>
 
 <fieldset>
@@ -235,6 +243,7 @@
 <input type="reset" value="Cancel" class="cancel">
 </div>
 </form>
+
 </article>
 <!-- 본문내용 -->
 <!-- 본문들어가는 곳 -->
