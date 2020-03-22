@@ -84,6 +84,52 @@ public class commentDAO {
 		
 		
 		return commentlist;
-	}
+	}//getCommentList
+	
+	
+	public void commentUpdate(int num,int ref,String comment) {
+		try {
+			//1단계
+			Class.forName("com.mysql.jdbc.Driver");
+			//2단계 : 경로설정
+		 	String dburl = "jdbc:mysql://localhost:3306/jspdb1";
+		 	String dbUser = "jspid";
+		 	String dbPass = "jsppass";
+		 	//3단계
+		 	Connection con = DriverManager.getConnection(dburl, dbUser, dbPass);
+		 	String sql="update comment set content=? where num=?&&ref=?";
+		 	PreparedStatement pre = con.prepareStatement(sql);
+		 	pre.setString(1, comment);
+		 	pre.setInt(2, num);
+		 	pre.setInt(3, ref);
+		 	pre.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}//commentUpdate
+	
+	public void commentDelete(int num,int ref) {
+		try {
+			//1단계
+			Class.forName("com.mysql.jdbc.Driver");
+			//2단계 : 경로설정
+		 	String dburl = "jdbc:mysql://localhost:3306/jspdb1";
+		 	String dbUser = "jspid";
+		 	String dbPass = "jsppass";
+		 	//3단계
+		 	Connection con = DriverManager.getConnection(dburl, dbUser, dbPass);
+		 	String sql="delete from comment where num=?&&ref=?";
+		 	PreparedStatement pre = con.prepareStatement(sql);
+		 	pre.setInt(1, num);
+		 	pre.setInt(2, ref);
+		 	pre.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+	}//commentDelete
+	
 
 }

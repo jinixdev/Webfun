@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,12 +71,13 @@ public class JBoardDAO {
 			 ResultSet rs= pre.executeQuery();
 			 while(rs.next()) {
 				 JBoardBean jbb = new JBoardBean();
+				 String s = new SimpleDateFormat("yyyy-MM-dd").format(rs.getTimestamp("date"));
 				 jbb.setNum(rs.getInt("num"));
 				 jbb.setName(rs.getString("name"));
 				 jbb.setPass(rs.getString("pass"));
 				 jbb.setSubject(rs.getString("subject"));
 				 jbb.setContent(rs.getString("content"));
-				 jbb.setDate(rs.getTimestamp("date"));
+				 jbb.setOnlydate(s);
 				 jbb.setReadcount(rs.getInt("readcount"));
 				 
 				 jbblist.add(jbb);
@@ -107,12 +110,13 @@ public class JBoardDAO {
 			 ResultSet rs= pre.executeQuery();
 			 while(rs.next()) {
 				 JBoardBean jbb = new JBoardBean();
+				 String s = new SimpleDateFormat("yyyy-MM-dd").format(rs.getTimestamp("date"));
 				 jbb.setNum(rs.getInt("num"));
 				 jbb.setName(rs.getString("name"));
 				 jbb.setPass(rs.getString("pass"));
 				 jbb.setSubject(rs.getString("subject"));
 				 jbb.setContent(rs.getString("content"));
-				 jbb.setDate(rs.getTimestamp("date"));
+				 jbb.setOnlydate(s);
 				 jbb.setReadcount(rs.getInt("readcount"));
 				 
 				 jbblist.add(jbb);

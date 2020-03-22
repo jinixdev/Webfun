@@ -6,6 +6,15 @@ public class JBoardBean {
 	
 	private String name,pass,subject,content;
 	private Timestamp date;
+	private String onlydate;
+
+	public String getOnlydate() {
+		return onlydate;
+	}
+
+	public void setOnlydate(String onlydate) {
+		this.onlydate = onlydate;
+	}
 
 	public Timestamp getDate() {
 		return date;
@@ -14,6 +23,11 @@ public class JBoardBean {
 	public void setDate(Timestamp date) {
 		this.date = date;
 	}
+	
+	public void setDate1(Timestamp date) {
+		this.date = date;
+	}
+	
 
 	private int num,readcount;
 

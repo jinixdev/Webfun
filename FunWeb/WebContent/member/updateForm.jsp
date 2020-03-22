@@ -122,12 +122,7 @@
 <div id="sub_img_member"></div>
 <!-- 본문메인이미지 -->
 <!-- 왼쪽메뉴 -->
-<nav id="sub_menu">
-<ul>
-<li><a href="#">Join us</a></li>
-<li><a href="#">Privacy policy</a></li>
-</ul>
-</nav>
+<jsp:include page="../inc/info_sub_menu.jsp"></jsp:include>
 <!-- 왼쪽메뉴 -->
 <!-- 본문내용 -->
 <article>

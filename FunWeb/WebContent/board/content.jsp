@@ -20,6 +20,19 @@ function showhide(){
 		obj.style.display="none";
 	}
 }
+
+function commentUp(){
+	var update=document.getElementById("updatetable");
+	if(update.style.display=="none"){
+		update.style.display="block";
+	}else{
+		update.style.display="none";
+	}
+}
+function commentDelete(){
+	
+}
+
 </script> 
 </head>
 <body>
@@ -56,7 +69,6 @@ JBoardBean jbb= jbDAO.getboardContent(num);
 
 <hr>
 <!-- comment code -->
-
 <form action="contentPro.jsp">
 <input type="hidden" name="id" value="<%=jbb.getName()%>">
 <textarea name="content" cols="50" rows="2"></textarea>
@@ -66,14 +78,46 @@ JBoardBean jbb= jbDAO.getboardContent(num);
 
 <%
 commentDAO comDAO = new commentDAO();
-List comList= comDAO.getCommentList(num);%>
+List comList= comDAO.getCommentList(num);
+
+int commentnum;
+int commentref;
+String comment;%>
 <table border="1">
 <% for(int i=0;i<comList.size();i++){
 	commentBean cb = (commentBean)comList.get(i);
 	%>
-<tr><td><%=cb.getId() %></td><td><%=cb.getContent() %></td></tr>
+<tr><td><%=cb.getId() %></td><td><%=cb.getContent() %></td>
+<td><input type="button" value="수정" onclick="commentUp();"></td>
+<td><a href="../comment/deletePro.jsp">x</a></td></tr>
+
+
+<%
+commentnum = cb.getNum();
+commentref = cb.getRef();
+comment = cb.getContent();
+
+} %>
+</table>
+
+
+
+<!-- comment update code -->
+<div id="updatetable" style="display:none;">
+<form action="../comment/updateForm.jsp" method="post">
+<table border="1">
+<% for(int i=0;i<comList.size();i++){
+	commentBean cb = (commentBean)comList.get(i);
+	%>
+<tr><td><%=cb.getId() %></td><td><input value="<%=cb.getContent() %>"></td>
+<td><input type="submit" value="수정" ></td>
+<td><input type="reset" value="취소" onclick="commentUp();"></td></tr>
 <%} %>
 </table>
+</form>
+</div>
+
+
 
 
 

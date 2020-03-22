@@ -24,7 +24,7 @@ for(int i =0;i<boardlist.size();i++){
 	<tr><td><%=jbb.getNum() %></td><td><%=jbb.getReadcount() %></td>
 	<td><%=jbb.getName() %></td><td><%=jbb.getPass() %></td>
 	<td><a href="content.jsp?num=<%=jbb.getNum()%>"><%= jbb.getSubject() %></a></td>
-	<td><%=jbb.getContent() %></td><td><%=jbb.getDate() %></td>
+	<td><%=jbb.getContent() %></td><td><%=jbb.getOnlydate() %></td>
 	</tr>
 <%} 
 String id = (String)session.getAttribute("id"); 

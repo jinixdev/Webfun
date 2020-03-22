@@ -64,7 +64,7 @@ List boardlist = jbDAO.getboardList();
 <% for(int i =0;i<boardlist.size();i++){
 	JBoardBean jbb = (JBoardBean)boardlist.get(i);%>   
 <tr><td><%=jbb.getNum() %></td><td class="left"><a href="../board/content.jsp?num=<%=jbb.getNum()%>"><%= jbb.getSubject() %></a></td>
-    <td><%=jbb.getName() %></td><td><%=jbb.getDate() %></td><td><%=jbb.getReadcount() %></td></tr>
+    <td><%=jbb.getName() %></td><td><%=jbb.getOnlydate() %></td><td><%=jbb.getReadcount() %></td></tr>
 
 
 
