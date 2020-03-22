@@ -1,8 +1,8 @@
-package jboard;
+package board;
 
 import java.sql.Timestamp;
 
-public class JBoardBean {
+public class BoardBean {
 	
 	private String name,pass,subject,content;
 	private Timestamp date;

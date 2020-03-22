@@ -1,5 +1,5 @@
-<%@page import="jboard.JBoardDAO"%>
-<%@page import="jboard.JBoardBean"%>
+<%@page import="board.BoardDAO"%>
+<%@page import="board.BoardBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,10 +13,10 @@
 int num = Integer.parseInt(request.getParameter("num"));
 System.out.print("updatepro2 : "+request.getParameter("num"));
 
-JBoardBean jbb = new JBoardBean();
+BoardBean jbb = new BoardBean();
 jbb.setSubject(request.getParameter("subject"));
 jbb.setContent(request.getParameter("content"));
-JBoardDAO jbDAO = new JBoardDAO();
+BoardDAO jbDAO = new BoardDAO();
 jbDAO.updateBoard(num, jbb); 
 
 response.sendRedirect("../center/notice.jsp");

@@ -1,6 +1,6 @@
-<%@page import="jboard.JBoardBean"%>
+<%@page import="board.BoardBean"%>
+<%@page import="board.BoardDAO"%>
 <%@page import="java.util.List"%>
-<%@page import="jboard.JBoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -51,7 +51,7 @@
 <article>
 <h1>Notice</h1>
 <%
-JBoardDAO jbDAO= new JBoardDAO();
+BoardDAO jbDAO= new BoardDAO();
 
 List boardlist = jbDAO.getboardList();
 %>
@@ -62,7 +62,7 @@ List boardlist = jbDAO.getboardList();
     <th class="tdate">Date</th>
     <th class="tread">Read</th></tr>
 <% for(int i =0;i<boardlist.size();i++){
-	JBoardBean jbb = (JBoardBean)boardlist.get(i);%>   
+	BoardBean jbb = (BoardBean)boardlist.get(i);%>   
 <tr><td><%=jbb.getNum() %></td><td class="left"><a href="../board/content.jsp?num=<%=jbb.getNum()%>"><%= jbb.getSubject() %></a></td>
     <td><%=jbb.getName() %></td><td><%=jbb.getOnlydate() %></td><td><%=jbb.getReadcount() %></td></tr>
 

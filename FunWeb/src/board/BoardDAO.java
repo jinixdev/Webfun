@@ -1,4 +1,4 @@
-package jboard;
+package board;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class JBoardDAO {
+public class BoardDAO {
 
-	public void write(JBoardBean jbb) {
+	public void write(BoardBean bb) {
 		try {
-			System.out.println(jbb.getName());
+			System.out.println(bb.getName());
 
 			int num = 0;
 			int readcount = 0;
@@ -37,13 +37,13 @@ public class JBoardDAO {
 
 			sql = "insert into board(name,pass,subject,content,num,readcount,date) values(?,?,?,?,?,?,?)";
 			pre = con.prepareStatement(sql);
-			pre.setString(1, jbb.getName());
-			pre.setString(2, jbb.getPass());
-			pre.setString(3, jbb.getSubject());
-			pre.setString(4, jbb.getContent());
+			pre.setString(1, bb.getName());
+			pre.setString(2, bb.getPass());
+			pre.setString(3, bb.getSubject());
+			pre.setString(4, bb.getContent());
 			pre.setInt(5, num);
 			pre.setInt(6, readcount);
-			pre.setTimestamp(7, jbb.getDate());
+			pre.setTimestamp(7, bb.getDate());
 
 			pre.executeUpdate();
 
@@ -70,7 +70,7 @@ public class JBoardDAO {
 			 PreparedStatement pre = con.prepareStatement(sql); 
 			 ResultSet rs= pre.executeQuery();
 			 while(rs.next()) {
-				 JBoardBean jbb = new JBoardBean();
+				 BoardBean jbb = new BoardBean();
 				 String s = new SimpleDateFormat("yyyy-MM-dd").format(rs.getTimestamp("date"));
 				 jbb.setNum(rs.getInt("num"));
 				 jbb.setName(rs.getString("name"));
@@ -109,7 +109,7 @@ public class JBoardDAO {
 			 pre.setString(1, name);
 			 ResultSet rs= pre.executeQuery();
 			 while(rs.next()) {
-				 JBoardBean jbb = new JBoardBean();
+				 BoardBean jbb = new BoardBean();
 				 String s = new SimpleDateFormat("yyyy-MM-dd").format(rs.getTimestamp("date"));
 				 jbb.setNum(rs.getInt("num"));
 				 jbb.setName(rs.getString("name"));
@@ -129,8 +129,8 @@ public class JBoardDAO {
 		return jbblist;
 	}//getboardList(String id)
 	
-	public JBoardBean getboardContent(int num) {
-		JBoardBean jbb = new JBoardBean();
+	public BoardBean getboardContent(int num) {
+		BoardBean jbb = new BoardBean();
 		
 		try {
 			
@@ -170,7 +170,7 @@ public class JBoardDAO {
 		return jbb;
 	}//getboardList
 	
-	public void updateBoard(int num,JBoardBean jbb) {
+	public void updateBoard(int num,BoardBean jbb) {
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");

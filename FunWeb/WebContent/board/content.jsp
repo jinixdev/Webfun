@@ -1,9 +1,9 @@
+<%@page import="board.BoardBean"%>
+<%@page import="board.BoardDAO"%>
 <%@page import="comment.commentBean"%>
 <%@page import="java.util.List"%>
 <%@page import="comment.commentDAO"%>
 <%@page import="com.sun.xml.internal.txw2.Document"%>
-<%@page import="jboard.JBoardBean"%>
-<%@page import="jboard.JBoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -38,8 +38,8 @@ function commentDelete(){
 <body>
 <%
 int num = Integer.parseInt(request.getParameter("num"));
-JBoardDAO jbDAO= new JBoardDAO();
-JBoardBean jbb= jbDAO.getboardContent(num);
+BoardDAO jbDAO= new BoardDAO();
+BoardBean jbb= jbDAO.getboardContent(num);
 /* int num2 = jbb.getNum(); */
 %>
 

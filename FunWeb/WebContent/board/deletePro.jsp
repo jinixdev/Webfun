@@ -1,5 +1,4 @@
-<%@page import="jboard.JBoardDAO"%>
-<%@page import="jboard.JBoardBean"%>
+<%@page import="board.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,7 +15,7 @@ String pass = request.getParameter("pass");
 System.out.print("num"+num);
 System.out.print("pass"+pass);
 
-JBoardDAO jbDAO = new JBoardDAO();
+BoardDAO jbDAO = new BoardDAO();
 int check = jbDAO.passCheck(num, pass);
 if(check ==1){
 	jbDAO.deleteBoard(num);%>

@@ -1,6 +1,6 @@
-<%@page import="jboard.JBoardBean"%>
+<%@page import="board.BoardBean"%>
+<%@page import="board.BoardDAO"%>
 <%@page import="java.util.List"%>
-<%@page import="jboard.JBoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,7 +11,7 @@
 </head>
 <body>
 <%
-JBoardDAO jbDAO= new JBoardDAO();
+BoardDAO jbDAO= new BoardDAO();
 
 List boardlist = jbDAO.getboardList();
 %>
@@ -20,7 +20,7 @@ List boardlist = jbDAO.getboardList();
 <tr><td>글번호</td><td>조회수</td><td>글쓴이</td><td>비밀번호</td><td>제목</td><td>내용</td><td>작성날짜</td></tr>
 <%
 for(int i =0;i<boardlist.size();i++){
-	JBoardBean jbb = (JBoardBean)boardlist.get(i);%>
+	BoardBean jbb = (BoardBean)boardlist.get(i);%>
 	<tr><td><%=jbb.getNum() %></td><td><%=jbb.getReadcount() %></td>
 	<td><%=jbb.getName() %></td><td><%=jbb.getPass() %></td>
 	<td><a href="content.jsp?num=<%=jbb.getNum()%>"><%= jbb.getSubject() %></a></td>
