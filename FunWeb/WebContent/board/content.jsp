@@ -21,20 +21,30 @@ function showhide(){
 	}
 }
 
-function commentUpdate(id,comment,commentref){
+function commentUpdate(id,comment,p_num,r_num){
 	
 	var update=document.getElementById("updatetable");
 	document.getElementById("comment_id").value=id;
 	document.getElementById("comment").value=comment;
-	document.getElementById("comment_ref").value=commentref;
+	document.getElementById("p_num").value=p_num;
+	document.getElementById("r_num").value=r_num;
 	if(update.style.display=="none"){
 		update.style.display="block";
 	}else{
 		update.style.display="none";
 	}
 }
+function hide(){
+	var update=document.getElementById("updatetable");
+	if(update.style.display=="block"){
+		update.style.display="none";
+	}
+}
+
 function commentDelete(){
-	
+	var p_num =document.getElementById("p_num").value;
+	var r_num =document.getElementById("r_num").value;
+	location.href="../comment/deletePro.jsp?p_num="+p_num;
 }
 
 </script> 
@@ -42,8 +52,10 @@ function commentDelete(){
 <body>
 <%
 int p_num = Integer.parseInt(request.getParameter("num"));
+System.out.println("num : "+p_num);
 BoardDAO jbDAO= new BoardDAO();
 BoardBean jbb= jbDAO.getboardContent(p_num);
+String id = (String)session.getAttribute("id");
 /* int num2 = jbb.getNum(); */
 %>
 
@@ -54,9 +66,12 @@ BoardBean jbb= jbDAO.getboardContent(p_num);
 <tr><td>조회수</td><td><%=jbb.getReadcount() %></td></tr>
 <tr><td>제목</td><td colspan="3"><%=jbb.getSubject() %></td></tr>
 <tr><td>내용</td><td colspan="3"><%=jbb.getContent() %></td></tr>
-<tr><td colspan="4"> <input type="button" value="글수정" onclick="location.href='updateForm.jsp?num=<%=jbb.getNum()%>'">
-<input type="button" value="글삭제" onclick="showhide();">
 
+<%if(id.equals(jbb.getId())){ %>
+<tr><td colspan="4"> <input type="button" value="글수정" onclick="location.href='updateForm.jsp?num=<%=jbb.getNum()%>'">
+
+<input type="button" value="글삭제" onclick="showhide();">
+<%} %>
 <input type="button" value="글목록" onclick="location.href='list.jsp'"></td></tr>
 </table>
 
@@ -74,7 +89,7 @@ BoardBean jbb= jbDAO.getboardContent(p_num);
 <hr>
 <!-- comment code -->
 <form action="commentPro.jsp">
-<input type="hidden" name="id" value="<%=jbb.getName()%>">
+<input type="hidden" name="id" value="<%=id%>">
 <textarea name="content" cols="50" rows="2"></textarea>
 <input type="hidden" name="p_num" value="<%=p_num%>">
 <input type="submit">
@@ -82,21 +97,16 @@ BoardBean jbb= jbDAO.getboardContent(p_num);
 
 <%
 commentDAO comDAO = new commentDAO();
-List comList= comDAO.getCommentList(p_num);
-
-int commentnum;
-int commentref;
-String comment;%>
-<table border="1">
+List comList= comDAO.getCommentList(p_num);%>
+<table>
 <% for(int i=0;i<comList.size();i++){
 	commentBean cb = (commentBean)comList.get(i);
-	commentnum = cb.getNum();
-	commentref = cb.getP_num();
-	comment = cb.getContent();
 	%>
 <tr><td><%=cb.getId() %></td><td><%=cb.getContent() %></td>
-<td><input type="button" value="수정" onclick="commentUpdate('<%=cb.getId()%>','<%=cb.getContent()%>','<%=cb.getP_num()%>');"></td>
-<td><a href="../comment/deletePro.jsp">x</a></td></tr>
+<% if(id.equals(cb.getId())){ %>
+<td><input type="button" value="수정" onclick="commentUpdate('<%=cb.getId()%>','<%=cb.getContent()%>',
+'<%=cb.getP_num()%>','<%=cb.getR_num()%>');"></td>
+<td><a href="../comment/deletePro.jsp?num=<%=cb.getNum()%>&p_num=<%=cb.getP_num()%>">x</a></td> <%} %></tr>
 
 
 <%
@@ -110,12 +120,11 @@ String comment;%>
 <!-- comment update code -->
 <div id="updatetable" style="display:none;">
 <form action="../comment/updatePro.jsp" method="get">
-<table border="1">
-<tr><td><input type="text" name="comment_id" id="comment_id"></td><td><input type="text" name="comment" id="comment"></td>
-<td><input type="hidden" name="num" id="num" value="<%=p_num%>"></td><td><input type="hidden" name="comment_ref" id="comment_ref"></td>
-<td><input type="submit" value="수정" ></td>
-<td><input type="reset" value="취소" onclick="commentUp();"></td></tr>
-</table>
+
+<input type="text" name="comment_id" id="comment_id"><input type="text" name="comment" id="comment">
+<input type="hidden" name="p_num" id="p_num"><input type="hidden" name="r_num" id="r_num">
+<input type="submit" value="수정" >
+<input type="button" value="취소" onclick="hide();">
 </form>
 </div>
 

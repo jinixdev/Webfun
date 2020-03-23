@@ -51,6 +51,7 @@
 <article>
 <h1>Notice</h1>
 <%
+request.setCharacterEncoding("UTF-8");
 BoardDAO jbDAO= new BoardDAO();
 // 게시판 글개수를 호출 getBoardCount() count() 
 // int count = getBoardCount() 호출

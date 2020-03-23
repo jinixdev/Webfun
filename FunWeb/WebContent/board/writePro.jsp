@@ -19,6 +19,7 @@ String content = request.getParameter("content"); */
 
 BoardBean jbb = new BoardBean();
 System.out.print("writepro : "+request.getParameter("content"));
+jbb.setId(request.getParameter("id"));
 jbb.setName(request.getParameter("name"));
 jbb.setPass(request.getParameter("pass"));
 jbb.setSubject(request.getParameter("subject"));

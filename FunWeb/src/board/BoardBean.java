@@ -4,7 +4,16 @@ import java.sql.Timestamp;
 
 public class BoardBean {
 	
-	private String name,pass,subject,content;
+	private String name,pass,subject,content,id;
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+
 	private Timestamp date;
 	private String onlydate;
 

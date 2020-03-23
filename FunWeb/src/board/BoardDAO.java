@@ -35,7 +35,7 @@ public class BoardDAO {
 			 if(rs.next()) { num = rs.getInt("max(num)")+1; }
 			 
 
-			sql = "insert into board(name,pass,subject,content,num,readcount,date) values(?,?,?,?,?,?,?)";
+			sql = "insert into board(name,pass,subject,content,num,readcount,date,id) values(?,?,?,?,?,?,?,?)";
 			pre = con.prepareStatement(sql);
 			pre.setString(1, bb.getName());
 			pre.setString(2, bb.getPass());
@@ -44,6 +44,7 @@ public class BoardDAO {
 			pre.setInt(5, num);
 			pre.setInt(6, readcount);
 			pre.setTimestamp(7, bb.getDate());
+			pre.setString(8, bb.getId());
 
 			pre.executeUpdate();
 
@@ -155,8 +156,8 @@ public class BoardDAO {
 			 pre.setInt(1, num);
 			 ResultSet rs= pre.executeQuery();
 			 if(rs.next()) {
-				 
 				 jbb.setNum(rs.getInt("num"));
+				 jbb.setId(rs.getString("id"));
 				 jbb.setName(rs.getString("name"));
 				 jbb.setPass(rs.getString("pass"));
 				 jbb.setSubject(rs.getString("subject"));

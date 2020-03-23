@@ -11,6 +11,7 @@
 function sendCheckValue(){
 	 opener.document.getElementById("idDuplication").value ="idcheck";
 	 document.getElementById("cInput").value= opener.document.getElementById("idDuplication").value;
+	 window.close();
 }
 </script>
 </head>
@@ -31,7 +32,7 @@ case 1:  %>
 <%break;
 case 0:%>
 <%=id %>는  사용할 수 있는 아이디 입니다.<br>
- <input type="text" id="cInput">
+ <input type="hidden" id="cInput">
 <input type="button" id="idcheck" value="확인" onclick="sendCheckValue()">
 <input type="button" value="취소" onclick="window.close()">
 <%break;}%>
