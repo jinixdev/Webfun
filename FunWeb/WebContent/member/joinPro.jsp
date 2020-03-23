@@ -29,8 +29,6 @@ mb.setAddress(request.getParameter("address"));
 mb.setPostcode(request.getParameter("postcode"));
 mb.setDetailAddress(request.getParameter("detailAddress"));
 mb.setExtraAddress(request.getParameter("extraAddress"));
-mb.setPhone(request.getParameter("phone"));
-mb.setMobile(request.getParameter("mobile"));
 mb.setReg_date(reg_date);
 
 MemberDAO mDAO = new MemberDAO();
