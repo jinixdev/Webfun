@@ -1,5 +1,5 @@
-<%@page import="jmember.JMemberBean"%>
-<%@page import="jmember.JMemberDAO"%>
+<%@page import="member.MemberBean"%>
+<%@page import="member.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,8 +17,8 @@ String id = (String)session.getAttribute("id");
 alert("글쓰기는 회원만 이용가능합니다.");
 </script>
 <%}else{ 
-	JMemberDAO jmDAO = new JMemberDAO();
-	JMemberBean jmb = jmDAO.getMember(id);
+	MemberDAO jmDAO = new MemberDAO();
+	MemberBean jmb = jmDAO.getMember(id);
 	System.out.println("jmb.getId() : " +jmb.getId());
 %>
 <form action="writePro.jsp" method="post">

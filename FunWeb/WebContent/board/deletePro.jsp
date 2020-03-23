@@ -22,7 +22,7 @@ if(check ==1){
 	jbDAO.deleteBoard(num);%>
 	<script type="text/javascript">
 	alert("작성하신 글이 삭제되었습니다.");
-	location.href="list.jsp";
+	location.href="../center/notice.jsp";
 	</script>
 	
 <%}else{%>
