@@ -21,8 +21,12 @@ function showhide(){
 	}
 }
 
-function commentUp(){
+function commentUpdate(id,comment,commentref){
+	
 	var update=document.getElementById("updatetable");
+	document.getElementById("comment_id").value=id;
+	document.getElementById("comment").value=comment;
+	document.getElementById("comment_ref").value=commentref;
 	if(update.style.display=="none"){
 		update.style.display="block";
 	}else{
@@ -37,9 +41,9 @@ function commentDelete(){
 </head>
 <body>
 <%
-int num = Integer.parseInt(request.getParameter("num"));
+int p_num = Integer.parseInt(request.getParameter("num"));
 BoardDAO jbDAO= new BoardDAO();
-BoardBean jbb= jbDAO.getboardContent(num);
+BoardBean jbb= jbDAO.getboardContent(p_num);
 /* int num2 = jbb.getNum(); */
 %>
 
@@ -69,16 +73,16 @@ BoardBean jbb= jbDAO.getboardContent(num);
 
 <hr>
 <!-- comment code -->
-<form action="contentPro.jsp">
+<form action="commentPro.jsp">
 <input type="hidden" name="id" value="<%=jbb.getName()%>">
 <textarea name="content" cols="50" rows="2"></textarea>
-<input type="hidden" name="ref" value="<%=num%>">
+<input type="hidden" name="p_num" value="<%=p_num%>">
 <input type="submit">
 </form>
 
 <%
 commentDAO comDAO = new commentDAO();
-List comList= comDAO.getCommentList(num);
+List comList= comDAO.getCommentList(p_num);
 
 int commentnum;
 int commentref;
@@ -86,16 +90,17 @@ String comment;%>
 <table border="1">
 <% for(int i=0;i<comList.size();i++){
 	commentBean cb = (commentBean)comList.get(i);
+	commentnum = cb.getNum();
+	commentref = cb.getP_num();
+	comment = cb.getContent();
 	%>
 <tr><td><%=cb.getId() %></td><td><%=cb.getContent() %></td>
-<td><input type="button" value="수정" onclick="commentUp();"></td>
+<td><input type="button" value="수정" onclick="commentUpdate('<%=cb.getId()%>','<%=cb.getContent()%>','<%=cb.getP_num()%>');"></td>
 <td><a href="../comment/deletePro.jsp">x</a></td></tr>
 
 
 <%
-commentnum = cb.getNum();
-commentref = cb.getRef();
-comment = cb.getContent();
+
 
 } %>
 </table>
@@ -104,15 +109,12 @@ comment = cb.getContent();
 
 <!-- comment update code -->
 <div id="updatetable" style="display:none;">
-<form action="../comment/updateForm.jsp" method="post">
+<form action="../comment/updatePro.jsp" method="get">
 <table border="1">
-<% for(int i=0;i<comList.size();i++){
-	commentBean cb = (commentBean)comList.get(i);
-	%>
-<tr><td><%=cb.getId() %></td><td><input value="<%=cb.getContent() %>"></td>
+<tr><td><input type="text" name="comment_id" id="comment_id"></td><td><input type="text" name="comment" id="comment"></td>
+<td><input type="hidden" name="num" id="num" value="<%=p_num%>"></td><td><input type="hidden" name="comment_ref" id="comment_ref"></td>
 <td><input type="submit" value="수정" ></td>
 <td><input type="reset" value="취소" onclick="commentUp();"></td></tr>
-<%} %>
 </table>
 </form>
 </div>

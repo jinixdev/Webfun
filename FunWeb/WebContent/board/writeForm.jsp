@@ -12,12 +12,14 @@
 <%
 String id = (String)session.getAttribute("id"); 
 %>
-<%if(id==null){%>
-<script type="text/javascript">
-alert("글쓰기는 회원만 이용가능합니다.");
-</script>
-<%}else{ 
-	MemberDAO jmDAO = new MemberDAO();
+<%-- <%if(id==null){%> --%>
+<!-- <script type="text/javascript"> -->
+// alert("글쓰기는 회원만 이용가능합니다.");
+// location.href="../member/login.jsp";
+<!-- </script> -->
+<%-- <%} %> --%>
+
+<%	MemberDAO jmDAO = new MemberDAO();
 	MemberBean jmb = jmDAO.getMember(id);
 	System.out.println("jmb.getId() : " +jmb.getId());
 %>
@@ -31,6 +33,6 @@ alert("글쓰기는 회원만 이용가능합니다.");
 </table>
 
 </form>
-<%}%>
+<%-- <%}%> --%>
 </body>
 </html>

@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class commentBean {
 	
 	
-		private int num,ref;
+		private int num,p_num,r_num,re_r_num;
 		private String id,content;
 		private Timestamp reg_date;
 		
@@ -15,12 +15,6 @@ public class commentBean {
 		}
 		public void setNum(int num) {
 			this.num = num;
-		}
-		public int getRef() {
-			return ref;
-		}
-		public void setRef(int ref) {
-			this.ref = ref;
 		}
 		public String getId() {
 			return id;
@@ -39,6 +33,24 @@ public class commentBean {
 		}
 		public void setReg_date(Timestamp reg_date) {
 			this.reg_date = reg_date;
+		}
+		public int getP_num() {
+			return p_num;
+		}
+		public void setP_num(int p_num) {
+			this.p_num = p_num;
+		}
+		public int getR_num() {
+			return r_num;
+		}
+		public void setR_num(int r_num) {
+			this.r_num = r_num;
+		}
+		public int getRe_r_num() {
+			return re_r_num;
+		}
+		public void setRe_r_num(int re_r_num) {
+			this.re_r_num = re_r_num;
 		}
 
 	}

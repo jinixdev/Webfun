@@ -52,8 +52,40 @@
 <h1>Notice</h1>
 <%
 BoardDAO jbDAO= new BoardDAO();
+// 게시판 글개수를 호출 getBoardCount() count() 
+// int count = getBoardCount() 호출
+int count = jbDAO.getBoardCount();
 
-List boardlist = jbDAO.getboardList();
+// 한 화면에 보여줄 가져올 글 개수 설정
+int pageSize =10;
+
+
+// 현 페이지 번호 가져오기 pageNum 파라미터 가져오기 (처음엔 없기때문에 "1")
+String pageNum = request.getParameter("pageNum");
+// 현 페이지 번호가 없으면 "1"페이지로 설정
+if(pageNum==null){ // 현페이지 번호가 없으면
+	pageNum="1"; // 10개씩 잘라서 1페이지 시작하는지 확인
+} 
+// pageNum => 정수형으로 변경
+int currentPage =Integer.parseInt(pageNum);
+// 10개씩 잘라서 1페이지 시작하는 행번호 구하기
+// pageNum(currentPage) = pageSize	=>	startRow시작행번호
+//			1				10		=>		0+1		=>1
+//			2				10		=>		10+1	=>11
+//			3				10		=>		20+1	=>21
+ int startRow= (currentPage-1)*pageSize+1;
+// endRow
+// pageNum(currentPage) = pageSize	=>	endRow시작행번호
+//			1				10		=>		10
+//			2				10		=>		20
+//			3				10		=>		30
+int endRow = currentPage*pageSize;
+
+// select * from board order by num desc limit 시작하는 행번호-1,글개수
+
+
+List boardlist = jbDAO.getboardList(startRow,pageSize); //호출
+// List boardlist = jbDAO.getboardList();
 %>
 <table id="notice">
 <tr><th class="tno">No.</th>

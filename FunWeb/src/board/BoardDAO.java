@@ -52,7 +52,7 @@ public class BoardDAO {
 		}
 	}//write
 	
-	public List getboardList() {
+	public List getboardList(int startRow,int pageSize) {
 		List jbblist = new ArrayList();
 		
 		try {
@@ -66,8 +66,11 @@ public class BoardDAO {
 			Connection con = DriverManager.getConnection(dburl, dbuser, dbpass);
 
 			
-			 String sql = "select * from board order by num desc"; 
+//			 String sql = "select * from board order by num desc";
+			String sql = "select * from board order by num desc limit ?,?";
 			 PreparedStatement pre = con.prepareStatement(sql); 
+			 pre.setInt(1, startRow-1); //startRow 시작을 포함하지 않기때문에 -1
+			 pre.setInt(2, pageSize);
 			 ResultSet rs= pre.executeQuery();
 			 while(rs.next()) {
 				 BoardBean jbb = new BoardBean();
@@ -240,7 +243,33 @@ public class BoardDAO {
 		}
 		
 		
-	}
+	}//deleteBoard
+	
+	public int getBoardCount() {
+		int count=0;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+
+			String dburl = "jdbc:mysql://localhost:3306/jspdb1";
+			String dbuser = "jspid";
+			String dbpass = "jsppass";
+			
+			Connection con = DriverManager.getConnection(dburl, dbuser, dbpass);
+			String sql="select count(num) from board";
+			PreparedStatement pre = con.prepareStatement(sql);
+			ResultSet rs= pre.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt("count(num)"); 
+			 }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.print("count(num)"+count);
+		return count;
+		
+		
+	}//getBoardCount
+
 	
 	
 	
