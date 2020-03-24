@@ -4,38 +4,50 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
+
 
 public class BoardDAO {
+	
+	private Connection getConnection() throws Exception{
+		
+		Context init = new InitialContext();
+	    DataSource ds=(DataSource)init.lookup("java:comp/env/jdbc/MysqlDB"); //장소/jdbc/MysqlDB
+		Connection con = ds.getConnection(); //java.sql
+		return con;
+	}
+	
 
 	public void write(BoardBean bb) {
+		ResultSet rs=null;
+		PreparedStatement pre=null;
+		Connection con=null;
 		try {
 			System.out.println(bb.getName());
 
 			int num = 0;
 			int readcount = 0;
 
-			Class.forName("com.mysql.jdbc.Driver");
-
-			String dburl = "jdbc:mysql://localhost:3306/jspdb1";
-			String dbuser = "jspid";
-			String dbpass = "jsppass";
-
-			Connection con = DriverManager.getConnection(dburl, dbuser, dbpass);
+			con = getConnection();
 
 			
 			 String sql = "select max(num) from board"; 
-			 PreparedStatement pre = con.prepareStatement(sql); 
-			 ResultSet rs= pre.executeQuery();
+			 pre = con.prepareStatement(sql); 
+			 rs= pre.executeQuery();
 			 
 			 if(rs.next()) { num = rs.getInt("max(num)")+1; }
 			 
 
-			sql = "insert into board(name,pass,subject,content,num,readcount,date,id) values(?,?,?,?,?,?,?,?)";
+			sql = "insert into board(name,pass,subject,content,num,readcount,date,id,file) values(?,?,?,?,?,?,?,?,?)";
 			pre = con.prepareStatement(sql);
 			pre.setString(1, bb.getName());
 			pre.setString(2, bb.getPass());
@@ -45,34 +57,38 @@ public class BoardDAO {
 			pre.setInt(6, readcount);
 			pre.setTimestamp(7, bb.getDate());
 			pre.setString(8, bb.getId());
+			pre.setString(9, bb.getFile());
 
 			pre.executeUpdate();
 
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally{
+			if(rs!=null) try {rs.close();}catch(SQLException ex) {}
+			if(pre!=null) try{pre.close();}catch(SQLException ex) {}
+			if(con!=null) try {con.close();}catch(SQLException ex) {}
 		}
 	}//write
 	
 	public List getboardList(int startRow,int pageSize) {
 		List jbblist = new ArrayList();
+		ResultSet rs=null;
+		PreparedStatement pre=null;
+		Connection con=null;
 		
 		try {
 			
 			Class.forName("com.mysql.jdbc.Driver");
 
-			String dburl = "jdbc:mysql://localhost:3306/jspdb1";
-			String dbuser = "jspid";
-			String dbpass = "jsppass";
-			
-			Connection con = DriverManager.getConnection(dburl, dbuser, dbpass);
+			con = getConnection();
 
 			
 //			 String sql = "select * from board order by num desc";
 			String sql = "select * from board order by num desc limit ?,?";
-			 PreparedStatement pre = con.prepareStatement(sql); 
+			 pre = con.prepareStatement(sql); 
 			 pre.setInt(1, startRow-1); //startRow 시작을 포함하지 않기때문에 -1
 			 pre.setInt(2, pageSize);
-			 ResultSet rs= pre.executeQuery();
+			 rs= pre.executeQuery();
 			 while(rs.next()) {
 				 BoardBean jbb = new BoardBean();
 				 String s = new SimpleDateFormat("yyyy-MM-dd").format(rs.getTimestamp("date"));
@@ -89,6 +105,10 @@ public class BoardDAO {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally{
+			if(rs!=null) try {rs.close();}catch(SQLException ex) {}
+			if(pre!=null) try{pre.close();}catch(SQLException ex) {}
+			if(con!=null) try {con.close();}catch(SQLException ex) {}
 		}
 		
 		return jbblist;
@@ -96,22 +116,18 @@ public class BoardDAO {
 	
 	public List getboardList(String name) {
 		List jbblist = new ArrayList();
+		ResultSet rs=null;
+		PreparedStatement pre=null;
+		Connection con=null;
 		
 		try {
 			
-			Class.forName("com.mysql.jdbc.Driver");
+			con = getConnection();
 
-			String dburl = "jdbc:mysql://localhost:3306/jspdb1";
-			String dbuser = "jspid";
-			String dbpass = "jsppass";
-			
-			Connection con = DriverManager.getConnection(dburl, dbuser, dbpass);
-
-			
 			 String sql = "select * from board where name=? order by num desc";
-			 PreparedStatement pre = con.prepareStatement(sql); 
+			 pre = con.prepareStatement(sql); 
 			 pre.setString(1, name);
-			 ResultSet rs= pre.executeQuery();
+			 rs= pre.executeQuery();
 			 while(rs.next()) {
 				 BoardBean jbb = new BoardBean();
 				 String s = new SimpleDateFormat("yyyy-MM-dd").format(rs.getTimestamp("date"));
@@ -128,6 +144,10 @@ public class BoardDAO {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally{
+			if(rs!=null) try {rs.close();}catch(SQLException ex) {}
+			if(pre!=null) try{pre.close();}catch(SQLException ex) {}
+			if(con!=null) try {con.close();}catch(SQLException ex) {}
 		}
 		
 		return jbblist;
@@ -135,26 +155,23 @@ public class BoardDAO {
 	
 	public BoardBean getboardContent(int num) {
 		BoardBean jbb = new BoardBean();
+		ResultSet rs=null;
+		PreparedStatement pre=null;
+		Connection con=null;
 		
 		try {
 			
-			Class.forName("com.mysql.jdbc.Driver");
-
-			String dburl = "jdbc:mysql://localhost:3306/jspdb1";
-			String dbuser = "jspid";
-			String dbpass = "jsppass";
-			
-			Connection con = DriverManager.getConnection(dburl, dbuser, dbpass);
+			con = getConnection();
 			
 			 String sql = "update board set readcount=readcount+1 where num=?"; 
-			 PreparedStatement pre = con.prepareStatement(sql); 
+			 pre = con.prepareStatement(sql); 
 			 pre.setInt(1, num);
 			 pre.executeUpdate();
 			
 			 sql = "select * from board where num=?"; 
 			 pre = con.prepareStatement(sql); 
 			 pre.setInt(1, num);
-			 ResultSet rs= pre.executeQuery();
+			 rs= pre.executeQuery();
 			 if(rs.next()) {
 				 jbb.setNum(rs.getInt("num"));
 				 jbb.setId(rs.getString("id"));
@@ -169,23 +186,23 @@ public class BoardDAO {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally{
+			if(rs!=null) try {rs.close();}catch(SQLException ex) {}
+			if(pre!=null) try{pre.close();}catch(SQLException ex) {}
+			if(con!=null) try {con.close();}catch(SQLException ex) {}
 		}
 		
 		return jbb;
 	}//getboardList
 	
 	public void updateBoard(int num,BoardBean jbb) {
+		PreparedStatement pre=null;
+		Connection con=null;
 		
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-
-			String dburl = "jdbc:mysql://localhost:3306/jspdb1";
-			String dbuser = "jspid";
-			String dbpass = "jsppass";
-			
-			Connection con = DriverManager.getConnection(dburl, dbuser, dbpass);
+			con = getConnection();
 			String sql="update board set subject=?,content=? where num=?";
-			PreparedStatement pre = con.prepareStatement(sql);
+			pre = con.prepareStatement(sql);
 			System.out.print(jbb.getSubject());
 			pre.setString(1, jbb.getSubject());
 			pre.setString(2, jbb.getContent());
@@ -194,23 +211,24 @@ public class BoardDAO {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally{
+			if(pre!=null) try{pre.close();}catch(SQLException ex) {}
+			if(con!=null) try {con.close();}catch(SQLException ex) {}
 		}
 	}//updateBoard
 	
 	public int passCheck(int num,String pass) {
 		int check =0;
+		ResultSet rs=null;
+		PreparedStatement pre=null;
+		Connection con=null;
+		
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-
-			String dburl = "jdbc:mysql://localhost:3306/jspdb1";
-			String dbuser = "jspid";
-			String dbpass = "jsppass";
-			
-			Connection con = DriverManager.getConnection(dburl, dbuser, dbpass);
+			con = getConnection();
 			String sql="select * from board where num=?";
-			PreparedStatement pre = con.prepareStatement(sql);
+			pre = con.prepareStatement(sql);
 			pre.setInt(1, num);
-			ResultSet rs = pre.executeQuery();
+			rs = pre.executeQuery();
 			
 			if(rs.next()) {
 			if(pass.equals(rs.getString("pass"))){
@@ -222,25 +240,29 @@ public class BoardDAO {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally{
+			if(rs!=null) try {rs.close();}catch(SQLException ex) {}
+			if(pre!=null) try{pre.close();}catch(SQLException ex) {}
+			if(con!=null) try {con.close();}catch(SQLException ex) {}
 		}
+		
 		return check;
 	}//passCheck
 	
 	public void deleteBoard(int num) {
+		PreparedStatement pre=null;
+		Connection con=null;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-
-			String dburl = "jdbc:mysql://localhost:3306/jspdb1";
-			String dbuser = "jspid";
-			String dbpass = "jsppass";
-			
-			Connection con = DriverManager.getConnection(dburl, dbuser, dbpass);
+			con = getConnection();
 			String sql="delete from board where num=?;";
-			PreparedStatement pre = con.prepareStatement(sql);
+			pre = con.prepareStatement(sql);
 			pre.setInt(1, num);
 			pre.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally{
+			if(pre!=null) try{pre.close();}catch(SQLException ex) {}
+			if(con!=null) try {con.close();}catch(SQLException ex) {}
 		}
 		
 		
@@ -248,23 +270,26 @@ public class BoardDAO {
 	
 	public int getBoardCount() {
 		int count=0;
+		ResultSet rs=null;
+		PreparedStatement pre=null;
+		Connection con=null;
+		
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-
-			String dburl = "jdbc:mysql://localhost:3306/jspdb1";
-			String dbuser = "jspid";
-			String dbpass = "jsppass";
-			
-			Connection con = DriverManager.getConnection(dburl, dbuser, dbpass);
+			con = getConnection();
 			String sql="select count(num) from board";
-			PreparedStatement pre = con.prepareStatement(sql);
-			ResultSet rs= pre.executeQuery();
+			pre = con.prepareStatement(sql);
+			rs= pre.executeQuery();
 			if(rs.next()) {
 				count = rs.getInt("count(num)"); 
 			 }
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally{
+			if(rs!=null) try {rs.close();}catch(SQLException ex) {}
+			if(pre!=null) try{pre.close();}catch(SQLException ex) {}
+			if(con!=null) try {con.close();}catch(SQLException ex) {}
 		}
+		
 		System.out.print("count(num)"+count);
 		return count;
 		

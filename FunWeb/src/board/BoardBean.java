@@ -4,7 +4,17 @@ import java.sql.Timestamp;
 
 public class BoardBean {
 	
-	private String name,pass,subject,content,id;
+	private String name,pass,subject,content,id,file;
+	
+	
+	public String getFile() {
+		return file;
+	}
+
+	public void setFile(String file) {
+		this.file = file;
+	}
+
 	public String getId() {
 		return id;
 	}

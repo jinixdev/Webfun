@@ -17,7 +17,7 @@ BoardDAO jbDAO= new BoardDAO();
 int count = jbDAO.getBoardCount();
 
 // 한 화면에 보여줄 가져올 글 개수 설정
-int pageSize =10;
+int pageSize =3;
 
 
 // 현 페이지 번호 가져오기 pageNum 파라미터 가져오기 (처음엔 없기때문에 "1")
@@ -63,6 +63,7 @@ for(int i =0;i<boardlist.size();i++){
 String id = (String)session.getAttribute("id"); %>
 <!-- if(id!=null){%> -->
 <tr><td><input type="button" value="글작성" onclick="location.href='writeForm.jsp'"></td></tr>
+<tr><td><input type="button" value="갤러리작성" onclick="location.href='fwriteForm.jsp'"></td></tr>
 <%-- <%} %> --%>
 </table>
 <%
@@ -72,18 +73,49 @@ String id = (String)session.getAttribute("id"); %>
 
 
 // 한 화면에 보여줄 페이지 개수
-int pageBlock = 10;
+int pageBlock = 3;
 // int pageCount = count /pageSize +(count%pageSize==0?0:1);
-int pageCount= count%pageBlock==0?(count/pageBlock):(count/pageBlock)+1 ;
-System.out.println();
+int pageCount= count%pageSize==0?(count/pageSize):(count/pageSize)+1 ;
+
 // 한 화면에 보여줄 시작 페이지 번호 구하기
+// 페이지 번호(CurrentPage)   pageBlock=>	시작페이지 번호 
+//	 1-10						10	=>		0*10+1=> 0+1 => 1
+//	 11-20						10	=>		1*10+1=> 0+1 => 11
+//	 21-30						10	=>		2*10+1=> 0+1 => 21
+int startPage = ((currentPage-1)/pageBlock)*pageBlock+1;
 // 한 화면에 보여줄 끝 페이지 번호 구하기
+// startPage		pageBlock 	=> 		endPage
+//		1				10		=>			10
+//		11				10		=>			20
+int endPage = (startPage+pageBlock)-1;
+// endPage 10 <= 전체 페이지수 5페이지
+if(endPage>pageCount){
+	endPage = pageCount;
+}
+
+// 	 1  2  3  ~ 10 [다음]
+//  [이전]11 12 13 ~20
 
 
-%>
+// [이전] 10페이지 이전
+if(startPage > pageBlock){%>
+	<a href="list.jsp?pageNum=<%=startPage-pageBlock%>">[이전]</a> 
+<%}
 
-	 1  2  3  ~ 10 [다음]
-[이전]11 12 13 ~20
+// 1~10	11~20	startPage ~ endPage
+for(int i=startPage;i<=endPage;i++){%>
+	<a href="list.jsp?pageNum=<%=i%>"><%=i%></a> 
+<%}
+// [다음] 10페이지 다음
+if(endPage < pageCount){%>
+	<a href="list.jsp?pageNum=<%=startPage+pageBlock%>">[다음]</a> 
+<%}%>
+
+
+
+
+
+
 
 </body>
 </html>
