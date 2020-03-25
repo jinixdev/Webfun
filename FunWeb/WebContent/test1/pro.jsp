@@ -7,6 +7,14 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%
+String fruit[] = request.getParameterValues("fruit");
+String fruits="";
+for(String s:fruit){
+fruits += ","+s;
 
+}
+System.out.print(fruits);
+%>
 </body>
 </html>

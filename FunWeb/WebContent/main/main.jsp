@@ -33,7 +33,7 @@
 <!-- 헤더들어가는 곳 -->
 <!-- 메인이미지 들어가는곳 -->
 <div class="clear"></div>
-<div id="main_img"><img src="../images/main_img.jpg"
+<div id="main_img"><img src="../images/main_img1.jpg"
  width="971" height="282"></div>
 <!-- 메인이미지 들어가는곳 -->
 <!-- 메인 콘텐츠 들어가는 곳 -->

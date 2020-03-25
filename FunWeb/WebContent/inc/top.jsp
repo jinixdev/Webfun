@@ -11,7 +11,7 @@ if(id==null){
 <div id="login"><%=id %>님 | <a href="../member/info.jsp">info</a> | <a href="../member/logout.jsp">logout</a></div><%} %>
 <div class="clear"></div>
 <!-- 로고들어가는 곳 -->
-<div id="logo"><img src="../images/logo.gif" width="265" height="62" alt="Fun Web"></div>
+<div id="logo"><a href="../main/main.jsp"><img src="../images/linkedin_banner_image_1.png" width="265" height="80" alt="Fun Web"></a></div>
 <!-- 로고들어가는 곳 -->
 <nav id="top_menu">
 <ul>

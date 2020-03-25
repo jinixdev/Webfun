@@ -97,7 +97,7 @@ List boardlist = jbDAO.getboardList(startRow,pageSize); //호출
 <% for(int i =0;i<boardlist.size();i++){
 	BoardBean jbb = (BoardBean)boardlist.get(i);%>   
 <tr><td><%=jbb.getNum() %></td><td class="left"><a href="../board/content.jsp?num=<%=jbb.getNum()%>"><%= jbb.getSubject() %></a></td>
-    <td><%=jbb.getName() %></td><td><%=jbb.getOnlydate() %></td><td><%=jbb.getReadcount() %></td></tr>
+    <td class="left"><%=jbb.getName() %></td><td><%=jbb.getOnlydate() %></td><td><%=jbb.getReadcount() %></td></tr>
 
 
 
