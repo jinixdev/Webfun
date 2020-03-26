@@ -97,8 +97,9 @@ public class BoardDAO {
 				 jbb.setPass(rs.getString("pass"));
 				 jbb.setSubject(rs.getString("subject"));
 				 jbb.setContent(rs.getString("content"));
-				 jbb.setOnlydate(s);
+				 jbb.setDate(rs.getTimestamp("date"));
 				 jbb.setReadcount(rs.getInt("readcount"));
+				 jbb.setFile(rs.getString("file"));
 				 
 				 jbblist.add(jbb);
 			 }
@@ -130,13 +131,13 @@ public class BoardDAO {
 			 rs= pre.executeQuery();
 			 while(rs.next()) {
 				 BoardBean jbb = new BoardBean();
-				 String s = new SimpleDateFormat("yyyy-MM-dd").format(rs.getTimestamp("date"));
+//				 String s = new SimpleDateFormat("yyyy-MM-dd").format(rs.getTimestamp("date"));
 				 jbb.setNum(rs.getInt("num"));
 				 jbb.setName(rs.getString("name"));
 				 jbb.setPass(rs.getString("pass"));
 				 jbb.setSubject(rs.getString("subject"));
 				 jbb.setContent(rs.getString("content"));
-				 jbb.setOnlydate(s);
+				 jbb.setDate(rs.getTimestamp("date"));
 				 jbb.setReadcount(rs.getInt("readcount"));
 				 
 				 jbblist.add(jbb);
@@ -181,6 +182,7 @@ public class BoardDAO {
 				 jbb.setContent(rs.getString("content"));
 				 jbb.setDate(rs.getTimestamp("date"));
 				 jbb.setReadcount(rs.getInt("readcount"));
+				 jbb.setFile(rs.getString("file"));
 				 
 			 }
 			

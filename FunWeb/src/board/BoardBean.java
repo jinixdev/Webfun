@@ -25,15 +25,8 @@ public class BoardBean {
 
 
 	private Timestamp date;
-	private String onlydate;
 
-	public String getOnlydate() {
-		return onlydate;
-	}
 
-	public void setOnlydate(String onlydate) {
-		this.onlydate = onlydate;
-	}
 
 	public Timestamp getDate() {
 		return date;

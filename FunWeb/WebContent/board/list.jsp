@@ -50,21 +50,22 @@ List boardlist = jbDAO.getboardList(startRow,pageSize); //호출
 
 <h1>글목록 [ 전체 글개수 :<%=count%>] </h1>
 <table border="1">
-<tr><td>글번호</td><td>조회수</td><td>글쓴이</td><td>비밀번호</td><td>제목</td><td>내용</td><td>작성날짜</td></tr>
+<tr><td>글번호</td><td>조회수</td><td>글쓴이</td><td>비밀번호</td><td>제목</td><td>내용</td><td>작성날짜</td><td>파일                                 </td></tr>
 <%
 for(int i =0;i<boardlist.size();i++){
 	BoardBean jbb = (BoardBean)boardlist.get(i);%>
 	<tr><td><%=jbb.getNum() %></td><td><%=jbb.getReadcount() %></td>
 	<td><%=jbb.getName() %></td><td><%=jbb.getPass() %></td>
-	<td><a href="content.jsp?num=<%=jbb.getNum()%>"><%= jbb.getSubject() %></a></td>
-	<td><%=jbb.getContent() %></td><td><%=jbb.getOnlydate() %></td>
+	<td><a href="content.jsp?num=<%=jbb.getNum()%>&pageNum=<%=pageNum%>"><%= jbb.getSubject() %></a></td>
+	<td><%=jbb.getContent() %></td><td><%=jbb.getDate() %></td>
+	<td><img src="../upload/<%=jbb.getFile()%>" width="100" height="100"></td>
 	</tr>
 <%} 
-String id = (String)session.getAttribute("id"); %>
-<!-- if(id!=null){%> -->
+String id = (String)session.getAttribute("id"); 
+if(id!=null){%>
 <tr><td><input type="button" value="글작성" onclick="location.href='writeForm.jsp'"></td></tr>
 <tr><td><input type="button" value="갤러리작성" onclick="location.href='fwriteForm.jsp'"></td></tr>
-<%-- <%} %> --%>
+<%} %>
 </table>
 <%
 // 전체 페이지 수 구하기	전체 글 개수  50		한화면에 보여줄 개수  10 => 전체 페이지수  5 + 나머지가 없으면 0
@@ -100,13 +101,20 @@ if(endPage>pageCount){
 // [이전] 10페이지 이전
 if(startPage > pageBlock){%>
 	<a href="list.jsp?pageNum=<%=startPage-pageBlock%>">[이전]</a> 
-<%}
+<%}%>
 
-// 1~10	11~20	startPage ~ endPage
-for(int i=startPage;i<=endPage;i++){%>
-	<a href="list.jsp?pageNum=<%=i%>"><%=i%></a> 
-<%}
-// [다음] 10페이지 다음
+<%// 1~10	11~20	startPage ~ endPage
+// 선택한 페이지 진한글씨
+for(int i = startPage; i <= endPage; i++){
+	if(i == currentPage){%>
+		<u><b>[<%=i %>]</b></u>
+<%	} else {%>
+		[<a href="gallery.jsp?pageNum=<%=i %>"><%=i %></a>]
+<%	}
+}%>
+
+
+<%// [다음] 10페이지 다음
 if(endPage < pageCount){%>
 	<a href="list.jsp?pageNum=<%=startPage+pageBlock%>">[다음]</a> 
 <%}%>
