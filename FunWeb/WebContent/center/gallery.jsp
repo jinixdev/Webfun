@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="board.BoardBean"%>
 <%@page import="board.BoardDAO"%>
 <%@page import="java.util.List"%>
@@ -88,21 +89,26 @@ int endRow = currentPage*pageSize;
 List boardlist = jbDAO.getboardList(startRow,pageSize); //호출
 // List boardlist = jbDAO.getboardList();
 %>
+
+
 <table id="notice">
 <tr><th class="tno">No.</th>
     <th class="ttitle">Title</th>
     <th class="twrite">Writer</th>
     <th class="tdate">Date</th>
     <th class="tread">Read</th></tr>
-<% for(int i =0;i<boardlist.size();i++){
+<% 
+// SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+for(int i =0;i<boardlist.size();i+=2){
 	BoardBean jbb = (BoardBean)boardlist.get(i);%>   
-<tr><td><%=jbb.getNum() %></td><td class="left"><a href="../board/content.jsp?num=<%=jbb.getNum()%>"><%= jbb.getSubject() %></a></td>
-    <td class="left"><%=jbb.getName() %></td><td><%=jbb.getDate() %></td><td><%=jbb.getReadcount() %></td></tr>
+<tr><td><img src="../upload/<%=jbb.getFile()%>" width="100" height="100"></td></tr>
+<tr><td><%=jbb.getSubject() %></td></tr>
+<tr><td><%=jbb.getName() %></td></tr>
+<tr><td>조회수</td><td><%=jbb.getReadcount() %></td></tr>
 
 
 
 <%}%> 
-
 
 </table>
 <div id="table_search">
@@ -110,20 +116,13 @@ List boardlist = jbDAO.getboardList(startRow,pageSize); //호출
 <input type="button" value="search" class="btn">
 <%String id = (String)session.getAttribute("id"); 
 if(id!=null){%>
-<input type="button" value="글작성" class="btn" onclick="location.href='../board/writeForm.jsp'">
+<input type="button" value="글작성" class="btn" onclick="location.href='../board/fwriteForm.jsp'">
 <%} %>
 </div>
 
 
-<!-- <div class="clear"></div> -->
-<!-- <div id="page_control"> -->
-<!-- <a href="#">Prev</a> -->
-<!-- <a href="#">1</a><a href="#">2</a><a href="#">3</a> -->
-<!-- <a href="#">4</a><a href="#">5</a><a href="#">6</a> -->
-<!-- <a href="#">7</a><a href="#">8</a><a href="#">9</a> -->
-<!-- <a href="#">10</a> -->
-<!-- <a href="#">Next</a> -->
-<!-- </div> -->
+
+
 
 <%// 한 화면에 보여줄 페이지 개수
 int pageBlock = 3;

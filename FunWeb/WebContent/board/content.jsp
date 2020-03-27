@@ -123,6 +123,7 @@ String id = (String)session.getAttribute("id");
 
 <hr>
 <!-- comment code -->
+<% if(id!=null){ %>
 <form action="commentPro.jsp">
 <input type="hidden" name="id" value="<%=id%>">
 <textarea name="content" cols="50" rows="2"></textarea>
@@ -130,7 +131,7 @@ String id = (String)session.getAttribute("id");
 <input type="submit">
 </form>
 
-<%
+<%}
 commentDAO comDAO = new commentDAO();
 List comList= comDAO.getCommentList(p_num);%>
 <table>

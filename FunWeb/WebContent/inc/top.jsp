@@ -15,11 +15,11 @@ if(id==null){
 <!-- 로고들어가는 곳 -->
 <nav id="top_menu">
 <ul>
-	<li><a href="../main/main.jsp">HOME</a></li>
-	<li><a href="../company/welcome.jsp">COMPANY</a></li>
+	<li><a href="../main/main.jsp">Home</a></li>
+	<li><a href="../company/welcome.jsp">About</a></li>
 	<li><a href="../center/gallery.jsp">Gallery</a></li>
 	<li><a href="../center/notice.jsp">Community</a></li>
-	<li><a href="#">CONTACT US</a></li>
+	<li><a href="#">Contact us</a></li>
 </ul>
 </nav>
 </header>
