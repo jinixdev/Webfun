@@ -102,7 +102,7 @@ String id = (String)session.getAttribute("id");
 <a href="file_down.jsp?file_name=<%=jbb.getFile()%>"><%=jbb.getFile()%></a></td>
 </tr>
 <tr><td colspan="4">
-<input type="button" value="글목록" onclick="location.href='../notice.jsp?pageNum=<%=pageNum%>'">
+<input type="button" value="글목록" onclick="location.href='../center/notice.jsp?pageNum=<%=pageNum%>'">
 <%if(jbb.getId().equals(id)){%>
 <input type="button" value="글수정" onclick="location.href='updateForm.jsp?num=<%=jbb.getNum()%>&pageNum=<%=pageNum%>'">
 <input type="button" value="글삭제" onclick="showhide();">
