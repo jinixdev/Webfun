@@ -70,6 +70,12 @@
     	 alert("선택 : "+star);
     	 document.getElementById("star").value =star;
      }
+     
+     
+     function map(){
+//     	window.name = "checkPro";
+    	checkpro=window.open("map.jsp","chkpro", "width=800, height=600, resizable = no, scrollbars = no");
+     }
 </script>
 <body>
 <form action="pro.jsp">
@@ -89,6 +95,13 @@
        <span id="startext">평가하기</span>
 </p>
 <input type="hidden" id="star">
+
+<input type="text" id="placename">
+<input type="text" id="placeaddr">
+<input type="button" value="dup. check" class="dup" onclick="map()">
+
+
+
 </form>
 </body>
 </html>

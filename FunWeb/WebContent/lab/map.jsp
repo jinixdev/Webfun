@@ -153,7 +153,7 @@ function displayPlaces(places) {
         // 마커와 검색결과 항목에 mouseover 했을때
         // 해당 장소에 인포윈도우에 장소명을 표시합니다
         // mouseout 했을 때는 인포윈도우를 닫습니다
-        (function(marker, title) {
+        (function(marker, title, addr) {
             kakao.maps.event.addListener(marker, 'mouseover', function() {
                 displayInfowindow(marker, title);
             });
@@ -161,6 +161,12 @@ function displayPlaces(places) {
             kakao.maps.event.addListener(marker, 'mouseout', function() {
                 infowindow.close();
             });
+            
+            kakao.maps.event.addListener(marker, 'click', function() {
+            	 opener.document.getElementById("placename").value =title;
+            	 opener.document.getElementById("placeaddr").value =addr;
+            });
+         
 
             itemEl.onmouseover =  function () {
                 displayInfowindow(marker, title);
@@ -169,7 +175,15 @@ function displayPlaces(places) {
             itemEl.onmouseout =  function () {
                 infowindow.close();
             };
-        })(marker, places[i].place_name);
+            
+            itemEl.onclick =  function () {
+            	 opener.document.getElementById("placename").value =title;
+            	 opener.document.getElementById("placeaddr").value =addr;
+            };
+            
+            
+
+        })(marker, places[i].place_name, places[i].address_name);
 
         fragment.appendChild(itemEl);
     }
@@ -202,6 +216,9 @@ function getListItem(index, places) {
 
     el.innerHTML = itemStr;
     el.className = 'item';
+    
+    
+    
 
     return el;
 }

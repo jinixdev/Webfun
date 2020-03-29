@@ -73,16 +73,17 @@ float: right;}
 footer #social img{margin: 0 7px}/*밖여백 0 7px*/
 
 .gwrap{
-	 width: 900px;
+	 width: 970px;
 	 height: auto;
 }
 
 .container {
-  width: 890px;
+  width: 900px;
   display: grid;
   grid-template-rows: repeat(3, 300px);
   grid-template-columns: repeat(3, 300px);
   align-content: <align-content>;
+  margin-left: 50px;
 }
 
 .g_content{

@@ -91,7 +91,7 @@ public class BoardDAO {
 			 rs= pre.executeQuery();
 			 while(rs.next()) {
 				 BoardBean jbb = new BoardBean();
-				 String s = new SimpleDateFormat("yyyy-MM-dd").format(rs.getTimestamp("date"));
+//				 String s = new SimpleDateFormat("yyyy-MM-dd").format(rs.getTimestamp("date"));
 				 jbb.setNum(rs.getInt("num"));
 				 jbb.setName(rs.getString("name"));
 				 jbb.setPass(rs.getString("pass"));
@@ -292,7 +292,6 @@ public class BoardDAO {
 			if(con!=null) try {con.close();}catch(SQLException ex) {}
 		}
 		
-		System.out.print("count(num)"+count);
 		return count;
 		
 		
