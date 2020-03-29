@@ -71,14 +71,23 @@ float: right;}
 /*너비 130px 밖여백 20px 20px 0 0
 정렬 오른쪽*/
 footer #social img{margin: 0 7px}/*밖여백 0 7px*/
-/* bul */
- #star_grade a{
-        text-decoration: none;
-        color: gray;
-    }
-    #star_grade a.on{
-        color: red;
-    }
+
+.gwrap{
+	 width: 900px;
+	 height: auto;
+}
+
+.container {
+  width: 890px;
+  display: grid;
+  grid-template-rows: repeat(3, 300px);
+  grid-template-columns: repeat(3, 300px);
+  align-content: <align-content>;
+}
+
+.g_content{
+	 width: 300px;
+}
 
 
 

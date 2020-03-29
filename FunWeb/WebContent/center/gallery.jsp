@@ -38,19 +38,18 @@
 <!-- 메인이미지 -->
 
 <!-- 왼쪽메뉴 -->
-<nav id="sub_menu">
-<ul>
-<li><a href="#">Notice</a></li>
-<li><a href="#">Public News</a></li>
-<li><a href="#">Driver Download</a></li>
-<li><a href="#">Service Policy</a></li>
-</ul>
-</nav>
+<!-- <nav id="sub_menu"> -->
+<!-- <ul> -->
+<!-- <li><a href="#">Notice</a></li> -->
+<!-- <li><a href="#">Public News</a></li> -->
+<!-- <li><a href="#">Driver Download</a></li> -->
+<!-- <li><a href="#">Service Policy</a></li> -->
+<!-- </ul> -->
+<!-- </nav> -->
 <!-- 왼쪽메뉴 -->
 
 <!-- 게시판 -->
-<article>
-<h1>Notice</h1>
+<div class="gwrap">
 <%
 request.setCharacterEncoding("UTF-8");
 BoardDAO jbDAO= new BoardDAO();
@@ -59,7 +58,7 @@ BoardDAO jbDAO= new BoardDAO();
 int count = jbDAO.getBoardCount();
 
 // 한 화면에 보여줄 가져올 글 개수 설정
-int pageSize =5;
+int pageSize =9;
 
 
 // 현 페이지 번호 가져오기 pageNum 파라미터 가져오기 (처음엔 없기때문에 "1")
@@ -91,26 +90,40 @@ List boardlist = jbDAO.getboardList(startRow,pageSize); //호출
 %>
 
 
-<table id="notice">
-<tr><th class="tno">No.</th>
-    <th class="ttitle">Title</th>
-    <th class="twrite">Writer</th>
-    <th class="tdate">Date</th>
-    <th class="tread">Read</th></tr>
-<% 
-// SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
-for(int i =0;i<boardlist.size();i+=2){
-	BoardBean jbb = (BoardBean)boardlist.get(i);%>   
-<tr><td><img src="../upload/<%=jbb.getFile()%>" width="100" height="100"></td></tr>
-<tr><td><%=jbb.getSubject() %></td></tr>
-<tr><td><%=jbb.getName() %></td></tr>
-<tr><td>조회수</td><td><%=jbb.getReadcount() %></td></tr>
+<!-- <table id="notice"> -->
+<!-- <tr><th class="tno">No.</th> -->
+<!--     <th class="ttitle">Title</th> -->
+<!--     <th class="twrite">Writer</th> -->
+<!--     <th class="tdate">Date</th> -->
+<!--     <th class="tread">Read</th></tr> -->
+<%-- <%  --%>
+<!-- // // SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd"); -->
+<!-- // for(int i =0;i<boardlist.size();i+=2){ -->
+<%-- 	BoardBean jbb = (BoardBean)boardlist.get(i);%>    --%>
+<%-- <tr><td><img src="../upload/<%=jbb.getFile()%>" width="100" height="100"></td></tr> --%>
+<%-- <tr><td><%=jbb.getSubject() %></td></tr> --%>
+<%-- <tr><td><%=jbb.getName() %></td></tr> --%>
+<%-- <tr><td>조회수</td><td><%=jbb.getReadcount() %></td></tr> --%>
+
+<div class="container">
+<%for(int i =0;i<boardlist.size();i++){ 
+BoardBean jbb = (BoardBean)boardlist.get(i);%>
+
+<div class="g_content">
+<img src="../upload/<%=jbb.getFile()%>" width="250" height="250">
+
+<div>
+<span><%=jbb.getId()%></span> <strong><%=jbb.getReadcount() %></strong>
+<p><%=jbb.getSubject() %></p>
+</div>
+
+
+</div>
+<%} %>
+</div>
 
 
 
-<%}%> 
-
-</table>
 <div id="table_search">
 <input type="text" name="search" class="input_box">
 <input type="button" value="search" class="btn">
@@ -173,7 +186,7 @@ if(endPage < pageCount){%>
 
 
 
-</article>
+</div>
 <!-- 게시판 -->
 <!-- 본문들어가는 곳 -->
 <div class="clear"></div>
