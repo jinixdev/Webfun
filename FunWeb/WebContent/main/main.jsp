@@ -1,3 +1,7 @@
+<%@page import="board.BoardBean"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.List"%>
+<%@page import="board.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -33,7 +37,7 @@
 <!-- 헤더들어가는 곳 -->
 <!-- 메인이미지 들어가는곳 -->
 <div class="clear"></div>
-<div id="main_img"><img src="../images/main_img.jpg"
+<div id="main_img"><img src="../images/main_img1.jpg"
  width="971" height="282"></div>
 <!-- 메인이미지 들어가는곳 -->
 <!-- 메인 콘텐츠 들어가는 곳 -->
@@ -77,16 +81,35 @@ quis ante......</dd>
 <div id="news_notice">
 <h3 class="brown">News &amp; Notice</h3>
 <table>
-<tr><td class="contxt"><a href="#">Vivans....</a></td>
-    <td>2012.11.02</td></tr>
-<tr><td class="contxt"><a href="#">Vivans....</a></td>
-    <td>2012.11.02</td></tr>
-<tr><td class="contxt"><a href="#">Vivans....</a></td>
-    <td>2012.11.02</td></tr>
-<tr><td class="contxt"><a href="#">Vivans....</a></td>
-    <td>2012.11.02</td></tr>
-<tr><td class="contxt"><a href="#">Vivans....</a></td>
-    <td>2012.11.02</td></tr>
+<%
+// 최신글 5개
+// 1행 5개 가져오기
+// BoardDAO bdao 생성
+BoardDAO bDAO = new BoardDAO();
+// int count = getBoardCount()호출
+int count = bDAO.getBoardCount();
+// 한 화면에 보여줄 가져올 글 갯수 생성
+int pageSize =5;
+// 현 페이지 번호가 없으면 "1"페이지로 설번
+String pageNum = request.getParameter("pageNum");
+// 현 페이지 번호가 없으면 "1"페이지로 설정
+if(pageNum==null){ // 현페이지 번호가 없으면
+	pageNum="1"; // 10개씩 잘라서 1페이지 시작하는지 확인
+} 
+// pageNum => 정수형으로 변경
+int currentPage =Integer.parseInt(pageNum);
+// 10개씩 잘라서 1페이지 시작하는 행 번호 구하기
+ int startRow= (currentPage-1)*pageSize+1;
+// List boardlist = jbDAO.getboardList(startRow,pageSize); 호출
+List boardlist = bDAO.getboardList(startRow,pageSize); 
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+for (int i = 0; i < boardlist.size(); i++) {
+	BoardBean jbb = (BoardBean) boardlist.get(i);
+%>
+<tr><td class="contxt"><a href="#"><%=jbb.getSubject() %></a></td>
+    <td><%=sdf.format(jbb.getDate())%></td></tr>
+
+<%} %>
 </table>
 </div>
 </article>

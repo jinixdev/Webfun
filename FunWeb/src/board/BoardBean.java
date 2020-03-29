@@ -4,7 +4,17 @@ import java.sql.Timestamp;
 
 public class BoardBean {
 	
-	private String name,pass,subject,content,id;
+	private String name,pass,subject,content,id,file;
+	
+	
+	public String getFile() {
+		return file;
+	}
+
+	public void setFile(String file) {
+		this.file = file;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -15,15 +25,8 @@ public class BoardBean {
 
 
 	private Timestamp date;
-	private String onlydate;
 
-	public String getOnlydate() {
-		return onlydate;
-	}
 
-	public void setOnlydate(String onlydate) {
-		this.onlydate = onlydate;
-	}
 
 	public Timestamp getDate() {
 		return date;

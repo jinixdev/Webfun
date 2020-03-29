@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 body {
-	background-color: #898989; margin: 0px;
+	background-color: #ffffff; margin: 0px;
 	padding: 0px; font-size: 0.75em;
 	line-height: 1.2em; color: #333;
 }/*배경색 #898989 밖여백 0 안여백 0 글자크기 0.75em
@@ -9,7 +9,7 @@ body {
 	width: 971px; text-align: left;
 	margin: 0;margin-right: auto;margin-left: auto;
 	min-height: 780px;
-	background-image: url("../images/shadow.png");
+/* 	background-image: url("../images/shadow.png"); */
 	background-repeat: repeat-y;
 }/*너비 : 971px 글자정렬 left 밖여백 0 
 밖오른쪽여백 auto 밖왼쪽여백 auto  최소높이 780px
@@ -25,7 +25,7 @@ font-size: 12px;word-spacing: 5px}
 #login a:hover{color: #F90}
 /* 하이퍼링크 hover 글자색 #F90*/
 .clear{clear: both;}/*영역구분*/
-#logo{float: left;width: 265px; margin: 60px 0 0 40px}
+#logo{float: left;width: 265px; margin: 40px 0 0 40px}
 /*정렬 왼쪽 너비 265px 밖여백 60px 0 0 40px*/
 header{height: 151px;margin: 0px;padding: 0px}
 /*높이 151px 밖여백 0 안여백 0*/
@@ -71,8 +71,14 @@ float: right;}
 /*너비 130px 밖여백 20px 20px 0 0
 정렬 오른쪽*/
 footer #social img{margin: 0 7px}/*밖여백 0 7px*/
-
-
+/* bul */
+ #star_grade a{
+        text-decoration: none;
+        color: gray;
+    }
+    #star_grade a.on{
+        color: red;
+    }
 
 
 

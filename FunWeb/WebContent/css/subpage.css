@@ -88,9 +88,9 @@ border-bottom-left-radius:5px;
 왼쪽위 둥글게5px 왼쪽아래 둥글게5px*/
 article th.ttitle{width: 400px; letter-spacing: 0.7em}
 /*너비 400px 문자간격 0.7em*/
-article th.twrite{width: 100px;}
+article th.twrite{width: 80px;}
 /*너비 100px*/
-article th.tdate{width: 50px;}
+article th.tdate{width: 70px;}
 /*너비 50px*/
 article th.tread{width: 50px;
 border-top-right-radius:5px;

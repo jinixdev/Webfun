@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="board.BoardBean"%>
 <%@page import="board.BoardDAO"%>
 <%@page import="java.util.List"%>
@@ -7,17 +8,58 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>list</title>
+<title>Insert title here</title>
+<link href="../css/default.css" rel="stylesheet" type="text/css">
+<link href="../css/subpage.css" rel="stylesheet" type="text/css">
+<!--[if lt IE 9]>
+<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js" type="text/javascript"></script>
+<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/ie7-squish.js" type="text/javascript"></script>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+<![endif]-->
+<!--[if IE 6]>
+ <script src="../script/DD_belatedPNG_0.0.8a.js"></script>
+ <script>
+   /* EXAMPLE */
+   DD_belatedPNG.fix('#wrap');
+   DD_belatedPNG.fix('#main_img');   
+
+ </script>
+ <![endif]-->
 </head>
 <body>
+<div id="wrap">
+<!-- 헤더들어가는 곳 -->
+<jsp:include page="../inc/top.jsp"></jsp:include>
+<!-- 헤더들어가는 곳 -->
+
+<!-- 본문들어가는 곳 -->
+<!-- 메인이미지 -->
+<div id="sub_img_center"></div>
+<!-- 메인이미지 -->
+
+<!-- 왼쪽메뉴 -->
+<nav id="sub_menu">
+<ul>
+<li><a href="#">Notice</a></li>
+<li><a href="#">Public News</a></li>
+<li><a href="#">Driver Download</a></li>
+<li><a href="#">Service Policy</a></li>
+</ul>
+</nav>
+<!-- 왼쪽메뉴 -->
+
+<!-- 게시판 -->
+<article>
+<h1>Notice</h1>
 <%
+request.setCharacterEncoding("UTF-8");
 BoardDAO jbDAO= new BoardDAO();
 // 게시판 글개수를 호출 getBoardCount() count() 
 // int count = getBoardCount() 호출
 int count = jbDAO.getBoardCount();
 
 // 한 화면에 보여줄 가져올 글 개수 설정
-int pageSize =3;
+int pageSize =5;
 
 
 // 현 페이지 번호 가져오기 pageNum 파라미터 가져오기 (처음엔 없기때문에 "1")
@@ -48,31 +90,41 @@ List boardlist = jbDAO.getboardList(startRow,pageSize); //호출
 // List boardlist = jbDAO.getboardList();
 %>
 
-<h1>글목록 [ 전체 글개수 :<%=count%>] </h1>
-<table border="1">
-<tr><td>글번호</td><td>조회수</td><td>글쓴이</td><td>비밀번호</td><td>제목</td><td>내용</td><td>작성날짜</td><td>파일                                 </td></tr>
-<%
-for(int i =0;i<boardlist.size();i++){
-	BoardBean jbb = (BoardBean)boardlist.get(i);%>
-	<tr><td><%=jbb.getNum() %></td><td><%=jbb.getReadcount() %></td>
-	<td><%=jbb.getName() %></td><td><%=jbb.getPass() %></td>
-	<td><a href="content.jsp?num=<%=jbb.getNum()%>&pageNum=<%=pageNum%>"><%= jbb.getSubject() %></a></td>
-	<td><%=jbb.getContent() %></td><td><%=jbb.getDate() %></td>
-	<td><img src="../upload/<%=jbb.getFile()%>" width="100" height="100"></td>
-	</tr>
-<%} 
-String id = (String)session.getAttribute("id"); 
-if(id!=null){%>
-<tr><td><input type="button" value="글작성" onclick="location.href='writeForm.jsp'"></td></tr>
-<tr><td><input type="button" value="갤러리작성" onclick="location.href='fwriteForm.jsp'"></td></tr>
-<%} %>
-</table>
-<%
-// 페이징
-// 전체 페이지 수 구하기	전체 글 개수  50		한화면에 보여줄 개수  10 => 전체 페이지수  5 + 나머지가 없으면 0
-//							 59					  10			  5 + 		있으면 1
 
-// 한 화면에 보여줄 페이지 개수
+<table id="notice">
+<tr><th class="tno">No.</th>
+    <th class="ttitle">Title</th>
+    <th class="twrite">Writer</th>
+    <th class="tdate">Date</th>
+    <th class="tread">Read</th></tr>
+<% 
+// SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+for(int i =0;i<boardlist.size();i+=2){
+	BoardBean jbb = (BoardBean)boardlist.get(i);%>   
+<tr><td><img src="../upload/<%=jbb.getFile()%>" width="100" height="100"></td></tr>
+<tr><td><%=jbb.getSubject() %></td></tr>
+<tr><td><%=jbb.getName() %></td></tr>
+<tr><td>조회수</td><td><%=jbb.getReadcount() %></td></tr>
+
+
+
+<%}%> 
+
+</table>
+<div id="table_search">
+<input type="text" name="search" class="input_box">
+<input type="button" value="search" class="btn">
+<%String id = (String)session.getAttribute("id"); 
+if(id!=null){%>
+<input type="button" value="글작성" class="btn" onclick="location.href='../board/fwriteForm.jsp'">
+<%} %>
+</div>
+
+
+
+
+
+<%// 한 화면에 보여줄 페이지 개수
 int pageBlock = 3;
 // int pageCount = count /pageSize +(count%pageSize==0?0:1);
 int pageCount= count%pageSize==0?(count/pageSize):(count/pageSize)+1 ;
@@ -99,7 +151,7 @@ if(endPage>pageCount){
 
 // [이전] 10페이지 이전
 if(startPage > pageBlock){%>
-	<a href="list.jsp?pageNum=<%=startPage-pageBlock%>">[이전]</a> 
+	<a href="gallery.jsp?pageNum=<%=startPage-pageBlock%>">[이전]</a> 
 <%}%>
 
 <%// 1~10	11~20	startPage ~ endPage
@@ -115,14 +167,19 @@ for(int i = startPage; i <= endPage; i++){
 
 <%// [다음] 10페이지 다음
 if(endPage < pageCount){%>
-	<a href="list.jsp?pageNum=<%=startPage+pageBlock%>">[다음]</a> 
+	<a href="gallery.jsp?pageNum=<%=startPage+pageBlock%>">[다음]</a> 
 <%}%>
 
 
 
 
-
-
-
+</article>
+<!-- 게시판 -->
+<!-- 본문들어가는 곳 -->
+<div class="clear"></div>
+<!-- 헤더들어가는 곳 -->
+<jsp:include page="../inc/bottom.jsp"></jsp:include>
+<!-- 헤더들어가는 곳 -->
+</div>
 </body>
 </html>

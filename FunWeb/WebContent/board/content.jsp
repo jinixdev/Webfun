@@ -11,6 +11,8 @@
 <head>
 <meta charset="UTF-8">
 <title>content</title>
+<link href="../css/default.css" rel="stylesheet" type="text/css">
+<link href="../css/subpage.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
 function showhide(){
 	var obj=document.getElementById("showtable");
@@ -50,8 +52,37 @@ function commentDelete(){
 </script> 
 </head>
 <body>
+<div id="wrap">
+<!-- 헤더들어가는 곳 -->
+<jsp:include page="../inc/top.jsp"></jsp:include>
+<!-- 헤더들어가는 곳 -->
+
+<!-- 본문들어가는 곳 -->
+<!-- 메인이미지 -->
+<div id="sub_img_center"></div>
+<!-- 메인이미지 -->
+
+<!-- 왼쪽메뉴 -->
+<nav id="sub_menu">
+<ul>
+<li><a href="#">Notice</a></li>
+<li><a href="#">Public News</a></li>
+<li><a href="#">Driver Download</a></li>
+<li><a href="#">Service Policy</a></li>
+</ul>
+</nav>
+<!-- 왼쪽메뉴 -->
+
+<!-- 게시판 -->
+<article>
+
+
+
+
+
 <%
 int p_num = Integer.parseInt(request.getParameter("num"));
+String pageNum = request.getParameter("pageNum"); // 계산할것이 아니므로 String으로 받아도 됨
 System.out.println("num : "+p_num);
 BoardDAO jbDAO= new BoardDAO();
 BoardBean jbb= jbDAO.getboardContent(p_num);
@@ -66,18 +97,22 @@ String id = (String)session.getAttribute("id");
 <tr><td>조회수</td><td><%=jbb.getReadcount() %></td></tr>
 <tr><td>제목</td><td colspan="3"><%=jbb.getSubject() %></td></tr>
 <tr><td>내용</td><td colspan="3"><%=jbb.getContent() %></td></tr>
-
-<%if(id.equals(jbb.getId())){ %>
-<tr><td colspan="4"> <input type="button" value="글수정" onclick="location.href='updateForm.jsp?num=<%=jbb.getNum()%>'">
-
+<tr><td>파일</td><td colspan="3"><a href="../upload/<%=jbb.getFile()%>"><%=jbb.getFile()%></a>
+<img src="../upload/<%=jbb.getFile()%>" width="100" height="100">
+<a href="file_down.jsp?file_name=<%=jbb.getFile()%>"><%=jbb.getFile()%></a></td>
+</tr>
+<tr><td colspan="4">
+<input type="button" value="글목록" onclick="location.href='../center/notice.jsp?pageNum=<%=pageNum%>'">
+<%if(jbb.getId().equals(id)){%>
+<input type="button" value="글수정" onclick="location.href='updateForm.jsp?num=<%=jbb.getNum()%>&pageNum=<%=pageNum%>'">
 <input type="button" value="글삭제" onclick="showhide();">
-<%} %>
-<input type="button" value="글목록" onclick="location.href='list.jsp'"></td></tr>
+<%}%>
+</td></tr>
 </table>
 
 <!-- delete code -->
 <div id="showtable" style="display:none;">
-<form action="deletePro.jsp" method="post">
+<form action="deletePro.jsp?pageNum=<%=pageNum%>" method="post">
 <table>
 <tr><td>비밀번호</td><td><input type="password" name="pass"></td>
 <% session.setAttribute("num", jbb.getNum());%>
@@ -88,6 +123,7 @@ String id = (String)session.getAttribute("id");
 
 <hr>
 <!-- comment code -->
+<% if(id!=null){ %>
 <form action="commentPro.jsp">
 <input type="hidden" name="id" value="<%=id%>">
 <textarea name="content" cols="50" rows="2"></textarea>
@@ -95,7 +131,7 @@ String id = (String)session.getAttribute("id");
 <input type="submit">
 </form>
 
-<%
+<%}
 commentDAO comDAO = new commentDAO();
 List comList= comDAO.getCommentList(p_num);%>
 <table>
@@ -103,7 +139,7 @@ List comList= comDAO.getCommentList(p_num);%>
 	commentBean cb = (commentBean)comList.get(i);
 	%>
 <tr><td><%=cb.getId() %></td><td><%=cb.getContent() %></td>
-<% if(id.equals(cb.getId())){ %>
+<% if(cb.getId().equals(id)){ %>
 <td><input type="button" value="수정" onclick="commentUpdate('<%=cb.getId()%>','<%=cb.getContent()%>',
 '<%=cb.getP_num()%>','<%=cb.getR_num()%>');"></td>
 <td><a href="../comment/deletePro.jsp?num=<%=cb.getNum()%>&p_num=<%=cb.getP_num()%>">x</a></td> <%} %></tr>
@@ -129,11 +165,14 @@ List comList= comDAO.getCommentList(p_num);%>
 </div>
 
 
-
-
-
-
-
+</article>
+<!-- 게시판 -->
+<!-- 본문들어가는 곳 -->
+<div class="clear"></div>
+<!-- 헤더들어가는 곳 -->
+<jsp:include page="../inc/bottom.jsp"></jsp:include>
+<!-- 헤더들어가는 곳 -->
+</div>
 
 
 

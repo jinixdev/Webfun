@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="board.BoardBean"%>
 <%@page import="board.BoardDAO"%>
 <%@page import="java.util.List"%>
@@ -58,7 +59,7 @@ BoardDAO jbDAO= new BoardDAO();
 int count = jbDAO.getBoardCount();
 
 // 한 화면에 보여줄 가져올 글 개수 설정
-int pageSize =10;
+int pageSize =8;
 
 
 // 현 페이지 번호 가져오기 pageNum 파라미터 가져오기 (처음엔 없기때문에 "1")
@@ -89,42 +90,101 @@ List boardlist = jbDAO.getboardList(startRow,pageSize); //호출
 // List boardlist = jbDAO.getboardList();
 %>
 <table id="notice">
-<tr><th class="tno">No.</th>
-    <th class="ttitle">Title</th>
-    <th class="twrite">Writer</th>
-    <th class="tdate">Date</th>
-    <th class="tread">Read</th></tr>
-<% for(int i =0;i<boardlist.size();i++){
-	BoardBean jbb = (BoardBean)boardlist.get(i);%>   
-<tr><td><%=jbb.getNum() %></td><td class="left"><a href="../board/content.jsp?num=<%=jbb.getNum()%>"><%= jbb.getSubject() %></a></td>
-    <td><%=jbb.getName() %></td><td><%=jbb.getOnlydate() %></td><td><%=jbb.getReadcount() %></td></tr>
-
-
-
-<%}%> 
-
-
+	<tr>
+		<th class="tno">No.</th>
+		<th class="ttitle">Title</th>
+		<th class="twrite">Writer</th>
+		<th class="tdate">Date</th>
+		<th class="tread">Read</th>
+	</tr>
+	<%
+		// jbb.getNum() 실제 게시판 번호 -> 가상카운트 번호 부여  
+	// 전체 글개수 count		pageNum		pageSize	=>	num
+	//			30			1			10		=>	30- 0=>30
+	//			30			2			10		=>	30-10=>20
+		//			30			3			10		=>	30-20=>10
+		int num = count - (currentPage - 1) * pageSize;
+		// 2020-0324 17:42:30.0  ==>  2012.11.06 문자날짜모양
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+		for (int i = 0; i < boardlist.size(); i++) {
+			BoardBean jbb = (BoardBean) boardlist.get(i);
+	%>
+	<tr>
+		<td><%=num--%></td>
+		<td class="left"><a href="../board/content.jsp?num=<%=jbb.getNum()%>&pageNum=<%=pageNum%>"><%=jbb.getSubject()%></a></td>
+		<td class="left"><%=jbb.getName()%></td>
+		<td><%=sdf.format(jbb.getDate())%></td>
+		<td><%=jbb.getReadcount()%></td>
+	</tr>
+	<%
+		}
+	%>
 </table>
 <div id="table_search">
-<input type="text" name="search" class="input_box">
-<input type="button" value="search" class="btn">
-<%String id = (String)session.getAttribute("id"); 
-if(id!=null){%>
-<input type="button" value="글작성" class="btn" onclick="location.href='../board/writeForm.jsp'">
-<%} %>
+	<input type="text" name="search" class="input_box"> 
+	<input type="button" value="search" class="btn">
+	<%
+		String id = (String) session.getAttribute("id");
+		if (id != null) {
+	%>
+	<input type="button" value="글작성" class="btn"
+		onclick="location.href='../board/writeForm.jsp'">
+	<%
+		}
+	%>
 </div>
+		<%// 한 화면에 보여줄 페이지 개수
+int pageBlock = 3;
+// int pageCount = count /pageSize +(count%pageSize==0?0:1);
+int pageCount= count%pageSize==0?(count/pageSize):(count/pageSize)+1 ;
+
+// 한 화면에 보여줄 시작 페이지 번호 구하기
+// 페이지 번호(CurrentPage)   pageBlock=>	시작페이지 번호 
+//	 1-10						10	=>		0*10+1=> 0+1 => 1
+//	 11-20						10	=>		1*10+1=> 0+1 => 11
+//	 21-30						10	=>		2*10+1=> 0+1 => 21
+int startPage = ((currentPage-1)/pageBlock)*pageBlock+1;
+// 한 화면에 보여줄 끝 페이지 번호 구하기
+// startPage		pageBlock 	=> 		endPage
+//		1				10		=>			10
+//		11				10		=>			20
+int endPage = (startPage+pageBlock)-1;
+// endPage 10 <= 전체 페이지수 5페이지
+if(endPage>pageCount){
+	endPage = pageCount;
+}
+
+// 	 1  2  3  ~ 10 [다음]
+//  [이전]11 12 13 ~20
 
 
-<div class="clear"></div>
-<div id="page_control">
-<a href="#">Prev</a>
-<a href="#">1</a><a href="#">2</a><a href="#">3</a>
-<a href="#">4</a><a href="#">5</a><a href="#">6</a>
-<a href="#">7</a><a href="#">8</a><a href="#">9</a>
-<a href="#">10</a>
-<a href="#">Next</a>
-</div>
-</article>
+// [이전] 10페이지 이전
+if(startPage > pageBlock){%> 
+
+	<a href="notice.jsp?pageNum=<%=startPage-pageBlock%>">[이전]</a> 
+	<!-- 10페이지씩 앞으로 감 -->
+<%}%>
+
+<%// 1~10	11~20	startPage ~ endPage
+// 선택한 페이지 진한글씨
+for(int i = startPage; i <= endPage; i++){
+	if(i == currentPage){%>
+		<u><b>[<%=i %>]</b></u>
+<%	} else {%>
+		[<a href="notice.jsp?pageNum=<%=i %>"><%=i %></a>]
+<%	}
+}%>
+
+
+<%// [다음] 10페이지 다음
+if(endPage < pageCount){%>
+	<a href="notice.jsp?pageNum=<%=startPage+pageBlock%>">[다음]</a> 
+<%}%>
+
+
+
+
+		</article>
 <!-- 게시판 -->
 <!-- 본문들어가는 곳 -->
 <div class="clear"></div>

@@ -2,7 +2,7 @@
 
 .clear{clear: both;}
 #main_img{width: 971px; height: 308px;
-background-image:url("../images/img_back.png");
+/* background-image:url("../images/img_back.png"); */
 background-repeat: no-repeat;
 background-position: center top;}
 /*너비 971px 높이 308px 
