@@ -1,3 +1,5 @@
+<%@page import="gallery.galleryBean"%>
+<%@page import="gallery.galleryDAO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="board.BoardBean"%>
 <%@page import="board.BoardDAO"%>
@@ -52,10 +54,10 @@
 <div class="gwrap">
 <%
 request.setCharacterEncoding("UTF-8");
-BoardDAO jbDAO= new BoardDAO();
+galleryDAO gDAO = new galleryDAO();
 // 게시판 글개수를 호출 getBoardCount() count() 
 // int count = getBoardCount() 호출
-int count = jbDAO.getBoardCount();
+int count = gDAO.getBoardCount();
 
 // 한 화면에 보여줄 가져올 글 개수 설정
 int pageSize =9;
@@ -85,7 +87,7 @@ int endRow = currentPage*pageSize;
 // select * from board order by num desc limit 시작하는 행번호-1,글개수
 
 
-List boardlist = jbDAO.getboardList(startRow,pageSize); //호출
+List gallerylist = gDAO.getboardList(startRow,pageSize); //호출
 // List boardlist = jbDAO.getboardList();
 %>
 
@@ -107,15 +109,16 @@ List boardlist = jbDAO.getboardList(startRow,pageSize); //호출
 
 <div class="gwrap">
 <div class="container">
-<%for(int i =0;i<boardlist.size();i++){ 
-BoardBean jbb = (BoardBean)boardlist.get(i);%>
+<%for(int i =0;i<gallerylist.size();i++){ 
+galleryBean gb = (galleryBean)gallerylist.get(i);%>
 
-<div class="g_content" onclick="location.href='../board/content.jsp?num=<%=jbb.getNum()%>'">
-<img src="../upload/<%=jbb.getFile()%>" width="250" height="250" request="re">
+<div class="g_content" onclick="location.href='../gallery/fcontent.jsp?num=<%=gb.getNum()%>'">
+<img src="../upload/<%=gb.getFile()%>" width="250" height="250" request="re">
 
 <div>
-<span><%=jbb.getId()%></span> <strong><%=jbb.getReadcount() %></strong>
-<p><%=jbb.getSubject() %></p>
+<span><%=gb.getId()%></span> 
+<%-- <strong><%=gb.getReadcount() %></strong> --%>
+<p><%=gb.getDate() %></p>
 </div>
 
 
