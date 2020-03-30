@@ -30,6 +30,6 @@ cDAO.commentUpdate(cb);
 
 %>
 
-<meta http-equiv="refresh" content="0;url=../board/notice.jsp?num=<%=p_num%>"></meta>
+<meta http-equiv="refresh" content="0;url=../board/content.jsp?num=<%=p_num%>"></meta>
 </body>
 </html>

@@ -100,6 +100,7 @@ public class BoardDAO {
 				 jbb.setDate(rs.getTimestamp("date"));
 				 jbb.setReadcount(rs.getInt("readcount"));
 				 jbb.setFile(rs.getString("file"));
+				 jbb.setId(rs.getString("id"));
 				 
 				 jbblist.add(jbb);
 			 }

@@ -24,22 +24,29 @@ function showhide(){
 }
 
 function commentUpdate(id,comment,p_num,r_num){
-	
-	var update=document.getElementById("updatetable");
+	var commenttable = document.getElementById("commenttable");
+	var updatetable=document.getElementById("updatetable");
 	document.getElementById("comment_id").value=id;
 	document.getElementById("comment").value=comment;
 	document.getElementById("p_num").value=p_num;
 	document.getElementById("r_num").value=r_num;
-	if(update.style.display=="none"){
-		update.style.display="block";
+	
+	if(updatetable.style.display=="none"){
+		updatetable.style.display="block";
+		commenttable.style.display="none";
 	}else{
-		update.style.display="none";
+		updatetable.style.display="none";
+		commenttable.style.display="block";
 	}
 }
+
+
 function hide(){
 	var update=document.getElementById("updatetable");
+	var commenttable = document.getElementById("commenttable");
 	if(update.style.display=="block"){
 		update.style.display="none";
+		commenttable.style.display="block";
 	}
 }
 
@@ -48,6 +55,7 @@ function commentDelete(){
 	var r_num =document.getElementById("r_num").value;
 	location.href="../comment/deletePro.jsp?p_num="+p_num;
 }
+
 
 </script> 
 </head>
@@ -122,16 +130,12 @@ String id = (String)session.getAttribute("id");
 </div>
 
 <hr>
+
+
+
 <!-- comment code -->
 <% if(id!=null){ %>
-<form action="commentPro.jsp">
-<input type="hidden" name="id" value="<%=id%>">
-<textarea name="content" cols="50" rows="2"></textarea>
-<input type="hidden" name="p_num" value="<%=p_num%>">
-<input type="submit">
-</form>
-
-<%}
+<%
 commentDAO comDAO = new commentDAO();
 List comList= comDAO.getCommentList(p_num);%>
 <table>
@@ -142,27 +146,44 @@ List comList= comDAO.getCommentList(p_num);%>
 <% if(cb.getId().equals(id)){ %>
 <td><input type="button" value="수정" onclick="commentUpdate('<%=cb.getId()%>','<%=cb.getContent()%>',
 '<%=cb.getP_num()%>','<%=cb.getR_num()%>');"></td>
-<td><a href="../comment/deletePro.jsp?num=<%=cb.getNum()%>&p_num=<%=cb.getP_num()%>">x</a></td> <%} %></tr>
-
-
-<%
-
-
-} %>
+<td><a href="../comment/deletePro.jsp?num=<%=cb.getNum()%>&p_num=<%=cb.getP_num()%>">x</a></td> <%}} %></tr>
 </table>
 
+
+
+
+
+
+<div id="commenttable" style="display:block;">
+<form action="commentPro.jsp">
+<input type="hidden" name="id" value="<%=id%>">
+<textarea name="content" cols="50" rows="2"></textarea>
+<input type="hidden" name="p_num" value="<%=p_num%>">
+<input type="submit">
+</form>
+</div>
 
 
 <!-- comment update code -->
 <div id="updatetable" style="display:none;">
 <form action="../comment/updatePro.jsp" method="get">
 
-<input type="text" name="comment_id" id="comment_id"><input type="text" name="comment" id="comment">
+<input type="hidden" name="comment_id" id="comment_id">
+<textarea name="comment" id="comment" cols="50" rows="2"></textarea>
 <input type="hidden" name="p_num" id="p_num"><input type="hidden" name="r_num" id="r_num">
 <input type="submit" value="수정" >
 <input type="button" value="취소" onclick="hide();">
 </form>
 </div>
+
+
+<%} %>
+
+
+
+
+
+
 
 
 </article>

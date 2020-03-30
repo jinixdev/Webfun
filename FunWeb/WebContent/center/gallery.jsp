@@ -105,12 +105,13 @@ List boardlist = jbDAO.getboardList(startRow,pageSize); //호출
 <%-- <tr><td><%=jbb.getName() %></td></tr> --%>
 <%-- <tr><td>조회수</td><td><%=jbb.getReadcount() %></td></tr> --%>
 
+<div class="gwrap">
 <div class="container">
 <%for(int i =0;i<boardlist.size();i++){ 
 BoardBean jbb = (BoardBean)boardlist.get(i);%>
 
-<div class="g_content">
-<img src="../upload/<%=jbb.getFile()%>" width="250" height="250">
+<div class="g_content" onclick="location.href='../board/content.jsp?num=<%=jbb.getNum()%>'">
+<img src="../upload/<%=jbb.getFile()%>" width="250" height="250" request="re">
 
 <div>
 <span><%=jbb.getId()%></span> <strong><%=jbb.getReadcount() %></strong>
@@ -129,7 +130,7 @@ BoardBean jbb = (BoardBean)boardlist.get(i);%>
 <input type="button" value="search" class="btn">
 <%String id = (String)session.getAttribute("id"); 
 if(id!=null){%>
-<input type="button" value="글작성" class="btn" onclick="location.href='../board/fwriteForm.jsp'">
+<input type="button" value="글작성" class="btn" onclick="location.href='../gallery/fwriteForm.jsp'">
 <%} %>
 </div>
 
