@@ -1,3 +1,5 @@
+<%@page import="gallery.galleryBean"%>
+<%@page import="gallery.galleryDAO"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="board.BoardDAO"%>
@@ -28,25 +30,23 @@ int maxSize = 5*1024*1024; // 5M
 MultipartRequest multi = new MultipartRequest(request,uploadPath,maxSize,"utf-8",new DefaultFileRenamePolicy()); 
 // p.310 request 정보가 multi에 들어감
 // request --> multi 로 바꾸기
-BoardBean jbb = new BoardBean();
+galleryBean gb = new galleryBean();
 System.out.print("writepro : "+multi.getParameter("content"));
-jbb.setId(multi.getParameter("id"));
-jbb.setName(multi.getParameter("name"));
-jbb.setPass(multi.getParameter("pass"));
-jbb.setSubject(multi.getParameter("subject"));
-jbb.setContent(multi.getParameter("content"));
+gb.setId(multi.getParameter("id"));
+gb.setContent(multi.getParameter("content"));
+gb.setTastetype(multi.getParameter("hot"));
 
 
 Timestamp date = new Timestamp(System.currentTimeMillis());
-jbb.setDate(date);
+gb.setDate(date);
 
 // 폴더에 업로드 된 파일이름
 String file = multi.getFilesystemName("file");
 //BoardBean에 file 추가
-jbb.setFile(file);
+gb.setFile(file);
 
-BoardDAO jbDAO = new BoardDAO();
-jbDAO.write(jbb);
+galleryDAO gDAO = new galleryDAO();
+gDAO.write(gb);
 
 response.sendRedirect("../center/gallery.jsp");
 
