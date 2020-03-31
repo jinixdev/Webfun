@@ -45,6 +45,17 @@ String file = multi.getFilesystemName("file");
 //BoardBean에 file 추가
 gb.setFile(file);
 
+// foodstyle
+String foodstyles[] = multi.getParameterValues("foodstyle");
+String foodstyle="";
+for(String s:foodstyles){
+	foodstyle += s+",";
+
+}
+System.out.print(foodstyle);
+gb.setFoodtype(foodstyle);
+
+
 galleryDAO gDAO = new galleryDAO();
 gDAO.write(gb);
 

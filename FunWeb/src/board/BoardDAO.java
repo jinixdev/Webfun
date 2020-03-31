@@ -297,7 +297,83 @@ public class BoardDAO {
 		
 		
 	}//getBoardCount
+	
+	// ===================================search=====================================
+	public int getBoardCount(String search) {
+		int count=0;
+		ResultSet rs=null;
+		PreparedStatement pre=null;
+		Connection con=null;
+		
+		try {
+			con = getConnection();
+			String sql="select count(num) from board where subject like ? ";
+			pre = con.prepareStatement(sql);
+			pre.setString(1, "%"+search+"%");
+			rs= pre.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt("count(num)"); 
+			 }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			if(rs!=null) try {rs.close();}catch(SQLException ex) {}
+			if(pre!=null) try{pre.close();}catch(SQLException ex) {}
+			if(con!=null) try {con.close();}catch(SQLException ex) {}
+		}
+		
+		return count;
+		
+		
+	}//getBoardCount
 
+	
+	public List getboardList(int startRow,int pageSize,String search) {
+		List jbblist = new ArrayList();
+		ResultSet rs=null;
+		PreparedStatement pre=null;
+		Connection con=null;
+		
+		try {
+			
+			Class.forName("com.mysql.jdbc.Driver");
+
+			con = getConnection();
+
+			
+//			 String sql = "select * from board order by num desc";
+			String sql = "select * from board where subject like ? order by num desc limit ?,?";
+			 pre = con.prepareStatement(sql); 
+			 pre.setString(1, "%"+search+"%");
+			 pre.setInt(2, startRow-1); //startRow 시작을 포함하지 않기때문에 -1
+			 pre.setInt(3, pageSize);
+			 rs= pre.executeQuery();
+			 while(rs.next()) {
+				 BoardBean jbb = new BoardBean();
+//				 String s = new SimpleDateFormat("yyyy-MM-dd").format(rs.getTimestamp("date"));
+				 jbb.setNum(rs.getInt("num"));
+				 jbb.setName(rs.getString("name"));
+				 jbb.setPass(rs.getString("pass"));
+				 jbb.setSubject(rs.getString("subject"));
+				 jbb.setContent(rs.getString("content"));
+				 jbb.setDate(rs.getTimestamp("date"));
+				 jbb.setReadcount(rs.getInt("readcount"));
+				 jbb.setFile(rs.getString("file"));
+				 jbb.setId(rs.getString("id"));
+				 
+				 jbblist.add(jbb);
+			 }
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			if(rs!=null) try {rs.close();}catch(SQLException ex) {}
+			if(pre!=null) try{pre.close();}catch(SQLException ex) {}
+			if(con!=null) try {con.close();}catch(SQLException ex) {}
+		}
+		
+		return jbblist;
+	}//getboardList
 	
 	
 	

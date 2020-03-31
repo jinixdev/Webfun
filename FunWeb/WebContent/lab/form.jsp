@@ -85,13 +85,50 @@
     			show.style.display="block";
     		}
      }
+     
+     function selectFood(){
+     var food = document.getElementsByName("fruit");
+     alert("ㅎ"+food[0].value);
+     }
+
+     window.addEventListener('DOMContentLoaded', function(){
+     var food = document.getElementsByName("fruit");
+     alert("ㅎㅎ"+food[0].value);
+     if(food[1].value="배")
+     food[1].checked =true;
+
+   })
+
+// window.addEventListener('DOMContentLoaded', function(){
+//     console.log('DOMContentLoaded');
+    
+// //     var food = document.getElementsByName("fruit");
+// //     alert(food[0].value);
+
+// // for(var i=1;i<food.length;i++){
+// //  alert(food[i].value);
+// // }
+
+//     var food=document.getElementByName("fruit");
+//     for(var i=0;i<5;i++){
+// //     	if(s[i]==food[i].value){
+//     	food[i].checked = true;	
+// //     	}
+//  }
+    
+// })
+
+
+
+
+    
 </script>
 <body>
 <form action="pro.jsp">
-<input name="fruit" type="checkbox" class="fruitValue" value="사과" />사과
-<input name="fruit" type="checkbox" class="fruitValue" value="배" />배
-<input name="fruit" type="checkbox" class="fruitValue" value="바나나" />바나나
-
+<input name="fruit"  type="checkbox" value="사과" />사과
+<input name="fruit" type="checkbox" value="배" />배
+<input name="fruit" type="checkbox" value="바나나" />바나나
+<input type="button" name="btn" onclick="selectFood()"/>
 <input type="submit" value="전송"><br>
 
 <input type="button" onclick="showrating('star');" value="star">

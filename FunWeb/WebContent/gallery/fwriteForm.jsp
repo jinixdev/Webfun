@@ -88,6 +88,7 @@ function submitCheck(){
 	}
 
 }
+
 </script>
 </head>
 <body>
@@ -98,6 +99,7 @@ String id = (String)session.getAttribute("id");
  <script type="text/javascript"> 
  alert("글쓰기와 댓글기능은 회원만 이용가능합니다.");
  location.href="../member/login.jsp";
+ 
  </script> 
  <%} %> 
 
@@ -133,11 +135,11 @@ String id = (String)session.getAttribute("id");
 
 </td></tr>
 <tr><td>foodtype</td>
-<td><input name="foodstyle" type="checkbox" class="foodValue" value="한식" />한식
-<input name="foodstyle" type="checkbox" class="foodValue" value="중식" />중식
-<input name="foodstyle" type="checkbox" class="foodValue" value="양식" />양식
-<input name="foodstyle" type="checkbox" class="foodValue" value="일식" />일식
-<input name="foodstyle" type="text" class="foodValue" value="" /></td>
+<td><input name="foodstyle" type="checkbox" value="한식" />한식
+<input name="foodstyle" type="checkbox" value="중식" />중식
+<input name="foodstyle" type="checkbox" value="양식" />양식
+<input name="foodstyle" type="checkbox" value="일식" />일식
+<input name="foodstyle" type="text" value="" /></td>
 </tr>
 <tr><td><input type="submit" value="확인"></td></tr>
 <tr><td><input type="hidden" name="id" value="<%=jmb.getId()%>"></td></tr>

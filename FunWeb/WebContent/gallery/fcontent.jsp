@@ -1,3 +1,4 @@
+<%@page import="java.util.Spliterator"%>
 <%@page import="gallery.galleryDAO"%>
 <%@page import="gallery.galleryBean"%>
 <%@page import="board.BoardBean"%>
@@ -58,6 +59,35 @@ function commentDelete(){
 	location.href="../comment/deletePro.jsp?p_num="+p_num;
 }
 
+function checked(foodtype){
+	var foodtype =foodtype.split(',');
+	alert(foodtype);
+	
+}
+
+
+
+window.addEventListener('DOMContentLoaded', function(){
+	
+	
+	var foodtype = document.getElementById("foodtypes").value;
+    alert(foodtype);
+    var s= foodtype.split(",");
+    for(var i=1;i<s.length;i++){
+    alert(s[i]);
+    }
+	
+	
+    var food = document.getElementsByName("foodstyle");
+    alert("ㅎㅎ"+food[0].value);
+    for(var i=0;i<5;i++){
+    if(food[i].value=s[i])
+    food[i].checked =true;
+    }
+  })
+
+
+
 
 </script> 
 </head>
@@ -101,6 +131,10 @@ String id = (String)session.getAttribute("id");
 /* int num2 = gb.getNum(); */
 %>
 
+<input type="hidden" id="foodtypes" value=<%=gb.getFoodtype()%>>
+
+
+
 <table border="1">
 <tr><td>글번호</td><td><%= gb.getNum() %></td></tr>
 <tr><td>작성일</td><td><%=gb.getDate() %></td></tr>
@@ -108,8 +142,30 @@ String id = (String)session.getAttribute("id");
 <tr><td>내용</td><td colspan="3"><%=gb.getContent() %></td></tr>
 <tr><td>파일</td><td colspan="3"><a href="../upload/<%=gb.getFile()%>"><%=gb.getFile()%></a>
 <img src="../upload/<%=gb.getFile()%>" width="100" height="100">
-<a href="file_down.jsp?file_name=<%=gb.getFile()%>"></a></td>
+<a href="file_down.jsp?file_name=<%=gb.getFile()%>"></a></td></tr>
+<tr><td>foodstyle</td><td><%= gb.getFoodtype() %></td>
+<td>
+<% String foodtypes = gb.getFoodtype();
+String f[] = foodtypes.split(","); %>
+
+
+
+
+<input name="foodstyle"  type="checkbox" value="한식"  />한식
+<input name="foodstyle" type="checkbox" value="중식" />중식
+<input name="foodstyle"  type="checkbox" value="양식" />양식
+<input name="foodstyle" type="checkbox" value="일식" />일식
+<script>
+
+
+
+
+</script>
+
+</td>
+
 </tr>
+
 <tr><td colspan="4">
 <input type="button" value="글목록" onclick="location.href='../center/notice.jsp?pageNum=<%=pageNum%>'">
 <%if(gb.getId().equals(id)){%>
@@ -127,6 +183,7 @@ String id = (String)session.getAttribute("id");
 <% session.setAttribute("num", gb.getNum());%>
 <td><button type="submit" value="확인">확인</button></td></tr>
 </table>
+<input type="hidden" id="hot">
 </form>
 </div>
 

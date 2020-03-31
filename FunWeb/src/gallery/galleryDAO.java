@@ -46,13 +46,14 @@ private Connection getConnection() throws Exception{
 			 }
 			 if(pre!=null) try{pre.close();}catch(SQLException ex) {}
 
-			sql = "insert into g_board(num,id,img,content,date) values(?,?,?,?,?)";
+			sql = "insert into g_board(num,id,img,content,date,foodtype) values(?,?,?,?,?,?)";
 			pre = con.prepareStatement(sql);
 			pre.setInt(1, num);
 			pre.setString(2, gb.getId());
 			pre.setString(3, gb.getFile());
 			pre.setString(4, gb.getContent());
 			pre.setTimestamp(5, gb.getDate());
+			pre.setString(6, gb.getFoodtype());
 			
 			
 
@@ -135,6 +136,7 @@ private Connection getConnection() throws Exception{
 				 gb.setContent(rs.getString("content"));
 				 gb.setDate(rs.getTimestamp("date"));
 				 gb.setFile(rs.getString("img"));
+				 gb.setFoodtype(rs.getString("foodtype"));
 				 
 			 }
 			
