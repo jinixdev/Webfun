@@ -1,3 +1,5 @@
+<%@page import="java.sql.Timestamp"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="board.BoardBean"%>
 <%@page import="board.BoardDAO"%>
 <%@page import="comment.commentBean"%>
@@ -22,6 +24,7 @@ function showhide(){
 		obj.style.display="none";
 	}
 }
+
 
 function commentUpdate(id,comment,p_num,r_num){
 	var commenttable = document.getElementById("commenttable");
@@ -89,6 +92,7 @@ function commentDelete(){
 
 
 <%
+String category ="board";
 int p_num = Integer.parseInt(request.getParameter("num"));
 String pageNum = request.getParameter("pageNum"); // 계산할것이 아니므로 String으로 받아도 됨
 System.out.println("num : "+p_num);
@@ -96,6 +100,10 @@ BoardDAO jbDAO= new BoardDAO();
 BoardBean jbb= jbDAO.getboardContent(p_num);
 String id = (String)session.getAttribute("id");
 /* int num2 = jbb.getNum(); */
+
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+		Timestamp nowtime = new Timestamp(System.currentTimeMillis());
+		SimpleDateFormat time = new SimpleDateFormat("hh:mm");
 %>
 
 <table border="1">
@@ -126,6 +134,8 @@ String id = (String)session.getAttribute("id");
 <% session.setAttribute("num", jbb.getNum());%>
 <td><button type="submit" value="확인">확인</button></td></tr>
 </table>
+<input type="hidden" name="p_num" value="<%=p_num%>">
+<input type="hidden" name="category" value="<%=category%>">
 </form>
 </div>
 
@@ -133,11 +143,12 @@ String id = (String)session.getAttribute("id");
 
 
 
-<!-- comment code -->
+<!-- ----------------comment code---------------------- -->
+<!-- comment insert code -->
+<!-- must have id -->
 <% if(id!=null){ %>
 <%
 commentDAO comDAO = new commentDAO();
-String category ="board";
 List comList= comDAO.getCommentList(p_num,category);%>
 <table>
 <% for(int i=0;i<comList.size();i++){
@@ -145,9 +156,9 @@ List comList= comDAO.getCommentList(p_num,category);%>
 	%>
 <tr><td><%=cb.getId() %></td><td><%=cb.getContent() %></td>
 <% if(cb.getId().equals(id)){ %>
-<td><input type="button" value="수정" onclick="commentUpdate('<%=cb.getId()%>','<%=cb.getContent()%>',
-'<%=cb.getP_num()%>','<%=cb.getR_num()%>');"></td>
-<td><a href="../comment/deletePro.jsp?num=<%=cb.getNum()%>&p_num=<%=cb.getP_num()%>&category=<%=category%>">x</a></td> <%}} %></tr>
+<td><a href="javascript:commentUpdate('<%=cb.getId()%>','<%=cb.getContent()%>',
+'<%=cb.getP_num()%>','<%=cb.getR_num()%>');">수정</a></td>
+<td><a href="../comment/deletePro.jsp?num=<%=cb.getNum()%>&p_num=<%=cb.getP_num()%>&category=<%=category%>">삭제</a></td> <%}} %></tr>
 </table>
 
 
@@ -169,6 +180,7 @@ List comList= comDAO.getCommentList(p_num,category);%>
 <input type="hidden" name="comment_id" id="comment_id">
 <textarea name="comment" id="comment" cols="50" rows="2"></textarea>
 <input type="hidden" name="p_num" id="p_num"><input type="hidden" name="r_num" id="r_num">
+<input type="hidden" name="category" value=<%=category %>>
 <input type="submit" value="수정" >
 <input type="button" value="취소" onclick="hide();">
 </form>

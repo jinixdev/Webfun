@@ -46,7 +46,7 @@ private Connection getConnection() throws Exception{
 			 }
 			 if(pre!=null) try{pre.close();}catch(SQLException ex) {}
 
-			sql = "insert into g_board(num,id,img,content,date,foodtype,pass) values(?,?,?,?,?,?,?)";
+			sql = "insert into g_board(num,id,img,content,date,foodtype,pass,placename,placeaddr) values(?,?,?,?,?,?,?,?,?)";
 			pre = con.prepareStatement(sql);
 			pre.setInt(1, num);
 			pre.setString(2, gb.getId());
@@ -55,6 +55,8 @@ private Connection getConnection() throws Exception{
 			pre.setTimestamp(5, gb.getDate());
 			pre.setString(6, gb.getFoodtype());
 			pre.setString(7, gb.getPass());
+			pre.setString(8, gb.getPlacename());
+			pre.setString(9, gb.getPlaceaddr());
 			
 			
 
@@ -97,6 +99,8 @@ private Connection getConnection() throws Exception{
 				 gb.setDate(rs.getTimestamp("date"));
 				 gb.setFile(rs.getString("img"));
 				 gb.setId(rs.getString("id"));
+				 gb.setPlacename(rs.getString("placename"));
+				 gb.setPlaceaddr(rs.getString("placeaddr"));
 				 
 				 gblist.add(gb);
 			 }
@@ -138,7 +142,8 @@ private Connection getConnection() throws Exception{
 				 gb.setDate(rs.getTimestamp("date"));
 				 gb.setFile(rs.getString("img"));
 				 gb.setFoodtype(rs.getString("foodtype"));
-				 
+				 gb.setPlacename(rs.getString("placename"));
+				 gb.setPlaceaddr(rs.getString("placeaddr"));
 			 }
 			
 		} catch (Exception e) {
@@ -206,7 +211,7 @@ private Connection getConnection() throws Exception{
 		return check;
 	}//passCheck
 	
-	public void deleteBoard(int num) {
+	public void deleteBoard(int num,String p_num,String category) {
 		PreparedStatement pre=null;
 		Connection con=null;
 		try {
@@ -214,6 +219,13 @@ private Connection getConnection() throws Exception{
 			String sql="delete from g_board where num=?;";
 			pre = con.prepareStatement(sql);
 			pre.setInt(1, num);
+			pre.executeUpdate();
+			if(pre!=null) try{pre.close();}catch(SQLException ex) {}
+			
+			sql="delete from comment where p_num=?&&category=?";
+			pre = con.prepareStatement(sql);
+			pre.setString(1, p_num);
+			pre.setString(2, category);
 			pre.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

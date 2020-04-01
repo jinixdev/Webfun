@@ -37,9 +37,11 @@ function commentUpdate(id,comment,p_num,r_num){
 	if(updatetable.style.display=="none"){
 		updatetable.style.display="block";
 		commenttable.style.display="none";
+		document.getElementByName("content").focus();
 	}else{
 		updatetable.style.display="none";
 		commenttable.style.display="block";
+		document.getElementByName("comment").focus();
 	}
 }
 
@@ -49,6 +51,7 @@ function hide(){
 	var commenttable = document.getElementById("commenttable");
 	if(update.style.display=="block"){
 		update.style.display="none";
+		document.getElementByName("comment").focus();
 		commenttable.style.display="block";
 	}
 }
@@ -120,6 +123,7 @@ window.addEventListener('DOMContentLoaded', function(){
 
 
 <%
+String category="gallery";
 int p_num = Integer.parseInt(request.getParameter("num"));
 String pageNum = request.getParameter("pageNum"); // 계산할것이 아니므로 String으로 받아도 됨
 System.out.println("num : "+p_num);
@@ -138,6 +142,8 @@ String id = (String)session.getAttribute("id");
 <tr><td>글번호</td><td><%= gb.getNum() %></td></tr>
 <tr><td>작성일</td><td><%=gb.getDate() %></td></tr>
 <tr><td>글쓴이</td><td><%= gb.getId() %></td></tr>
+<tr><td>장소</td><td><%= gb.getPlacename() %></td></tr>
+<tr><td>주소</td><td><%= gb.getPlaceaddr() %></td></tr>
 <tr><td>파일</td><td colspan="3"><a href="../upload/<%=gb.getFile()%>"><%=gb.getFile()%></a>
 <img src="../upload/<%=gb.getFile()%>" width="100" height="100">
 <a href="file_down.jsp?file_name=<%=gb.getFile()%>"></a></td></tr>
@@ -149,7 +155,9 @@ String id = (String)session.getAttribute("id");
 <input name="foodstyle"  type="checkbox" value="양식" />양식
 <input name="foodstyle" type="checkbox" value="일식" />일식
 
-</td></tr>
+</td>
+
+</tr>
 
 <tr><td colspan="4">
 <input type="button" value="글목록" onclick="location.href='../center/notice.jsp?pageNum=<%=pageNum%>'">
@@ -169,19 +177,21 @@ String id = (String)session.getAttribute("id");
 <td><button type="submit" value="확인">확인</button></td></tr>
 </table>
 <input type="hidden" id="hot">
+<input type="hidden" name="p_num" value="<%=p_num%>">
+<input type="hidden" name="category" value="<%=category%>">
 </form>
 </div>
 
 <hr>
 
 
-
+<!-- ----------------comment code---------------------- -->
 <!-- comment insert code -->
 <!-- must have id -->
 <% if(id!=null){ %>
 <%
 commentDAO comDAO = new commentDAO();
-String category="gallery";
+
 List comList= comDAO.getCommentList(p_num,category);%>
 <table>
 <% for(int i=0;i<comList.size();i++){

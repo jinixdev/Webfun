@@ -15,13 +15,15 @@ request.setCharacterEncoding("utf-8");
 
 commentBean cb = new commentBean();
 
+
+int p_num =Integer.parseInt(request.getParameter("p_num"));
+String category =request.getParameter("category");
+Timestamp date = new Timestamp(System.currentTimeMillis());
+
 cb.setId(request.getParameter("id"));
 cb.setContent(request.getParameter("content"));
-int p_num =Integer.parseInt(request.getParameter("p_num"));
-cb.setP_num(p_num);
-String category =request.getParameter("category");
 cb.setCategory(category);
-Timestamp date = new Timestamp(System.currentTimeMillis());
+cb.setP_num(p_num);
 cb.setReg_date(date);
 
 commentDAO cDAO = new commentDAO();
