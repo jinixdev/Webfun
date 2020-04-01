@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>write</title>
+<link href="../css/default.css" rel="stylesheet" type="text/css">
+<link href="../css/subpage.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
 var locked =0;
 function show(image1,star){
@@ -92,6 +94,28 @@ function submitCheck(){
 </script>
 </head>
 <body>
+<div id="wrap">
+<!-- 헤더들어가는 곳 -->
+<jsp:include page="../inc/top.jsp"></jsp:include>
+<!-- 헤더들어가는 곳 -->
+
+<!-- 본문들어가는 곳 -->
+<!-- 메인이미지 -->
+<div id="sub_img_center"></div>
+<!-- 메인이미지 -->
+
+<!-- 왼쪽메뉴 -->
+<nav id="sub_menu">
+<ul>
+<li><a href="#">Notice</a></li>
+<li><a href="#">Public News</a></li>
+<li><a href="#">Driver Download</a></li>
+<li><a href="#">Service Policy</a></li>
+</ul>
+</nav>
+
+
+<!-- 본문들어가는 곳 -->
 <%
 String id = (String)session.getAttribute("id"); 
 %>
@@ -140,14 +164,20 @@ String id = (String)session.getAttribute("id");
 <input name="foodstyle" type="checkbox" value="중식" />중식
 <input name="foodstyle" type="checkbox" value="양식" />양식
 <input name="foodstyle" type="checkbox" value="일식" />일식
-<input name="foodstyle" type="text" value="" /></td>
+<input name="foodstyle" type="checkbox" value="기타" />기타
+</td>
 </tr>
 <tr><td><input type="submit" value="확인"></td></tr>
-<tr><td><input type="hidden" name="id" value="<%=jmb.getId()%>"></td></tr>
 </table>
-
+<input type="hidden" name="id" value="<%=jmb.getId()%>">
 </form>
-<%-- <%}%> --%>
+<!-- 본문들어가는 곳 -->
+
+<div class="clear"></div>
+<!-- 헤더들어가는 곳 -->
+<jsp:include page="../inc/bottom.jsp"></jsp:include>
+<!-- 헤더들어가는 곳 -->
+</div>
 </body>
 </html>
 

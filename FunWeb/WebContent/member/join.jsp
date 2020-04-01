@@ -28,7 +28,7 @@
  <script type="text/javascript">
 
  function submitCheck(){
-		if(document.getElementById("id").value==""){
+		if(document.getElementById("id").value==null){
 			alert("아이디를 입력하세요");
 			document.fr.id.focus();
 			return false; //
@@ -88,11 +88,12 @@
 			 		document.getElementById("passsame").innerHTML="<font color=green>비밀번호가 일치합니다.</font>";
 			 	}else{
 					document.getElementById("passsame").innerHTML="<font color=red>비밀번호가 일치하지 않습니다.</font>";
+					document.getElementById("passDuplication").value ="passUncheck";
 		 		}
 			 }
 	 }else{
 		 document.getElementById("passcheck").innerHTML="<font color=red>비밀번호를 4자이상 입력해 주십시오.</font>";
-		 
+		 document.getElementById("passDuplication").value ="passUncheck";
 	 }
 	 
 	
@@ -106,6 +107,7 @@
 		 document.getElementById("emailsame").innerHTML="<font color=green>일치합니다.</font>";
 		 }else{
 		 document.getElementById("emailsame").innerHTML="<font color=red>이메일이 일치하지 않습니다.</font>";
+		 document.getElementById("emailDuplication").value ="emailUncheck";
 		 }
 	 }
 	 
@@ -121,7 +123,9 @@
 	checkpro=window.open("checkPro.jsp?id="+id,"chkpro", "width=500, height=300, resizable = no, scrollbars = no");
  }
  
- 
+ function iduncheck(){
+	 document.getElementById("idDuplication").value ="idUncheck";
+ }
  
 
 
@@ -152,7 +156,7 @@
 <fieldset>
 <legend>Basic Info</legend>
 <label>*User ID</label>
-<input type="text" name="id" class="id" id="id">
+<input type="text" name="id" class="id" id="id" onkeydown="iduncheck()">
 <input type="button" value="dup. check" class="dup" onclick="userDupCheck()"><br>
 <input type="hidden" name="idDuplication" id="idDuplication" value="idUncheck" ><br>
 
@@ -163,7 +167,7 @@
 <label>Retype Password</label>
 <input type="password" id="pass2" name="pass2" onkeyup="retype()"> <span id="passsame"></span>
 <input type="hidden"  id="passDuplication" value="passUncheck" ><br>
-<label>**Name</label>
+<label>*Name</label>
 <input type="text" id="name" name="name"><br>
 <label>E-Mail</label>
 <input type="email" id="email" name="email" onkeyup="retype()"><br>

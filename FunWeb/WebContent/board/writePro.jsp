@@ -32,7 +32,7 @@ BoardDAO jbDAO = new BoardDAO();
 
 jbDAO.write(jbb);
 
-response.sendRedirect("list.jsp");
+response.sendRedirect("../center/notice.jsp");
 
 
 %>

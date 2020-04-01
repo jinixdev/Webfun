@@ -15,7 +15,7 @@ BoardDAO jbDAO= new BoardDAO();
 BoardBean jbb= jbDAO.getboardContent(num);
 %>
 <form action="updatePro.jsp" method="post">
-<table border="1">
+<table>
 
 <tr><td>글번호</td><td><input type="text" name="num" readonly="readonly" value="<%=jbb.getNum()%>"></td></tr>
 <tr><td>작성일</td><td><%=jbb.getDate() %></td></tr>
@@ -23,7 +23,6 @@ BoardBean jbb= jbDAO.getboardContent(num);
 <tr><td>조회수</td><td><%=jbb.getReadcount() %></td></tr>
 <tr><td>제목</td><td colspan="3"><input type="text" name="subject" value="<%=jbb.getSubject() %>"></td></tr>
 <tr><td>내용</td><td colspan="3"><input type="text" name="content" value="<%=jbb.getContent() %>"></td></tr>
-<tr><td>내용2</td><td colspan="3"><input type="text" name="content2"></td></tr>
 <tr><td colspan="4"> <input type="submit" value="확인">
 <input type="button" value="취소" onclick="location.href='../center/notice.jsp'"></td></tr>
 	

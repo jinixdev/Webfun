@@ -1,3 +1,4 @@
+<%@page import="java.sql.Timestamp"%>
 <%@page import="gallery.galleryBean"%>
 <%@page import="gallery.galleryDAO"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -118,6 +119,7 @@ galleryBean gb = (galleryBean)gallerylist.get(i);%>
 <div>
 <span><%=gb.getId()%></span> 
 <%-- <strong><%=gb.getReadcount() %></strong> --%>
+
 <p><%=gb.getDate() %></p>
 </div>
 
@@ -177,7 +179,7 @@ for(int i = startPage; i <= endPage; i++){
 	if(i == currentPage){%>
 		<u><b>[<%=i %>]</b></u>
 <%	} else {%>
-		[<a href="gallery.jsp?pageNum=<%=i %>"><%=i %></a>]
+		[<a href="gallery.jsp?pageNum=<%=i %>"><%=i%></a>]
 <%	}
 }%>
 

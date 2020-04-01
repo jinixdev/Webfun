@@ -239,7 +239,7 @@ private Connection getConnection() throws Exception{
 		
 		try {
 			con = getConnection();
-			String sql="select count(num) from board";
+			String sql="select count(num) from g_board";
 			pre = con.prepareStatement(sql);
 			rs= pre.executeQuery();
 			if(rs.next()) {

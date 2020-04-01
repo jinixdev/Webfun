@@ -189,9 +189,9 @@ List comList= comDAO.getCommentList(p_num,category);%>
 	%>
 <tr><td><%=cb.getId() %></td><td><%=cb.getContent() %></td>
 <% if(cb.getId().equals(id)){ %>
-<td><input type="button" value="수정" onclick="commentUpdate('<%=cb.getId()%>','<%=cb.getContent()%>',
-'<%=cb.getP_num()%>','<%=cb.getR_num()%>');"></td>
-<td><a href="../comment/deletePro.jsp?num=<%=cb.getNum()%>&p_num=<%=cb.getP_num()%>&category=<%=category%>">x</a></td> <%}} %></tr>
+<td><a href="javascript:commentUpdate('<%=cb.getId()%>','<%=cb.getContent()%>',
+'<%=cb.getP_num()%>','<%=cb.getR_num()%>');">수정</a></td>
+<td><a href="../comment/deletePro.jsp?num=<%=cb.getNum()%>&p_num=<%=cb.getP_num()%>&category=<%=category%>">삭제</a></td> <%}} %></tr>
 </table>
 
 

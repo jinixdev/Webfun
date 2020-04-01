@@ -126,8 +126,7 @@ List boardlist = jbDAO.getboardList(startRow,pageSize); //호출
 <form action="noticeSearch.jsp" method="post">
 	<input type="text" name="search" class="input_box"> 
 	<input type="submit" value="search" class="btn">
-	</form>
-	<%
+		<%
 		String id = (String) session.getAttribute("id");
 		if (id != null) {
 	%>
@@ -136,7 +135,10 @@ List boardlist = jbDAO.getboardList(startRow,pageSize); //호출
 	<%
 		}
 	%>
+	</form>
+
 </div>
+<br>
 		<%// 한 화면에 보여줄 페이지 개수
 int pageBlock = 3;
 // int pageCount = count /pageSize +(count%pageSize==0?0:1);
