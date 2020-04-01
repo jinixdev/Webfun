@@ -198,6 +198,10 @@ List comList= comDAO.getCommentList(p_num,category);%>
 	commentBean cb = (commentBean)comList.get(i);
 	%>
 <tr><td><%=cb.getId() %></td><td><%=cb.getContent() %></td>
+
+
+
+
 <% if(cb.getId().equals(id)){ %>
 <td><a href="javascript:commentUpdate('<%=cb.getId()%>','<%=cb.getContent()%>',
 '<%=cb.getP_num()%>','<%=cb.getR_num()%>');">수정</a></td>
