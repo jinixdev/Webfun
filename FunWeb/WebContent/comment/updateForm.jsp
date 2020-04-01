@@ -5,8 +5,9 @@
     pageEncoding="UTF-8"%>
 <%
 int num = (Integer)session.getAttribute("contentnum");
+String category =request.getParameter("category");
 commentDAO comDAO = new commentDAO();
-List comList= comDAO.getCommentList(num);%>
+List comList= comDAO.getCommentList(num,category);%>
 
 <table border="1">
 <% for(int i=0;i<comList.size();i++){

@@ -6,7 +6,14 @@ public class commentBean {
 	
 	
 		private int num,p_num,r_num,re_r_num;
-		private String id,content;
+		private String id,content,category;
+		
+		public String getCategory() {
+			return category;
+		}
+		public void setCategory(String category) {
+			this.category = category;
+		}
 		private Timestamp reg_date;
 		
 		

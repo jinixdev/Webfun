@@ -4,7 +4,13 @@ import java.sql.Timestamp;
 
 public class galleryBean {
 	private int num;
-	private String id,file,content;
+	private String id,pass,file,content;
+	public String getPass() {
+		return pass;
+	}
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
 	private String tastetype,foodtype,eattype;
 	private int smile,star;
 	private Timestamp date;

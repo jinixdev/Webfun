@@ -69,26 +69,25 @@ function checked(foodtype){
 
 window.addEventListener('DOMContentLoaded', function(){
 	
-	
+    
+//     checkbox
 	var foodtype = document.getElementById("foodtypes").value;
-    alert(foodtype);
-    var s= foodtype.split(",");
-    for(var i=1;i<s.length;i++){
-    alert(s[i]);
-    }
-	
-	
-    var food = document.getElementsByName("foodstyle");
-    alert("ㅎㅎ"+food[0].value);
-    for(var i=0;i<5;i++){
-    if(food[i].value=s[i])
-    food[i].checked =true;
-    }
-  })
 
+	var food = document.getElementsByName("foodstyle");
+		
 
+		for (var i = 0; i < food.length; i++) {
+			if (foodtype.indexOf(food[i].value)==-1) {
+				food[i].checked = false;
+			} else {
+				food[i].checked = true;
+			}
+		}
+		
+		
+		
 
-
+	})
 </script> 
 </head>
 <body>
@@ -135,36 +134,22 @@ String id = (String)session.getAttribute("id");
 
 
 
-<table border="1">
+<table>
 <tr><td>글번호</td><td><%= gb.getNum() %></td></tr>
 <tr><td>작성일</td><td><%=gb.getDate() %></td></tr>
 <tr><td>글쓴이</td><td><%= gb.getId() %></td></tr>
-<tr><td>내용</td><td colspan="3"><%=gb.getContent() %></td></tr>
 <tr><td>파일</td><td colspan="3"><a href="../upload/<%=gb.getFile()%>"><%=gb.getFile()%></a>
 <img src="../upload/<%=gb.getFile()%>" width="100" height="100">
 <a href="file_down.jsp?file_name=<%=gb.getFile()%>"></a></td></tr>
-<tr><td>foodstyle</td><td><%= gb.getFoodtype() %></td>
+<tr><td>내용</td><td colspan="3"><%=gb.getContent() %></td></tr>
+<tr><td>foodstyle</td>
 <td>
-<% String foodtypes = gb.getFoodtype();
-String f[] = foodtypes.split(","); %>
-
-
-
-
 <input name="foodstyle"  type="checkbox" value="한식"  />한식
 <input name="foodstyle" type="checkbox" value="중식" />중식
 <input name="foodstyle"  type="checkbox" value="양식" />양식
 <input name="foodstyle" type="checkbox" value="일식" />일식
-<script>
 
-
-
-
-</script>
-
-</td>
-
-</tr>
+</td></tr>
 
 <tr><td colspan="4">
 <input type="button" value="글목록" onclick="location.href='../center/notice.jsp?pageNum=<%=pageNum%>'">
@@ -177,7 +162,7 @@ String f[] = foodtypes.split(","); %>
 
 <!-- delete code -->
 <div id="showtable" style="display:none;">
-<form action="deletePro.jsp?pageNum=<%=pageNum%>" method="post">
+<form action="fdeletePro.jsp?pageNum=<%=pageNum%>" method="post">
 <table>
 <tr><td>비밀번호</td><td><input type="password" name="pass"></td>
 <% session.setAttribute("num", gb.getNum());%>
@@ -191,11 +176,13 @@ String f[] = foodtypes.split(","); %>
 
 
 
-<!-- comment code -->
+<!-- comment insert code -->
+<!-- must have id -->
 <% if(id!=null){ %>
 <%
 commentDAO comDAO = new commentDAO();
-List comList= comDAO.getCommentList(p_num);%>
+String category="gallery";
+List comList= comDAO.getCommentList(p_num,category);%>
 <table>
 <% for(int i=0;i<comList.size();i++){
 	commentBean cb = (commentBean)comList.get(i);
@@ -204,19 +191,17 @@ List comList= comDAO.getCommentList(p_num);%>
 <% if(cb.getId().equals(id)){ %>
 <td><input type="button" value="수정" onclick="commentUpdate('<%=cb.getId()%>','<%=cb.getContent()%>',
 '<%=cb.getP_num()%>','<%=cb.getR_num()%>');"></td>
-<td><a href="../comment/deletePro.jsp?num=<%=cb.getNum()%>&p_num=<%=cb.getP_num()%>">x</a></td> <%}} %></tr>
+<td><a href="../comment/deletePro.jsp?num=<%=cb.getNum()%>&p_num=<%=cb.getP_num()%>&category=<%=category%>">x</a></td> <%}} %></tr>
 </table>
 
 
 
-
-
-
 <div id="commenttable" style="display:block;">
-<form action="commentPro.jsp">
+<form action="../comment/commentPro.jsp">
 <input type="hidden" name="id" value="<%=id%>">
 <textarea name="content" cols="50" rows="2"></textarea>
 <input type="hidden" name="p_num" value="<%=p_num%>">
+<input type="hidden" name="category" value="<%=category%>">
 <input type="submit">
 </form>
 </div>
@@ -229,6 +214,7 @@ List comList= comDAO.getCommentList(p_num);%>
 <input type="hidden" name="comment_id" id="comment_id">
 <textarea name="comment" id="comment" cols="50" rows="2"></textarea>
 <input type="hidden" name="p_num" id="p_num"><input type="hidden" name="r_num" id="r_num">
+<input type="hidden" name="category" value="<%=category%>">
 <input type="submit" value="수정" >
 <input type="button" value="취소" onclick="hide();">
 </form>

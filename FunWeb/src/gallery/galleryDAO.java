@@ -46,7 +46,7 @@ private Connection getConnection() throws Exception{
 			 }
 			 if(pre!=null) try{pre.close();}catch(SQLException ex) {}
 
-			sql = "insert into g_board(num,id,img,content,date,foodtype) values(?,?,?,?,?,?)";
+			sql = "insert into g_board(num,id,img,content,date,foodtype,pass) values(?,?,?,?,?,?,?)";
 			pre = con.prepareStatement(sql);
 			pre.setInt(1, num);
 			pre.setString(2, gb.getId());
@@ -54,6 +54,7 @@ private Connection getConnection() throws Exception{
 			pre.setString(4, gb.getContent());
 			pre.setTimestamp(5, gb.getDate());
 			pre.setString(6, gb.getFoodtype());
+			pre.setString(7, gb.getPass());
 			
 			
 
@@ -173,7 +174,56 @@ private Connection getConnection() throws Exception{
 		}
 	}//updateBoard
 	
+	public int passCheck(int num,String pass) {
+		int check =0;
+		ResultSet rs=null;
+		PreparedStatement pre=null;
+		Connection con=null;
+		
+		try {
+			con = getConnection();
+			String sql="select * from g_board where num=?";
+			pre = con.prepareStatement(sql);
+			pre.setInt(1, num);
+			rs = pre.executeQuery();
+			
+			if(rs.next()) {
+			if(pass.equals(rs.getString("pass"))){
+				check = 1;
+			}else {
+				check =-1;
+			}
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			if(rs!=null) try {rs.close();}catch(SQLException ex) {}
+			if(pre!=null) try{pre.close();}catch(SQLException ex) {}
+			if(con!=null) try {con.close();}catch(SQLException ex) {}
+		}
+		
+		return check;
+	}//passCheck
 	
+	public void deleteBoard(int num) {
+		PreparedStatement pre=null;
+		Connection con=null;
+		try {
+			con = getConnection();
+			String sql="delete from g_board where num=?;";
+			pre = con.prepareStatement(sql);
+			pre.setInt(1, num);
+			pre.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			if(pre!=null) try{pre.close();}catch(SQLException ex) {}
+			if(con!=null) try {con.close();}catch(SQLException ex) {}
+		}
+		
+		
+	}//deleteBoard
 	
 	
 	

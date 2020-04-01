@@ -35,6 +35,7 @@ System.out.print("writepro : "+multi.getParameter("content"));
 gb.setId(multi.getParameter("id"));
 gb.setContent(multi.getParameter("content"));
 gb.setTastetype(multi.getParameter("hot"));
+gb.setPass(multi.getParameter("pass"));
 
 
 Timestamp date = new Timestamp(System.currentTimeMillis());
@@ -47,12 +48,17 @@ gb.setFile(file);
 
 // foodstyle
 String foodstyles[] = multi.getParameterValues("foodstyle");
-String foodstyle="";
-for(String s:foodstyles){
-	foodstyle += s+",";
+ 
+System.out.println(String.join(",",foodstyles));
+String foodstyle = String.join(",",foodstyles);
 
-}
-System.out.print(foodstyle);
+// String foodstyle="";
+// for(String s:foodstyles){
+// // 	foodstyle += s+",";
+// 	String.join(",",foodstyles);
+// }
+
+System.out.println("foodstyle : "+foodstyle);
 gb.setFoodtype(foodstyle);
 
 

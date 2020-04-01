@@ -19,14 +19,16 @@ cb.setId(request.getParameter("id"));
 cb.setContent(request.getParameter("content"));
 int p_num =Integer.parseInt(request.getParameter("p_num"));
 cb.setP_num(p_num);
+String category =request.getParameter("category");
+cb.setCategory(category);
 Timestamp date = new Timestamp(System.currentTimeMillis());
 cb.setReg_date(date);
 
 commentDAO cDAO = new commentDAO();
-cDAO.insertComment(cb);
+cDAO.insertComment(cb,"board");
 %>
 
-<meta http-equiv="refresh" content="0;url=content.jsp?num=<%=p_num%>"></meta>
+<meta http-equiv="refresh" content="0;url=../<%=category%>/content.jsp?num=<%=p_num%>"></meta>
 
 </body>
 </html>

@@ -13,10 +13,9 @@
 int p_num = Integer.parseInt(request.getParameter("p_num"));
 int r_num = Integer.parseInt(request.getParameter("r_num"));
 String comment = request.getParameter("comment");
+String category =request.getParameter("category");
 
-System.out.println(p_num);
-System.out.println(r_num);
-System.out.println(comment);
+System.out.println(category);
 
 
 
@@ -25,11 +24,12 @@ commentBean cb = new commentBean();
 cb.setP_num(p_num);
 cb.setR_num(r_num);
 cb.setContent(comment);
+cb.setCategory(category);
 commentDAO cDAO = new commentDAO();
 cDAO.commentUpdate(cb);
 
 %>
 
-<meta http-equiv="refresh" content="0;url=../board/content.jsp?num=<%=p_num%>"></meta>
+<meta http-equiv="refresh" content="0;url=../<%=category%>/content.jsp?num=<%=p_num%>"></meta>
 </body>
 </html>

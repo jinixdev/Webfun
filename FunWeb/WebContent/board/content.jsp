@@ -137,7 +137,8 @@ String id = (String)session.getAttribute("id");
 <% if(id!=null){ %>
 <%
 commentDAO comDAO = new commentDAO();
-List comList= comDAO.getCommentList(p_num);%>
+String category ="board";
+List comList= comDAO.getCommentList(p_num,category);%>
 <table>
 <% for(int i=0;i<comList.size();i++){
 	commentBean cb = (commentBean)comList.get(i);
@@ -146,19 +147,16 @@ List comList= comDAO.getCommentList(p_num);%>
 <% if(cb.getId().equals(id)){ %>
 <td><input type="button" value="수정" onclick="commentUpdate('<%=cb.getId()%>','<%=cb.getContent()%>',
 '<%=cb.getP_num()%>','<%=cb.getR_num()%>');"></td>
-<td><a href="../comment/deletePro.jsp?num=<%=cb.getNum()%>&p_num=<%=cb.getP_num()%>">x</a></td> <%}} %></tr>
+<td><a href="../comment/deletePro.jsp?num=<%=cb.getNum()%>&p_num=<%=cb.getP_num()%>&category=<%=category%>">x</a></td> <%}} %></tr>
 </table>
 
 
-
-
-
-
 <div id="commenttable" style="display:block;">
-<form action="commentPro.jsp">
+<form action="../comment/commentPro.jsp">
 <input type="hidden" name="id" value="<%=id%>">
 <textarea name="content" cols="50" rows="2"></textarea>
 <input type="hidden" name="p_num" value="<%=p_num%>">
+<input type="hidden" name="category" value="<%=category%>">
 <input type="submit">
 </form>
 </div>

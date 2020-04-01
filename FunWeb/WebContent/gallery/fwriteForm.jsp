@@ -115,6 +115,7 @@ String id = (String)session.getAttribute("id");
 <table border="1">
 <tr><td colspan="2">가게이름</td></tr>
 <tr><td colspan="2">주소</td></tr>
+<tr><td>글 비밀번호</td><td><input type="password" name="pass"></td></tr>
 <tr><td colspan="2"><input type="file" name="file" id="file"></td></tr>
 <tr><td><%=jmb.getName()%></td></tr>
 <tr><td colspan="2"><textarea name="content" rows="10" cols="20"></textarea></td></tr>

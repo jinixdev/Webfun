@@ -112,7 +112,7 @@ List gallerylist = gDAO.getboardList(startRow,pageSize); //호출
 <%for(int i =0;i<gallerylist.size();i++){ 
 galleryBean gb = (galleryBean)gallerylist.get(i);%>
 
-<div class="g_content" onclick="location.href='../gallery/fcontent.jsp?num=<%=gb.getNum()%>'">
+<div class="g_content" onclick="location.href='../gallery/content.jsp?num=<%=gb.getNum()%>'">
 <img src="../upload/<%=gb.getFile()%>" width="250" height="250" >
 
 <div>

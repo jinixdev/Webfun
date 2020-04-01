@@ -9,7 +9,7 @@ import java.util.List;
 
 public class commentDAO {
 	
-	public void insertComment(commentBean cm) {
+	public void insertComment(commentBean cm,String category) {
 		int number =0;
 		int r_num =0;
 		
@@ -32,9 +32,10 @@ public class commentDAO {
 		 		number=1;
 		 	}
 		 	
-		 	sql="select max(r_num) from comment where p_num=?";
+		 	sql="select max(r_num) from comment where p_num=?&&category=?";
 		 	pre = con.prepareStatement(sql);
 		 	pre.setInt(1, cm.getP_num());
+		 	pre.setString(2, cm.getCategory());
 		 	rs = pre.executeQuery();
 		 	if(rs.next()) {
 		 		r_num = rs.getInt("max(r_num)")+1;
@@ -44,7 +45,7 @@ public class commentDAO {
 		 	
 		 	
 		 	
-		 	sql="insert into comment(num,id,content,date,p_num,r_num) values(?,?,?,?,?,?)";
+		 	sql="insert into comment(num,id,content,date,p_num,r_num,category) values(?,?,?,?,?,?,?)";
 		 	pre = con.prepareStatement(sql);
 		 	
 		 	System.out.println(cm.getId());
@@ -54,6 +55,7 @@ public class commentDAO {
 		 	pre.setTimestamp(4, cm.getReg_date());
 		 	pre.setInt(5, cm.getP_num());
 		 	pre.setInt(6, r_num);
+		 	pre.setString(7, cm.getCategory());
 		 	
 		 	pre.executeUpdate();
 		} catch (Exception e) {
@@ -62,7 +64,7 @@ public class commentDAO {
 	}//insertComment
 	
 	
-	public List getCommentList(int p_num) {
+	public List getCommentList(int p_num,String category) {
 		List commentlist = new ArrayList();
 		
 		try {
@@ -74,9 +76,10 @@ public class commentDAO {
 		 	String dbPass = "jsppass";
 		 	//3단계
 		 	Connection con = DriverManager.getConnection(dburl, dbUser, dbPass);
-		 	String sql="select * from comment where p_num=?";
+		 	String sql="select * from comment where p_num=?&&category=?";
 		 	PreparedStatement pre = con.prepareStatement(sql);
 		 	pre.setInt(1, p_num);
+		 	pre.setString(2, category);
 		 	
 		 	ResultSet rs = pre.executeQuery();
 		 	
@@ -88,6 +91,7 @@ public class commentDAO {
 		 		cb.setReg_date(rs.getTimestamp("date"));
 		 		cb.setP_num(rs.getInt("p_num"));
 		 		cb.setR_num(rs.getInt("r_num"));
+		 		cb.setCategory(rs.getString("category"));
 		 		
 		 		
 		 	commentlist.add(cb);
@@ -102,7 +106,7 @@ public class commentDAO {
 		return commentlist;
 	}//getCommentList
 	
-	public commentBean getcomment(int p_num,int r_num) {
+	public commentBean getcomment(int p_num,int r_num,String category) {
 		commentBean cb = new commentBean();
 		try {
 			//1단계
@@ -113,7 +117,7 @@ public class commentDAO {
 		 	String dbPass = "jsppass";
 		 	//3단계
 		 	Connection con = DriverManager.getConnection(dburl, dbUser, dbPass);
-		 	String sql="select * from comment where p_num=?&&r_num=?";
+		 	String sql="select * from comment where p_num=?&&r_num=?&&category=?";
 		 	PreparedStatement pre = con.prepareStatement(sql);
 		 	pre.setInt(1, p_num);
 		 	pre.setInt(2, r_num);
@@ -126,6 +130,7 @@ public class commentDAO {
 		 		cb.setReg_date(rs.getTimestamp("date"));
 		 		cb.setP_num(rs.getInt("p_num"));
 		 		cb.setR_num(rs.getInt("r_num"));
+		 		cb.setCategory(rs.getString("category"));
 		 	}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -147,11 +152,12 @@ public class commentDAO {
 		 	String dbPass = "jsppass";
 		 	//3단계
 		 	Connection con = DriverManager.getConnection(dburl, dbUser, dbPass);
-		 	String sql="update comment set content=? where p_num=?&&r_num=?";
+		 	String sql="update comment set content=? where p_num=?&&r_num=?&&category=?";
 		 	PreparedStatement pre = con.prepareStatement(sql);
 		 	pre.setString(1, cb.getContent());
 		 	pre.setInt(2, cb.getP_num());
 		 	pre.setInt(3, cb.getR_num());
+		 	pre.setString(4, cb.getCategory());
 		 	pre.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -159,7 +165,7 @@ public class commentDAO {
 		
 	}//commentUpdate
 	
-	public void commentDelete(int num) {
+	public void commentDelete(int num,String category) {
 		try {
 			//1단계
 			Class.forName("com.mysql.jdbc.Driver");
@@ -169,9 +175,10 @@ public class commentDAO {
 		 	String dbPass = "jsppass";
 		 	//3단계
 		 	Connection con = DriverManager.getConnection(dburl, dbUser, dbPass);
-		 	String sql="delete from comment where num=?";
+		 	String sql="delete from comment where num=?&&category=?";
 		 	PreparedStatement pre = con.prepareStatement(sql);
 		 	pre.setInt(1, num);
+		 	pre.setString(2, category);
 		 	pre.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

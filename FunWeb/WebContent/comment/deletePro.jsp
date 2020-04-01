@@ -12,19 +12,20 @@
 <%
 int num = Integer.parseInt(request.getParameter("num"));
 int p_num = Integer.parseInt(request.getParameter("p_num"));
+String category =request.getParameter("category");
 
 // System.out.println("deletepnum : "+p_num);
 // System.out.println("r_num : "+r_num);
 // System.out.println("deleternum : "+r_num);
 
 commentDAO cDAO = new commentDAO();
-cDAO.commentDelete(num);%>
+cDAO.commentDelete(num,category);%>
 
 
 	<script type="text/javascript">
 	alert("작성하신 글이 삭제되었습니다.");
 	</script>
 <meta http-equiv="refresh" 
-content="0;url=../board/content.jsp?num=<%=p_num%>"></meta>
+content="0;url=../<%=category%>/content.jsp?num=<%=p_num%>"></meta>
 </body>
 </html>

@@ -16,7 +16,7 @@ function submitCheck(){
 		document.getElementById("file").focus();
 		return false; //
 	}
-	
+}
 </script>
 </head>
 <body>
@@ -30,6 +30,7 @@ galleryBean gb= gDAO.getboardContent(num);
 
 <tr><td>글번호</td><td><input type="text" name="num" readonly="readonly" value="<%=gb.getNum()%>"></td></tr>
 <tr><td>작성일</td><td><%=gb.getDate() %></td></tr>
+<tr><td>글 비밀번호</td><td><input type="password" name="pass"></td></tr>
 <tr><td>내용</td><td colspan="3"><input type="text" name="content" value="<%=gb.getContent() %>"></td></tr>
 <tr><td>파일</td><td colspan="3" >
 <%-- <a href="../upload/<%=gb.getFile()%>"><%=gb.getFile()%></a> --%>
