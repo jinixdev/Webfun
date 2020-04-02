@@ -305,6 +305,35 @@ public class BoardDAO {
 		
 	}//getBoardCount
 	
+	public int getBoardCommentCount(int p_num,String category) {
+		int count=0;
+		ResultSet rs=null;
+		PreparedStatement pre=null;
+		Connection con=null;
+		
+		try {
+			con = getConnection();
+			String sql="select count(num) from comment where p_num=?&&category=?";
+			pre = con.prepareStatement(sql);
+			pre.setInt(1, p_num);
+			pre.setString(2, category);
+			rs= pre.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt("count(num)"); 
+			 }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			if(rs!=null) try {rs.close();}catch(SQLException ex) {}
+			if(pre!=null) try{pre.close();}catch(SQLException ex) {}
+			if(con!=null) try {con.close();}catch(SQLException ex) {}
+		}
+		
+		return count;
+		
+		
+	}//getBoardCount
+	
 	// ===================================search=====================================
 	public int getBoardCount(String search) {
 		int count=0;

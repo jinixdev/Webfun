@@ -12,9 +12,13 @@ String fruit[] = request.getParameterValues("fruit");
 String fruits="";
 for(String s:fruit){
 fruits += ","+s;
-
 }
+String star = request.getParameter("starvalue");
+
+
 System.out.print(fruits);
+System.out.print("star"+star);
+
 %>
 </body>
 </html>

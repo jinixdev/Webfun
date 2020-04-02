@@ -53,6 +53,7 @@
 <article>
 <h1>Notice</h1>
 <%
+String category ="board";
 request.setCharacterEncoding("UTF-8");
 BoardDAO jbDAO= new BoardDAO();
 // 게시판 글개수를 호출 getBoardCount() count() 
@@ -112,12 +113,16 @@ List boardlist = jbDAO.getboardList(startRow,pageSize); //호출
 		
 		for (int i = 0; i < boardlist.size(); i++) {
 			BoardBean jbb = (BoardBean) boardlist.get(i);
+			int commentCount = jbDAO.getBoardCommentCount(jbb.getNum(), category);
 	%>
 	<tr>
 		<td><%=num--%></td>
 		<td class="left"><a href="../board/content.jsp?num=<%=jbb.getNum()%>&pageNum=<%=pageNum%>"><%=jbb.getSubject()%></a> 
 		<%if (sdf.format(jbb.getDate()).equals(sdf.format(nowtime))) {%>
-				<span style="color: red;"><sup>Ν</sup></span> <%}%></td>
+				<span style="color: red;"><sup>Ν</sup></span> <%}%>
+				(<%=commentCount %>)
+				
+				</td>
 		<td class="left"><%=jbb.getName()%></td>
 		<%if (sdf.format(jbb.getDate()).equals(sdf.format(nowtime))) {%>
 				<td><%=time.format(jbb.getDate())%></td> <%}else{%>

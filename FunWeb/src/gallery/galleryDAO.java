@@ -46,7 +46,7 @@ private Connection getConnection() throws Exception{
 			 }
 			 if(pre!=null) try{pre.close();}catch(SQLException ex) {}
 
-			sql = "insert into g_board(num,id,img,content,date,foodtype,pass,placename,placeaddr) values(?,?,?,?,?,?,?,?,?)";
+			sql = "insert into g_board(num,id,img,content,date,foodtype,pass,placename,placeaddr,star) values(?,?,?,?,?,?,?,?,?,?)";
 			pre = con.prepareStatement(sql);
 			pre.setInt(1, num);
 			pre.setString(2, gb.getId());
@@ -57,6 +57,7 @@ private Connection getConnection() throws Exception{
 			pre.setString(7, gb.getPass());
 			pre.setString(8, gb.getPlacename());
 			pre.setString(9, gb.getPlaceaddr());
+			pre.setString(10, gb.getStar());
 			
 			
 
@@ -85,22 +86,22 @@ private Connection getConnection() throws Exception{
 			con = getConnection();
 
 			
-//			 String sql = "select * from board order by num desc";
-			String sql = "select * from g_board order by num desc limit ?,?";
-			 pre = con.prepareStatement(sql); 
-			 pre.setInt(1, startRow-1); //startRow 시작을 포함하지 않기때문에 -1
-			 pre.setInt(2, pageSize);
-			 rs= pre.executeQuery();
-			 while(rs.next()) {
-				 galleryBean gb = new galleryBean();
-//				 String s = new SimpleDateFormat("yyyy-MM-dd").format(rs.getTimestamp("date"));
-				 gb.setNum(rs.getInt("num"));
-				 gb.setContent(rs.getString("content"));
-				 gb.setDate(rs.getTimestamp("date"));
-				 gb.setFile(rs.getString("img"));
-				 gb.setId(rs.getString("id"));
-				 gb.setPlacename(rs.getString("placename"));
-				 gb.setPlaceaddr(rs.getString("placeaddr"));
+			//String sql = "select * from board order by num desc";
+			String sql = "select * from g_board group by placename order by num desc limit ?,?";
+			pre = con.prepareStatement(sql); 
+			pre.setInt(1, startRow-1); //startRow 시작을 포함하지 않기때문에 -1
+			pre.setInt(2, pageSize);
+			rs= pre.executeQuery();
+			while(rs.next()) {
+				galleryBean gb = new galleryBean();
+				//String s = new SimpleDateFormat("yyyy-MM-dd").format(rs.getTimestamp("date"));
+				gb.setNum(rs.getInt("num"));
+				gb.setContent(rs.getString("content"));
+				gb.setDate(rs.getTimestamp("date"));
+				gb.setFile(rs.getString("img"));
+				gb.setId(rs.getString("id"));
+				gb.setPlacename(rs.getString("placename"));
+				gb.setPlaceaddr(rs.getString("placeaddr"));
 				 
 				 gblist.add(gb);
 			 }
@@ -116,6 +117,7 @@ private Connection getConnection() throws Exception{
 		return gblist;
 	}//getboardList
 	
+	// 선택한 content 가져오기
 	public galleryBean getboardContent(int num) {
 		galleryBean gb = new galleryBean();
 		ResultSet rs=null;
@@ -144,6 +146,7 @@ private Connection getConnection() throws Exception{
 				 gb.setFoodtype(rs.getString("foodtype"));
 				 gb.setPlacename(rs.getString("placename"));
 				 gb.setPlaceaddr(rs.getString("placeaddr"));
+				 gb.setStar(rs.getString("star"));
 			 }
 			
 		} catch (Exception e) {
@@ -155,7 +158,57 @@ private Connection getConnection() throws Exception{
 		}
 		
 		return gb;
-	}//getboardList
+	}//getboardContent
+	
+	
+	public List getContentList(String placename) {
+		System.out.print(placename);
+		List contentlist = new ArrayList();
+		ResultSet rs=null;
+		PreparedStatement pre=null;
+		Connection con=null;
+		
+		try {
+			
+			Class.forName("com.mysql.jdbc.Driver");
+
+			con = getConnection();
+
+			
+			//String sql = "select * from board order by num desc";
+			String sql = "select * from g_board where placename=? order by num desc";
+			pre = con.prepareStatement(sql); 
+			pre.setString(1, placename);
+			rs= pre.executeQuery();
+			while(rs.next()) {
+				galleryBean gb = new galleryBean();
+				//String s = new SimpleDateFormat("yyyy-MM-dd").format(rs.getTimestamp("date"));
+				gb.setNum(rs.getInt("num"));
+				gb.setContent(rs.getString("content"));
+				gb.setDate(rs.getTimestamp("date"));
+				gb.setFile(rs.getString("img"));
+				gb.setId(rs.getString("id"));
+				gb.setPlacename(rs.getString("placename"));
+				gb.setPlaceaddr(rs.getString("placeaddr"));
+				gb.setStar(rs.getString("star"));
+				
+				 
+				contentlist.add(gb);
+			 }
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			if(rs!=null) try {rs.close();}catch(SQLException ex) {}
+			if(pre!=null) try{pre.close();}catch(SQLException ex) {}
+			if(con!=null) try {con.close();}catch(SQLException ex) {}
+		}
+		
+		return contentlist;
+	}//getContentList
+	
+	
+	
 	
 	public void updateBoard(int num,galleryBean gb) {
 		PreparedStatement pre=null;
@@ -269,5 +322,39 @@ private Connection getConnection() throws Exception{
 		
 		
 	}//getBoardCount
+	
+	
+	public int getPlaceCount(String placename) {
+		int count=0;
+		ResultSet rs=null;
+		PreparedStatement pre=null;
+		Connection con=null;
+		
+		try {
+			con = getConnection();
+			String sql="select count(num) from g_board where placename=?";
+			pre = con.prepareStatement(sql);
+			pre.setString(1, placename);
+			rs= pre.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt("count(num)"); 
+			 }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			if(rs!=null) try {rs.close();}catch(SQLException ex) {}
+			if(pre!=null) try{pre.close();}catch(SQLException ex) {}
+			if(con!=null) try {con.close();}catch(SQLException ex) {}
+		}
+		
+		return count;
+		
+		
+	}//getPlaceCount
+	
+	
+	
+	
+	
 
 }

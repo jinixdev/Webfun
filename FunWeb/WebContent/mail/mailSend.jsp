@@ -7,7 +7,8 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String sender = request.getParameter("sender");
-	String receiver = request.getParameter("receiver");
+// 	String receiver = request.getParameter("receiver");
+	String receiver ="jinixdev@gmail.com";
 	String subject = request.getParameter("subject");
 	String content = request.getParameter("content");
 
@@ -27,12 +28,26 @@
 		message.setFrom(sender_address);
 		message.addRecipient(Message.RecipientType.TO, receiver_address);
 		message.setSubject(subject);
-		message.setContent(content, "text/html;charset=UTF-8");
+		message.setContent("보내는사람 :"+sender+"<br>"+content, "text/html;charset=UTF-8");
+		
 		message.setSentDate(new java.util.Date());
-		Transport.send(message);
-		out.println("<h3>메일이 정상적으로 전송되었습니다.</h3>");
-	} catch (Exception e) {
-		out.println("SMTP 서버가 잘못 설정되었거나, 서비스에 문제가 있습니다.");
-		e.printStackTrace();
+		Transport.send(message);%>
+		
+		<script>
+		alert("메일이 정상적으로 전송되었습니다.");
+		history.back();
+		
+		</script>
+		
+		
+<!-- 		out.println("<h3>메일이 정상적으로 전송되었습니다.</h3>"); -->
+	<%} catch (Exception e) {%>
+<!-- 		out.println("SMTP 서버가 잘못 설정되었거나, 서비스에 문제가 있습니다."); -->
+		<script>
+		alert("서비스에 문제가 있습니다.");
+		history.back();
+		
+		</script>
+<%e.printStackTrace();
 	}
 %>

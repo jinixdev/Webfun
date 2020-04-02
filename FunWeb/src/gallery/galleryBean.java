@@ -7,10 +7,10 @@ public class galleryBean {
 	private String id,pass,file,content;
 	
 	private String tastetype,foodtype,eattype;
-	private int smile,star;
+	private int smile;
 	private Timestamp date;
 	private String storename,storeaddr,store_num,b_num; 
-	private String placename,placeaddr;
+	private String placename,placeaddr,star;
 	
 	
 	
@@ -37,10 +37,11 @@ public class galleryBean {
 	
 	
 	
-	public int getStar() {
+
+	public String getStar() {
 		return star;
 	}
-	public void setStar(int star) {
+	public void setStar(String star) {
 		this.star = star;
 	}
 	public String getStorename() {

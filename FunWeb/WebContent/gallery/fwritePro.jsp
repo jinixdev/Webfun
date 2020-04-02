@@ -63,6 +63,12 @@ String foodstyle = String.join(",",foodstyles);
 System.out.println("foodstyle : "+foodstyle);
 gb.setFoodtype(foodstyle);
 
+String star = multi.getParameter("starValue");
+System.out.print("starValue : "+star);
+gb.setStar(star);
+
+
+
 
 galleryDAO gDAO = new galleryDAO();
 gDAO.write(gb);

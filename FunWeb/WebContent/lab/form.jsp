@@ -68,7 +68,7 @@
     	 
     	 lock(image1,star);
     	 alert("선택 : "+star);
-    	 document.getElementById("star").value =star;
+    	 document.getElementById("starvalue").value =star;
      }
      
      
@@ -132,6 +132,7 @@
 <input type="submit" value="전송"><br>
 
 <input type="button" onclick="showrating('star');" value="star">
+
 <div id="star" style="display:none;">
 <span id="star_grade" >
        <img id=star1 onmouseover="show('star',1)" onclick="mark('star',1)" onmouseout="noshow('star',1)" src="../css/pic/star0.png">
@@ -141,7 +142,7 @@
        <img id=star5 onmouseover="show('star',5)" onclick="mark('star',5)" onmouseout="noshow('star',5)" src="../css/pic/star0.png">
        <span id="startext">평가하기</span>
 </span>
-<input type="hidden" id="star">
+<input type="hidden" id="starvalue" name="starvalue" >
 </div><br>
 
 

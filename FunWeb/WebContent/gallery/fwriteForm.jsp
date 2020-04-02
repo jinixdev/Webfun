@@ -10,94 +10,12 @@
 <link href="../css/default.css" rel="stylesheet" type="text/css">
 <link href="../css/subpage.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
-var locked =0;
-function show(image1,star){
-	 var i,image,el;
-	 var e = document.getElementById(image1+'text');
-	 var stateMsg;
-	 
-	 for(i=1; i<=star; i++){
-		 image = image1+i;
-		 el = document.getElementById(image);
-		 el.src= "../css/pic/"+image1+"1.png";
-	 }
-	 switch (star){
-	 case 1:
-		 stateMsg ="1";
-		 break;
-	 case 2:
-		 stateMsg ="2";
-		 break;
-	 case 3:
-		 stateMsg ="3";
-		 break;
-	 case 4:
-		 stateMsg ="4";
-		 break;
-	 case 5:
-		 stateMsg ="5";
-		 break;
-	default :
-		stateMsg = "";
-	 }
-	 e.innerHTML =stateMsg;
-}
 
-function noshow(image1,star){
-	 if(locked)
-		 return;
-	 var i,image,el;
-	 
-	 for(i=1; i<=star; i++){
-		 image = image1+i;
-		 el = document.getElementById(image);
-		 el.src= "../css/pic/"+image1+"0.png";
-	 }
-}
 
-function lock(image1,star){
-	 show(image1,star);
-	 locked =1;
-}
-function mark(image1,star){
-	 if(locked==1){
-		 for(i=1; i<=5; i++){
-   		 image = image1+i;
-   		 el = document.getElementById(image);
-   		 el.src= "../css/pic/"+image1+"0.png";
-   	 }
-	 }
-	 
-	 lock(image1,star);
-	 alert("선택 : "+star);
-	 document.getElementById("star").value =star;
-}
-
-function showrating(value){
-	var show=document.getElementById(value);
-	if(show.style.display=="block"){
-		show.style.display="none";
-	}else{
-		show.style.display="block";
-	}
-}
-
-function submitCheck(){
-	if(document.getElementById("file").value==""||document.getElementById("file").value==null){
-		alert("이미지를 등록해주세요");
-		document.getElementById("file").focus();
-		return false; //
-	}
-
-}
-
-// 위치추가
-function map(){
-	window.open("map.jsp","chkpro", "width=800, height=600, resizable = no, scrollbars = no");
- }
 
 
 </script>
+<script src="gallery.js"></script>
 </head>
 <body>
 <div id="wrap">
@@ -145,7 +63,7 @@ String id = (String)session.getAttribute("id");
 <table border="1">
 <tr><td colspan="2"><input type="text" id="placename" name="placename">
 <input type="button" value="위치추가" class="dup" onclick="map()"></td></tr>
-<tr><td colspan="2"><input type="text" id="placeaddr" name="placeaddr"></td></tr>
+<tr><td colspan="2"><input type="text" id="placeaddr" name="placeaddr" style="width:300px;"></td></tr>
 <tr><td>글 비밀번호</td><td><input type="password" name="pass"></td></tr>
 <tr><td colspan="2"><input type="file" name="file" id="file"></td></tr>
 <tr><td><%=jmb.getName()%></td></tr>
@@ -162,6 +80,17 @@ String id = (String)session.getAttribute("id");
        <span id="hottext">평가하기</span>
 </p>
 <input type="hidden" id="hot">
+</div>
+<div id="star">
+<span id="star_grade" >
+       <img id=star1 onmouseover="show('star',1)" onclick="mark('star',1)" onmouseout="noshow('star',1)" src="../css/pic/star0.png">
+       <img id=star2 onmouseover="show('star',2)" onclick="mark('star',2)" onmouseout="noshow('star',2)" src="../css/pic/star0.png">
+       <img id=star3 onmouseover="show('star',3)" onclick="mark('star',3)" onmouseout="noshow('star',3)" src="../css/pic/star0.png">
+       <img id=star4 onmouseover="show('star',4)" onclick="mark('star',4)" onmouseout="noshow('star',4)" src="../css/pic/star0.png">
+       <img id=star5 onmouseover="show('star',5)" onclick="mark('star',5)" onmouseout="noshow('star',5)" src="../css/pic/star0.png">
+       <span id="startext">평가하기</span>
+</span>
+<input type="hidden" id="starValue" name="starValue">
 </div>
 
 

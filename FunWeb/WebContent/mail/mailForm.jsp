@@ -65,10 +65,10 @@
 						<td>보내는 사람 메일 :</td>
 						<td><input type="text" name="sender"></td>
 					</tr>
-					<tr>
-						<td>받는 사람 메일 :</td>
-						<td><input type="text" name="receiver"></td>
-					</tr>
+<!-- 					<tr> -->
+<!-- 						<td>받는 사람 메일 :</td> -->
+<!-- 						<td><input type="text" name="receiver"></td> -->
+<!-- 					</tr> -->
 					<tr>
 						<td>제목 :</td>
 						<td><input type="text" name="subject"></td>

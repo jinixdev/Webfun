@@ -97,16 +97,23 @@ List gallerylist = gDAO.getboardList(startRow,pageSize); //호출
 <div class="gwrap">
 <div class="container">
 <%for(int i =0;i<gallerylist.size();i++){ 
-galleryBean gb = (galleryBean)gallerylist.get(i);%>
+galleryBean gb = (galleryBean)gallerylist.get(i);
+int placeCount = gDAO.getPlaceCount(gb.getPlacename());
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+Timestamp nowtime = new Timestamp(System.currentTimeMillis());
+SimpleDateFormat time = new SimpleDateFormat("hh:mm");
+%>
 
 <div class="g_content" onclick="location.href='../gallery/content.jsp?num=<%=gb.getNum()%>'">
 <img src="../upload/<%=gb.getFile()%>" width="250" height="250" >
 
 <div>
-<span><%=gb.getId()%></span> 
+<span><%=gb.getPlacename()%></span> <span>(<%=placeCount%>)</span> 
+	<%if (sdf.format(gb.getDate()).equals(sdf.format(nowtime))) {%>
+				<span style="color: red;"><sup>Ν</sup></span> <%}%>
+<p><%=gb.getPlaceaddr() %></p> 
 <%-- <strong><%=gb.getReadcount() %></strong> --%>
 
-<p><%=gb.getDate() %></p>
 </div>
 
 

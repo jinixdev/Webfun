@@ -1,3 +1,5 @@
+<%@page import="java.sql.Timestamp"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Spliterator"%>
 <%@page import="gallery.galleryDAO"%>
 <%@page import="gallery.galleryBean"%>
@@ -16,60 +18,8 @@
 <title>content</title>
 <link href="../css/default.css" rel="stylesheet" type="text/css">
 <link href="../css/subpage.css" rel="stylesheet" type="text/css">
+
 <script type="text/javascript">
-function showhide(){
-	var obj=document.getElementById("showtable");
-	if(obj.style.display=="none"){
-		obj.style.display="block";
-	}else{
-		obj.style.display="none";
-	}
-}
-
-function commentUpdate(id,comment,p_num,r_num){
-	var commenttable = document.getElementById("commenttable");
-	var updatetable=document.getElementById("updatetable");
-	document.getElementById("comment_id").value=id;
-	document.getElementById("comment").value=comment;
-	document.getElementById("p_num").value=p_num;
-	document.getElementById("r_num").value=r_num;
-	
-	if(updatetable.style.display=="none"){
-		updatetable.style.display="block";
-		commenttable.style.display="none";
-		document.getElementByName("content").focus();
-	}else{
-		updatetable.style.display="none";
-		commenttable.style.display="block";
-		document.getElementByName("comment").focus();
-	}
-}
-
-
-function hide(){
-	var update=document.getElementById("updatetable");
-	var commenttable = document.getElementById("commenttable");
-	if(update.style.display=="block"){
-		update.style.display="none";
-		document.getElementByName("comment").focus();
-		commenttable.style.display="block";
-	}
-}
-
-function commentDelete(){
-	var p_num =document.getElementById("p_num").value;
-	var r_num =document.getElementById("r_num").value;
-	location.href="../comment/deletePro.jsp?p_num="+p_num;
-}
-
-function checked(foodtype){
-	var foodtype =foodtype.split(',');
-	alert(foodtype);
-	
-}
-
-
-
 window.addEventListener('DOMContentLoaded', function(){
 	
     
@@ -92,6 +42,7 @@ window.addEventListener('DOMContentLoaded', function(){
 
 	})
 </script> 
+<script src="gallery.js"></script>
 </head>
 <body>
 <div id="wrap">
@@ -130,6 +81,11 @@ System.out.println("num : "+p_num);
 galleryDAO gDAO = new galleryDAO(); 
 galleryBean gb= gDAO.getboardContent(p_num);
 
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+Timestamp nowtime = new Timestamp(System.currentTimeMillis());
+SimpleDateFormat time = new SimpleDateFormat("hh:mm");
+
+
 String id = (String)session.getAttribute("id");
 /* int num2 = gb.getNum(); */
 %>
@@ -140,24 +96,25 @@ String id = (String)session.getAttribute("id");
 
 <table>
 <tr><td>글번호</td><td><%= gb.getNum() %></td></tr>
-<tr><td>작성일</td><td><%=gb.getDate() %></td></tr>
 <tr><td>글쓴이</td><td><%= gb.getId() %></td></tr>
+<tr><td colspan="2">
+<%-- <a href="../upload/<%=gb.getFile()%>"><%=gb.getFile()%></a> --%> 
+<img src="../upload/<%=gb.getFile()%>" width="300" height="300">
+<a href="file_down.jsp?file_name=<%=gb.getFile()%>"></a></td></tr>
+<tr><td>작성일</td><td><%=sdf.format(gb.getDate()) %></td></tr>
+
 <tr><td>장소</td><td><%= gb.getPlacename() %></td></tr>
 <tr><td>주소</td><td><%= gb.getPlaceaddr() %></td></tr>
-<tr><td>파일</td><td colspan="3"><a href="../upload/<%=gb.getFile()%>"><%=gb.getFile()%></a>
-<img src="../upload/<%=gb.getFile()%>" width="100" height="100">
-<a href="file_down.jsp?file_name=<%=gb.getFile()%>"></a></td></tr>
 <tr><td>내용</td><td colspan="3"><%=gb.getContent() %></td></tr>
 <tr><td>foodstyle</td>
 <td>
-<input name="foodstyle"  type="checkbox" value="한식"  />한식
+<input name="foodstyle" type="checkbox" value="한식"  />한식
 <input name="foodstyle" type="checkbox" value="중식" />중식
-<input name="foodstyle"  type="checkbox" value="양식" />양식
+<input name="foodstyle" type="checkbox" value="양식" />양식
 <input name="foodstyle" type="checkbox" value="일식" />일식
-
-</td>
-
-</tr>
+<input name="foodstyle" type="checkbox" value="기타" />기타
+</td></tr>
+<tr><td>평점</td><td><%=gb.getStar() %></td></tr>
 
 <tr><td colspan="4">
 <input type="button" value="글목록" onclick="location.href='../center/notice.jsp?pageNum=<%=pageNum%>'">
@@ -188,8 +145,11 @@ String id = (String)session.getAttribute("id");
 <!-- ----------------comment code---------------------- -->
 <!-- comment insert code -->
 <!-- must have id -->
+
 <% if(id!=null){ %>
+<h1>댓글</h1>
 <%
+
 commentDAO comDAO = new commentDAO();
 
 List comList= comDAO.getCommentList(p_num,category);%>
@@ -197,10 +157,14 @@ List comList= comDAO.getCommentList(p_num,category);%>
 <% for(int i=0;i<comList.size();i++){
 	commentBean cb = (commentBean)comList.get(i);
 	%>
-<tr><td><%=cb.getId() %></td><td><%=cb.getContent() %></td>
-
-
-
+<tr><td><%=cb.getId() %></td><td><%=cb.getContent() %></td> 
+<td><%if (sdf.format(gb.getDate()).equals(sdf.format(nowtime))) {%>
+<span><%=time.format(cb.getReg_date()) %></span>
+			<span style="color: red;"><sup>Ν</sup></span> 
+			<%}else{%>
+			<%=sdf.format(cb.getReg_date()) %>
+			<%} %>
+			</td>
 
 <% if(cb.getId().equals(id)){ %>
 <td><a href="javascript:commentUpdate('<%=cb.getId()%>','<%=cb.getContent()%>',
@@ -237,8 +201,30 @@ List comList= comDAO.getCommentList(p_num,category);%>
 
 <%} %>
 
+<h1>같은 음식점 다른리뷰</h1>
 
+<!-- --------------------------content list------------------------------ -->
 
+<%List contentList= gDAO.getContentList(gb.getPlacename()); %>
+
+<% for(int i=0;i<contentList.size();i++){
+	gb = (galleryBean)contentList.get(i);
+	%>
+	<hr>
+<div onclick="location.href='../gallery/content.jsp?num=<%=gb.getNum()%>'">
+<table>
+<tr><td rowspan="3">
+<%-- <a href="../upload/<%=gb.getFile()%>"><%=gb.getFile()%></a> --%> 
+<a href="" ></a><img src="../upload/<%=gb.getFile()%>" width="100" height="100"></a>
+<%-- <a href="file_down.jsp?file_name=<%=gb.getFile()%>"></a>  // download --%>
+</td><td>글쓴이</td><td><%= gb.getId() %></td>
+<td>평점</td><td><%=gb.getStar() %></td></tr>
+<tr><td>내용</td><td colspan="4"><%=gb.getContent() %></td></tr>
+<tr><td>작성일</td><td><%= sdf.format(gb.getDate())%></td></tr>
+</table>
+</div>
+
+<%} %>
 
 
 
