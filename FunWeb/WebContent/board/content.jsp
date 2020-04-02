@@ -112,7 +112,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
 <tr><td>글쓴이</td><td><%= jbb.getName() %></td></tr>
 <tr><td>조회수</td><td><%=jbb.getReadcount() %></td></tr>
 <tr><td>제목</td><td colspan="3"><%=jbb.getSubject() %></td></tr>
-<tr><td>내용</td><td colspan="3"><%=jbb.getContent() %></td></tr>
+<tr><td>내용</td><td colspan="3" ><%=jbb.getContent() %></td></tr>
 <tr><td>파일</td><td colspan="3"><a href="../upload/<%=jbb.getFile()%>"><%=jbb.getFile()%></a>
 <img src="../upload/<%=jbb.getFile()%>" width="100" height="100">
 <a href="file_down.jsp?file_name=<%=jbb.getFile()%>"><%=jbb.getFile()%></a></td>

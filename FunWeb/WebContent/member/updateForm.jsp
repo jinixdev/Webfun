@@ -223,7 +223,7 @@ MemberBean mb= mDAO.getMember(id);
 <div class="clear"></div>
 <div id="buttons">
 <input type="submit" value="수정" class="submit">
-<input type="reset" value="취소" class="cancel">
+<input type="reset" value="취소" class="cancel" onclick="history.back();">
 </div>
 </form>
 

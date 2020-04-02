@@ -92,7 +92,15 @@ List gallerylist = gDAO.getboardList(startRow,pageSize); //호출
 // List boardlist = jbDAO.getboardList();
 %>
 
-
+<!-- search -->
+<div id="table_search" style="margin: 0 0 0 50%;margin-bottom: 20px;">
+<input type="text" name="search" class="input_box">
+<input type="button" value="search" class="btn">
+<%String id = (String)session.getAttribute("id"); 
+if(id!=null){%>
+<input type="button" value="리뷰 작성" class="btn" onclick="location.href='../gallery/fwriteForm.jsp'">
+<%} %>
+</div>
 
 <div class="gwrap">
 <div class="container">
@@ -123,14 +131,6 @@ SimpleDateFormat time = new SimpleDateFormat("hh:mm");
 
 
 
-<div id="table_search">
-<input type="text" name="search" class="input_box">
-<input type="button" value="search" class="btn">
-<%String id = (String)session.getAttribute("id"); 
-if(id!=null){%>
-<input type="button" value="글작성" class="btn" onclick="location.href='../gallery/fwriteForm.jsp'">
-<%} %>
-</div>
 
 
 
@@ -161,8 +161,9 @@ if(endPage>pageCount){
 //  [이전]11 12 13 ~20
 
 
-// [이전] 10페이지 이전
-if(startPage > pageBlock){%>
+// [이전] 10페이지 이전%>
+<span style="margin: 0 40%;">
+<%if(startPage > pageBlock){%>
 	<a href="gallery.jsp?pageNum=<%=startPage-pageBlock%>">[이전]</a> 
 <%}%>
 
@@ -181,7 +182,7 @@ for(int i = startPage; i <= endPage; i++){
 if(endPage < pageCount){%>
 	<a href="gallery.jsp?pageNum=<%=startPage+pageBlock%>">[다음]</a> 
 <%}%>
-
+</span>
 
 
 
