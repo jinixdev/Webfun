@@ -1,3 +1,4 @@
+<%@page import="java.sql.Timestamp"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="board.BoardBean"%>
 <%@page import="board.BoardDAO"%>
@@ -106,14 +107,21 @@ List boardlist = jbDAO.getboardList(startRow,pageSize); //호출
 		int num = count - (currentPage - 1) * pageSize;
 		// 2020-0324 17:42:30.0  ==>  2012.11.06 문자날짜모양
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+		Timestamp nowtime = new Timestamp(System.currentTimeMillis());
+		SimpleDateFormat time = new SimpleDateFormat("hh:mm");
+		
 		for (int i = 0; i < boardlist.size(); i++) {
 			BoardBean jbb = (BoardBean) boardlist.get(i);
 	%>
 	<tr>
 		<td><%=num--%></td>
-		<td class="left"><a href="../board/content.jsp?num=<%=jbb.getNum()%>&pageNum=<%=pageNum%>"><%=jbb.getSubject()%></a></td>
+		<td class="left"><a href="../board/content.jsp?num=<%=jbb.getNum()%>&pageNum=<%=pageNum%>"><%=jbb.getSubject()%></a> 
+		<%if (sdf.format(jbb.getDate()).equals(sdf.format(nowtime))) {%>
+				<span style="color: red;"><sup>Ν</sup></span> <%}%></td>
 		<td class="left"><%=jbb.getName()%></td>
-		<td><%=sdf.format(jbb.getDate())%></td>
+		<%if (sdf.format(jbb.getDate()).equals(sdf.format(nowtime))) {%>
+				<td><%=time.format(jbb.getDate())%></td> <%}else{%>
+		<td><%=sdf.format(jbb.getDate())%></td><%} %>
 		<td><%=jbb.getReadcount()%></td>
 	</tr>
 	<%

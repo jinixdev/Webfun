@@ -13,13 +13,13 @@
 int num = (Integer)session.getAttribute("num");
 // int num = Integer.parseInt(request.getParameter("num"));
 String pass = request.getParameter("pass");
-System.out.print("num"+num);
-System.out.print("pass"+pass);
+String p_num = request.getParameter("p_num");
+String category = request.getParameter("category");
 
 galleryDAO gDAO = new galleryDAO();
 int check = gDAO.passCheck(num, pass);
 if(check ==1){
-	gDAO.deleteBoard(num);%>
+	gDAO.deleteBoard(num, p_num, category);%>
 	<script type="text/javascript">
 	alert("작성하신 글이 삭제되었습니다.");
 	location.href="../center/gallery.jsp";

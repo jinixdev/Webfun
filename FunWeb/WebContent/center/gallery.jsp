@@ -93,20 +93,6 @@ List gallerylist = gDAO.getboardList(startRow,pageSize); //호출
 %>
 
 
-<!-- <table id="notice"> -->
-<!-- <tr><th class="tno">No.</th> -->
-<!--     <th class="ttitle">Title</th> -->
-<!--     <th class="twrite">Writer</th> -->
-<!--     <th class="tdate">Date</th> -->
-<!--     <th class="tread">Read</th></tr> -->
-<%-- <%  --%>
-<!-- // // SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd"); -->
-<!-- // for(int i =0;i<boardlist.size();i+=2){ -->
-<%-- 	BoardBean jbb = (BoardBean)boardlist.get(i);%>    --%>
-<%-- <tr><td><img src="../upload/<%=jbb.getFile()%>" width="100" height="100"></td></tr> --%>
-<%-- <tr><td><%=jbb.getSubject() %></td></tr> --%>
-<%-- <tr><td><%=jbb.getName() %></td></tr> --%>
-<%-- <tr><td>조회수</td><td><%=jbb.getReadcount() %></td></tr> --%>
 
 <div class="gwrap">
 <div class="container">

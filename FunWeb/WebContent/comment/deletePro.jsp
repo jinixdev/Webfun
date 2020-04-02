@@ -23,7 +23,7 @@ cDAO.commentDelete(num,category);%>
 
 
 	<script type="text/javascript">
-	alert("작성하신 글이 삭제되었습니다.");
+	alert("작성하신 댓글이 삭제되었습니다.");
 	</script>
 <meta http-equiv="refresh" 
 content="0;url=../<%=category%>/content.jsp?num=<%=p_num%>"></meta>

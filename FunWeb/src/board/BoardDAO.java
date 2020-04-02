@@ -252,7 +252,7 @@ public class BoardDAO {
 		return check;
 	}//passCheck
 	
-	public void deleteBoard(int num) {
+	public void deleteBoard(int num,String p_num,String category) {
 		PreparedStatement pre=null;
 		Connection con=null;
 		try {
@@ -260,6 +260,13 @@ public class BoardDAO {
 			String sql="delete from board where num=?;";
 			pre = con.prepareStatement(sql);
 			pre.setInt(1, num);
+			pre.executeUpdate();
+			if(pre!=null) try{pre.close();}catch(SQLException ex) {}
+			
+			sql="delete from comment where p_num=?&&category=?";
+			pre = con.prepareStatement(sql);
+			pre.setString(1, p_num);
+			pre.setString(2, category);
 			pre.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

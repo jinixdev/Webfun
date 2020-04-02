@@ -36,6 +36,8 @@ gb.setId(multi.getParameter("id"));
 gb.setContent(multi.getParameter("content"));
 gb.setTastetype(multi.getParameter("hot"));
 gb.setPass(multi.getParameter("pass"));
+gb.setPlacename(multi.getParameter("placename"));
+gb.setPlaceaddr(multi.getParameter("placeaddr"));
 
 
 Timestamp date = new Timestamp(System.currentTimeMillis());

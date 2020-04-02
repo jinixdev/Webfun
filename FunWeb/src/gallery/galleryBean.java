@@ -5,16 +5,36 @@ import java.sql.Timestamp;
 public class galleryBean {
 	private int num;
 	private String id,pass,file,content;
+	
+	private String tastetype,foodtype,eattype;
+	private int smile,star;
+	private Timestamp date;
+	private String storename,storeaddr,store_num,b_num; 
+	private String placename,placeaddr;
+	
+	
+	
+	
+	public String getPlacename() {
+		return placename;
+	}
+	public void setPlacename(String placename) {
+		this.placename = placename;
+	}
+	public String getPlaceaddr() {
+		return placeaddr;
+	}
+	public void setPlaceaddr(String placeaddr) {
+		this.placeaddr = placeaddr;
+	}
+
 	public String getPass() {
 		return pass;
 	}
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
-	private String tastetype,foodtype,eattype;
-	private int smile,star;
-	private Timestamp date;
-	private String storename,storeaddr,store_num,b_num; 
+	
 	
 	
 	public int getStar() {

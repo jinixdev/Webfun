@@ -91,6 +91,12 @@ function submitCheck(){
 
 }
 
+// 위치추가
+function map(){
+	window.open("map.jsp","chkpro", "width=800, height=600, resizable = no, scrollbars = no");
+ }
+
+
 </script>
 </head>
 <body>
@@ -137,8 +143,9 @@ String id = (String)session.getAttribute("id");
 %>
 <form action="fwritePro.jsp" method="post" enctype="multipart/form-data" onsubmit="return submitCheck()">
 <table border="1">
-<tr><td colspan="2">가게이름</td></tr>
-<tr><td colspan="2">주소</td></tr>
+<tr><td colspan="2"><input type="text" id="placename" name="placename">
+<input type="button" value="위치추가" class="dup" onclick="map()"></td></tr>
+<tr><td colspan="2"><input type="text" id="placeaddr" name="placeaddr"></td></tr>
 <tr><td>글 비밀번호</td><td><input type="password" name="pass"></td></tr>
 <tr><td colspan="2"><input type="file" name="file" id="file"></td></tr>
 <tr><td><%=jmb.getName()%></td></tr>
