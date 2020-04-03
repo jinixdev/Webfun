@@ -105,7 +105,7 @@ String id = (String)session.getAttribute("id");
 
 <tr><td>장소</td><td><%= gb.getPlacename() %></td></tr>
 <tr><td>주소</td><td><%= gb.getPlaceaddr() %></td></tr>
-<tr><td>내용</td><td colspan="3"><%=gb.getContent() %></td></tr>
+<tr><td>내용</td><td colspan="3" width="200px" style="word-break:break-all;" ><%=gb.getContent() %></td></tr>
 <tr><td>foodstyle</td>
 <td>
 <input name="foodstyle" type="checkbox" value="한식"  />한식
@@ -219,7 +219,7 @@ List comList= comDAO.getCommentList(p_num,category);%>
 <%-- <a href="file_down.jsp?file_name=<%=gb.getFile()%>"></a>  // download --%>
 </td><td>글쓴이</td><td><%= gb.getId() %></td>
 <td>평점</td><td><%=gb.getStar() %></td></tr>
-<tr><td>내용</td><td colspan="4"><%=gb.getContent() %></td></tr>
+<tr><td>내용</td><td colspan="4" width='250px' style="word-break:break-all;"><%=gb.getContent() %></td></tr>
 <tr><td>작성일</td><td><%= sdf.format(gb.getDate())%></td></tr>
 </table>
 </div>

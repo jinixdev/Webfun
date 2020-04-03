@@ -60,10 +60,10 @@
 
 			<form action="mailSend.jsp" method="post">
 				<h1>Contact us</h1>
-				<table>
+				<table border="1">
 					<tr>
 						<td>보내는 사람 메일 :</td>
-						<td><input type="text" name="sender"></td>
+						<td><input type="text" name="sender" style="border:none" ></td>
 					</tr>
 <!-- 					<tr> -->
 <!-- 						<td>받는 사람 메일 :</td> -->
@@ -71,11 +71,11 @@
 <!-- 					</tr> -->
 					<tr>
 						<td>제목 :</td>
-						<td><input type="text" name="subject"></td>
+						<td><input type="text" name="subject" style="border:none" ></td>
 					</tr>
 					<tr>
 						<td>내용 :</td>
-						<td><textarea name="content" cols=40 rows=20></textarea></td>
+						<td><textarea name="content" cols=40 rows=20 style="border:none" ></textarea></td>
 					</tr>
 					<tr>
 						<td align=center colspan=2><input type="submit" value="보내기"></td>
