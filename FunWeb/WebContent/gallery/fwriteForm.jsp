@@ -60,6 +60,7 @@ String id = (String)session.getAttribute("id");
 	// 
 %>
 <form action="fwritePro.jsp" method="post" enctype="multipart/form-data" onsubmit="return submitCheck()">
+
 <table border="1">
 <tr><td colspan="2"><input type="text" id="placename" name="placename">
 <input type="button" value="위치추가" class="dup" onclick="map()"></td></tr>
@@ -106,6 +107,7 @@ String id = (String)session.getAttribute("id");
 <tr><td><input type="submit" value="확인"></td></tr>
 </table>
 <input type="hidden" name="id" value="<%=jmb.getId()%>">
+<input type="hidden" name="name" value="<%=jmb.getName()%>">
 </form>
 <!-- 본문들어가는 곳 -->
 

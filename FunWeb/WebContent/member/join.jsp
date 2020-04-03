@@ -118,10 +118,27 @@
  var checkpro;
  
  function userDupCheck(){
+	 
+	 var popupWidth = 400;
+	 var popupHeight = 200;
+
+	 var popupX = (window.screen.width / 2) - (popupWidth / 2);
+	 // 만들 팝업창 width 크기의 1/2 만큼 보정값으로 빼주었음
+
+	 var popupY= (window.screen.height / 2) - (popupHeight / 2);
+	 // 만들 팝업창 height 크기의 1/2 만큼 보정값으로 빼주었음
+	 
 	 var id = document.fr.id.value;
+	 if(id!=null&&id!==""){
 // 	window.name = "checkPro";
-	checkpro=window.open("checkPro.jsp?id="+id,"chkpro", "width=500, height=300, resizable = no, scrollbars = no");
+	window.open("checkPro.jsp?id="+id,"중복확인창",'height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY, "resizable = no, scrollbars = no");
+	
+	 }else{
+		 alert("중복확인 할 아이디를 입력해주십시오.");
+	 }
+	
  }
+ 
  
  function iduncheck(){
 	 document.getElementById("idDuplication").value ="idUncheck";
@@ -236,10 +253,8 @@
     }
 </script>
 
-<label>Phone Number</label>
-<input type="text" name="phone"><br>
-<label>Mobile Phone Number</label>
-<input type="text" name="mobile"><br>
+
+
 </fieldset>
 <div class="clear"></div>
 <div id="buttons">

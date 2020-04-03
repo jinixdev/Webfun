@@ -1,5 +1,7 @@
-<%@page import="board.BoardBean"%>
-<%@page import="board.BoardDAO"%>
+<%@page import="java.sql.Timestamp"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="gallery.galleryBean"%>
+<%@page import="gallery.galleryDAO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -32,16 +34,16 @@
 <article>
 <h1>My list</h1>
 <%
-String category ="board";
+String category ="gallery";
 request.setCharacterEncoding("UTF-8");
 String name = request.getParameter("name");
 String id = (String)session.getAttribute("id");
 
-BoardDAO jbDAO= new BoardDAO();
+galleryDAO gDAO = new galleryDAO();
 
 // paging
-int count = jbDAO.getBoardCount_mylst(id);
-int pageSize =10;
+int count = gDAO.getBoardCount_mylst(id);
+int pageSize =5;
 String pageNum = request.getParameter("pageNum");
 //현 페이지 번호가 없으면 "1"페이지로 설정
 if(pageNum==null){ // 현페이지 번호가 없으면
@@ -62,24 +64,30 @@ int startRow= (currentPage-1)*pageSize+1;
 //			3				10		=>		30
 int endRow = currentPage*pageSize;
 
+galleryBean gb = new galleryBean();
+List contentList = gDAO.getboardList_mylst(startRow,pageSize,id);
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+Timestamp nowtime = new Timestamp(System.currentTimeMillis());
+SimpleDateFormat time = new SimpleDateFormat("hh:mm");%>
 
-List boardlist = jbDAO.getboardList_mylst(startRow,pageSize,id);
-%>
-
-<table border="1">
-<tr><td>글번호</td><td>조회수</td><td>글쓴이</td><td>비밀번호</td><td>제목</td><td>내용</td><td>작성날짜</td></tr>
-<%
-for(int i =0;i<boardlist.size();i++){
-	BoardBean jbb = (BoardBean)boardlist.get(i);%>
-	<tr><td><%=jbb.getNum() %></td><td><%=jbb.getReadcount() %></td>
-	<td><%=jbb.getName() %></td><td><%=jbb.getPass() %></td>
-	<td><a href="content.jsp?num=<%=jbb.getNum()%>"><%= jbb.getSubject() %></a></td>
-	<td><%=jbb.getContent() %></td><td><%=jbb.getDate()%></td>
-	</tr>
-<%} %>
-<tr><td><input type="button" value="글작성" onclick="location.href='writeForm.jsp'"></td></tr>
-
+<% for(int i=0;i<contentList.size();i++){
+	gb = (galleryBean)contentList.get(i);
+	%>
+	<hr>
+<div onclick="location.href='../gallery/content.jsp?num=<%=gb.getNum()%>'">
+<table>
+<tr><td rowspan="3">
+<%-- <a href="../upload/<%=gb.getFile()%>"><%=gb.getFile()%></a> --%> 
+<a href="" ></a><img src="../upload/<%=gb.getFile()%>" width="100" height="100"></a>
+<%-- <a href="file_down.jsp?file_name=<%=gb.getFile()%>"></a>  // download --%>
+</td><td>글쓴이</td><td><%= gb.getId() %></td>
+<td>평점</td><td><%=gb.getStar() %></td></tr>
+<tr><td>내용</td><td colspan="4" width='250px' style="word-break:break-all;"><%=gb.getContent() %></td></tr>
+<tr><td>작성일</td><td><%= sdf.format(gb.getDate())%></td></tr>
 </table>
+</div>
+
+<%} %>
 
 <br>
 		<%// 한 화면에 보여줄 페이지 개수

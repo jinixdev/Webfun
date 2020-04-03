@@ -92,11 +92,9 @@ String id = (String)session.getAttribute("id");
 
 <input type="hidden" id="foodtypes" value=<%=gb.getFoodtype()%>>
 
-
-
 <table>
 <tr><td>글번호</td><td><%= gb.getNum() %></td></tr>
-<tr><td>글쓴이</td><td><%= gb.getId() %></td></tr>
+<tr><td>글쓴이</td><td><%= gb.getName() %></td></tr>
 <tr><td colspan="2">
 <%-- <a href="../upload/<%=gb.getFile()%>"><%=gb.getFile()%></a> --%> 
 <img src="../upload/<%=gb.getFile()%>" width="300" height="300">
@@ -117,13 +115,16 @@ String id = (String)session.getAttribute("id");
 <tr><td>평점</td><td><%=gb.getStar() %></td></tr>
 
 <tr><td colspan="4">
-<input type="button" value="글목록" onclick="location.href='../center/notice.jsp?pageNum=<%=pageNum%>'">
+<%-- <input type="button" value="글목록" onclick="location.href='../center/notice.jsp?pageNum=<%=pageNum%>'"> --%>
 <%if(gb.getId().equals(id)){%>
 <input type="button" value="글수정" onclick="location.href='fupdateForm.jsp?num=<%=gb.getNum()%>&pageNum=<%=pageNum%>'">
 <input type="button" value="글삭제" onclick="showhide();">
 <%}%>
 </td></tr>
 </table>
+
+
+
 
 <!-- delete code -->
 <div id="showtable" style="display:none;">

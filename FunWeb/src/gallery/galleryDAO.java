@@ -46,7 +46,7 @@ private Connection getConnection() throws Exception{
 			 }
 			 if(pre!=null) try{pre.close();}catch(SQLException ex) {}
 
-			sql = "insert into g_board(num,id,img,content,date,foodtype,pass,placename,placeaddr,star) values(?,?,?,?,?,?,?,?,?,?)";
+			sql = "insert into g_board(num,id,img,content,date,foodtype,pass,placename,placeaddr,star,name) values(?,?,?,?,?,?,?,?,?,?,?)";
 			pre = con.prepareStatement(sql);
 			pre.setInt(1, num);
 			pre.setString(2, gb.getId());
@@ -58,7 +58,7 @@ private Connection getConnection() throws Exception{
 			pre.setString(8, gb.getPlacename());
 			pre.setString(9, gb.getPlaceaddr());
 			pre.setString(10, gb.getStar());
-			
+			pre.setString(11, gb.getName());
 			
 
 			pre.executeUpdate();
@@ -100,6 +100,7 @@ private Connection getConnection() throws Exception{
 				gb.setDate(rs.getTimestamp("date"));
 				gb.setFile(rs.getString("img"));
 				gb.setId(rs.getString("id"));
+				gb.setName(rs.getString("name"));
 				gb.setPlacename(rs.getString("placename"));
 				gb.setPlaceaddr(rs.getString("placeaddr"));
 				 
@@ -140,6 +141,7 @@ private Connection getConnection() throws Exception{
 			 if(rs.next()) {
 				 gb.setNum(rs.getInt("num"));
 				 gb.setId(rs.getString("id"));
+				 gb.setName(rs.getString("name"));
 				 gb.setContent(rs.getString("content"));
 				 gb.setDate(rs.getTimestamp("date"));
 				 gb.setFile(rs.getString("img"));
@@ -184,10 +186,11 @@ private Connection getConnection() throws Exception{
 				galleryBean gb = new galleryBean();
 				//String s = new SimpleDateFormat("yyyy-MM-dd").format(rs.getTimestamp("date"));
 				gb.setNum(rs.getInt("num"));
+				gb.setId(rs.getString("id"));
 				gb.setContent(rs.getString("content"));
 				gb.setDate(rs.getTimestamp("date"));
 				gb.setFile(rs.getString("img"));
-				gb.setId(rs.getString("id"));
+				gb.setName(rs.getString("name"));
 				gb.setPlacename(rs.getString("placename"));
 				gb.setPlaceaddr(rs.getString("placeaddr"));
 				gb.setStar(rs.getString("star"));
@@ -216,11 +219,15 @@ private Connection getConnection() throws Exception{
 		
 		try {
 			con = getConnection();
-			String sql="update g_board set img=?,content=? where num=?";
+			String sql="update g_board set img=?,content=?,placename=?,placeaddr=?,foodtype=?,star=? where num=?";
 			pre = con.prepareStatement(sql);
 			pre.setString(1, gb.getFile());
 			pre.setString(2, gb.getContent());
-			pre.setInt(3, num);
+			pre.setString(3, gb.getPlacename());
+			pre.setString(4, gb.getPlaceaddr());
+			pre.setString(5, gb.getFoodtype());
+			pre.setString(6, gb.getStar());
+			pre.setInt(7, num);
 			
 			pre.executeUpdate();
 			
@@ -231,6 +238,8 @@ private Connection getConnection() throws Exception{
 			if(con!=null) try {con.close();}catch(SQLException ex) {}
 		}
 	}//updateBoard
+	
+	
 	
 	public int passCheck(int num,String pass) {
 		int check =0;
@@ -353,6 +362,80 @@ private Connection getConnection() throws Exception{
 	}//getPlaceCount
 	
 	
+	// 내글 가져오기
+		public List getboardList_mylst(int startRow,int pageSize,String id) {
+			List jbblist = new ArrayList();
+			ResultSet rs=null;
+			PreparedStatement pre=null;
+			Connection con=null;
+			
+			try {
+				
+				con = getConnection();
+
+				 String sql = "select * from g_board where id=? order by num desc limit ?,?";
+				 pre = con.prepareStatement(sql); 
+				 pre.setString(1, id);
+				 pre.setInt(2, startRow-1); //startRow 시작을 포함하지 않기때문에 -1
+				 pre.setInt(3, pageSize);
+				 
+				 rs= pre.executeQuery();
+				 while(rs.next()) {
+					 galleryBean gb = new galleryBean();
+//					 String s = new SimpleDateFormat("yyyy-MM-dd").format(rs.getTimestamp("date"));
+					gb.setNum(rs.getInt("num"));
+					gb.setId(rs.getString("id"));
+					gb.setContent(rs.getString("content"));
+					gb.setDate(rs.getTimestamp("date"));
+					gb.setFile(rs.getString("img"));
+					gb.setName(rs.getString("name"));
+					gb.setPlacename(rs.getString("placename"));
+					gb.setPlaceaddr(rs.getString("placeaddr"));
+					gb.setStar(rs.getString("star"));
+					 
+					 jbblist.add(gb);
+				 }
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally{
+				if(rs!=null) try {rs.close();}catch(SQLException ex) {}
+				if(pre!=null) try{pre.close();}catch(SQLException ex) {}
+				if(con!=null) try {con.close();}catch(SQLException ex) {}
+			}
+			
+			return jbblist;
+		}//getboardList(String id)
+		
+	
+		// 내글 카운트
+		public int getBoardCount_mylst(String id) {
+			int count=0;
+			ResultSet rs=null;
+			PreparedStatement pre=null;
+			Connection con=null;
+			
+			try {
+				con = getConnection();
+				String sql="select count(num) from g_board where id=?";
+				pre = con.prepareStatement(sql);
+				pre.setString(1, id);
+				rs= pre.executeQuery();
+				if(rs.next()) {
+					count = rs.getInt("count(num)"); 
+				 }
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally{
+				if(rs!=null) try {rs.close();}catch(SQLException ex) {}
+				if(pre!=null) try{pre.close();}catch(SQLException ex) {}
+				if(con!=null) try {con.close();}catch(SQLException ex) {}
+			}
+			
+			return count;
+			
+			
+		}//getBoardCount(String id)
 	
 	
 	

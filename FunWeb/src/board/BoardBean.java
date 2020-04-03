@@ -4,9 +4,20 @@ import java.sql.Timestamp;
 
 public class BoardBean {
 	
-	private String name,pass,subject,content,id,file;
+	private String name,pass,subject,content,id,file,category;
 	
 	
+	
+	
+	
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
 	public String getFile() {
 		return file;
 	}

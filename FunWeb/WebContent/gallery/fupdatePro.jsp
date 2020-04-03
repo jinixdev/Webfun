@@ -25,13 +25,48 @@ int num = Integer.parseInt(multi.getParameter("num"));
 System.out.print("writepro : "+multi.getParameter("content"));
 
 galleryBean gb = new galleryBean();
-String file = multi.getFilesystemName("file");
-gb.setFile(file);
+gb.setName(multi.getParameter("name"));
 gb.setContent(multi.getParameter("content"));
+gb.setTastetype(multi.getParameter("hot"));
+gb.setPass(multi.getParameter("pass"));
+gb.setPlacename(multi.getParameter("placename"));
+gb.setPlaceaddr(multi.getParameter("placeaddr"));
+
+
+// 폴더에 업로드 된 파일이름
+String file = multi.getFilesystemName("file");
+//BoardBean에 file 추가
+gb.setFile(file);
+
+// foodstyle
+String foodstyles[] = multi.getParameterValues("foodstyle");
+ 
+String foodstyle = String.join(",",foodstyles);
+
+// String foodstyle="";
+// for(String s:foodstyles){
+// // 	foodstyle += s+",";
+// 	String.join(",",foodstyles);
+// }
+
+System.out.println("foodstyle : "+foodstyle);
+gb.setFoodtype(foodstyle);
+
+String star = multi.getParameter("starValue");
+System.out.print("starValue : "+star);
+gb.setStar(star);
+
+
+
+
+
+
+
+
 galleryDAO gDAO = new galleryDAO();
 gDAO.updateBoard(num, gb); 
 
-response.sendRedirect("../center/gallery.jsp");
+response.sendRedirect("../center/gallery.jsp?num="+num);
 
 %>
 </body>

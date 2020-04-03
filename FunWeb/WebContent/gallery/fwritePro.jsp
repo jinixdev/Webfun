@@ -33,6 +33,7 @@ MultipartRequest multi = new MultipartRequest(request,uploadPath,maxSize,"utf-8"
 galleryBean gb = new galleryBean();
 System.out.print("writepro : "+multi.getParameter("content"));
 gb.setId(multi.getParameter("id"));
+gb.setName(multi.getParameter("name"));
 gb.setContent(multi.getParameter("content"));
 gb.setTastetype(multi.getParameter("hot"));
 gb.setPass(multi.getParameter("pass"));
@@ -51,7 +52,6 @@ gb.setFile(file);
 // foodstyle
 String foodstyles[] = multi.getParameterValues("foodstyle");
  
-System.out.println(String.join(",",foodstyles));
 String foodstyle = String.join(",",foodstyles);
 
 // String foodstyle="";

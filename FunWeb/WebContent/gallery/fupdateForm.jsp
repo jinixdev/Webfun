@@ -18,8 +18,41 @@ function submitCheck(){
 		document.getElementById("file").focus();
 		return false; //
 	}
+	
+	if(document.getElementById("starValue").value==""||document.getElementById("starValue").value==null){
+		alert("별점을 등록해주세요");
+		document.getElementById("starValue").focus();
+		return false; //
+	}
+	
+	
+	
+	
+	
 }
 
+	
+window.addEventListener('DOMContentLoaded', function(){
+	
+    
+//  checkbox
+	var foodtype = document.getElementById("foodtypes").value;
+
+	var food = document.getElementsByName("foodstyle");
+		
+
+		for (var i = 0; i < food.length; i++) {
+			if (foodtype.indexOf(food[i].value)==-1) {
+				food[i].checked = false;
+			} else {
+				food[i].checked = true;
+			}
+		}
+		
+		
+		
+
+	})
 
 </script>
 <script src="gallery.js"></script>
@@ -58,28 +91,33 @@ int p_num = Integer.parseInt(request.getParameter("num"));
 galleryDAO gDAO= new galleryDAO();
 galleryBean gb= gDAO.getboardContent(p_num);
 %>
+<input type="hidden" id="foodtypes" value=<%=gb.getFoodtype()%>>
 <form action="fupdatePro.jsp" method="post" enctype="multipart/form-data" onsubmit="return submitCheck()">
 <table >
 
 <tr><td>글번호</td><td><%=gb.getNum()%></td></tr>
 <tr><td>작성일</td><td><%=gb.getDate() %></td></tr>
+<tr><td colspan="2"><input type="text" id="placename" name="placename" value="<%=gb.getPlacename()%>">
+<input type="button" value="위치추가" class="dup" onclick="map()"></td></tr>
+<tr><td colspan="2"><input type="text" id="placeaddr" name="placeaddr" style="width:300px;"
+value="<%=gb.getPlaceaddr()%>"></td></tr>
 <tr><td>글 비밀번호</td><td><input type="password" name="pass"></td></tr>
-<tr><td>장소</td><td><input type="text" name="placename" value="<%=gb.getPlacename()%>"></td></tr>
-<tr><td>주소</td><td><input type="text" name="placeaddr" value="<%=gb.getPlaceaddr()%>"></td></tr>
-<tr><td>내용</td><td colspan="3"><input type="text" name="content" value="<%=gb.getContent() %>"></td></tr>
-<tr><td>파일</td><td colspan="3" >
-<%-- <a href="../upload/<%=gb.getFile()%>"><%=gb.getFile()%></a> --%>
-<img src="../upload/<%=gb.getFile()%>" width="100" height="100"></td></tr>
 <tr><td colspan="2"><input type="file" name="file" id="file" value="<%=gb.getFile()%>"></td></tr>
-<tr><td>foodstyle</td>
-<td>
-<input name="foodstyle" type="checkbox" value="한식" />한식
-<input name="foodstyle" type="checkbox" value="중식" />중식
-<input name="foodstyle" type="checkbox" value="양식" />양식
-<input name="foodstyle" type="checkbox" value="일식" />일식
-<input name="foodstyle" type="checkbox" value="기타" />기타
-</td></tr>
-<tr><td>별점</td><td>
+<tr><td colspan="2"><textarea name="content" rows="10" cols="20" ><%=gb.getContent() %></textarea></td></tr>
+<tr><td>tastetype</td><td>
+<input type="button" onclick="showrating('hot');" value="hot">
+<div id="hot" style="display:none;">
+<p id="hot_grade" >
+       <img id=hot1 onmouseover="show('hot',1)" onclick="mark('hot',1)" onmouseout="noshow('hot',1)" src="../css/pic/hot0.png">
+       <img id=hot2 onmouseover="show('hot',2)" onclick="mark('hot',2)" onmouseout="noshow('hot',2)" src="../css/pic/hot0.png">
+       <img id=hot3 onmouseover="show('hot',3)" onclick="mark('hot',3)" onmouseout="noshow('hot',3)" src="../css/pic/hot0.png">
+       <img id=hot4 onmouseover="show('hot',4)" onclick="mark('hot',4)" onmouseout="noshow('hot',4)" src="../css/pic/hot0.png">
+       <img id=hot5 onmouseover="show('hot',5)" onclick="mark('hot',5)" onmouseout="noshow('hot',5)" src="../css/pic/hot0.png">
+       <span id="hottext">평가하기</span>
+</p>
+<input type="hidden" id="hot" value="uncheck">
+</div>
+<div id="star">
 <span id="star_grade" >
        <img id=star1 onmouseover="show('star',1)" onclick="mark('star',1)" onmouseout="noshow('star',1)" src="../css/pic/star0.png">
        <img id=star2 onmouseover="show('star',2)" onclick="mark('star',2)" onmouseout="noshow('star',2)" src="../css/pic/star0.png">
@@ -88,13 +126,23 @@ galleryBean gb= gDAO.getboardContent(p_num);
        <img id=star5 onmouseover="show('star',5)" onclick="mark('star',5)" onmouseout="noshow('star',5)" src="../css/pic/star0.png">
        <span id="startext">평가하기</span>
 </span>
-<input type="hidden" id="star">
-<td>
+<input type="hidden" id="starValue" name="starValue" value="<%=gb.getStar()%>">
+</div>
+
+
+</td></tr>
+<tr><td>foodtype</td>
+<td><input name="foodstyle" type="checkbox" value="한식" />한식
+<input name="foodstyle" type="checkbox" value="중식" />중식
+<input name="foodstyle" type="checkbox" value="양식" />양식
+<input name="foodstyle" type="checkbox" value="일식" />일식
+<input name="foodstyle" type="checkbox" value="기타" />기타
+</td>
 </tr>
-<tr><td colspan="4"> <input type="submit" value="확인">
-<input type="button" value="취소" onclick="location.href='../center/notice.jsp'"></td></tr>
-	
+<tr><td><input type="submit" value="확인"></td></tr>
 </table>
+<input type="hidden" name="name" value="<%=gb.getName()%>">
+<input type="hidden" name="num" value="<%=gb.getNum()%>">
 </form>
 
 </article>

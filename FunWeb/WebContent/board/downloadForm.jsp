@@ -74,11 +74,12 @@ String id = (String)session.getAttribute("id");
 <tr><td>비밀번호</td><td><input type="text" name="pass"></td></tr>
 <tr><td>제목</td><td><input type="text" name="subject"></td></tr>
 <tr><td>내용</td><td><textarea name="content" rows="10" cols="20"></textarea></td></tr>
+<tr><td colspan="2"><input type="file" name="file" id="file"></td></tr>
 <tr><td><input type="submit" value="확인"></td>
 <td><input type="button" value="취소" onclick="history.back()"></td></tr>
 
 </table>
-<input type="hidden" name="category" value="board">
+<input type="hidden" name="category" value="download">
 </form>
 
 		</article>

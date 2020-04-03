@@ -28,6 +28,7 @@ if(check ==1){
 <%}else{%>
 	<script type="text/javascript">
 	alert("비밀번호를 다시 입력해주십시오.");
+	history.back();
 	</script>
 	<%} %>
 </body>

@@ -46,7 +46,7 @@
 <article>
 <h1>Notice</h1>
 <%
-String category ="board";
+String category ="download";
 request.setCharacterEncoding("UTF-8");
 BoardDAO jbDAO= new BoardDAO();
 // 게시판 글개수를 호출 getBoardCount() count() 

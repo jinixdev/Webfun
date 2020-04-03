@@ -45,9 +45,9 @@ public class BoardDAO {
 			 rs= pre.executeQuery();
 			 
 			 if(rs.next()) { num = rs.getInt("max(num)")+1; }
-			 
+				if(pre!=null) try{pre.close();}catch(SQLException ex) {}
 
-			sql = "insert into board(name,pass,subject,content,num,readcount,date,id,file) values(?,?,?,?,?,?,?,?,?)";
+			sql = "insert into board(name,pass,subject,content,num,readcount,date,id,file,category) values(?,?,?,?,?,?,?,?,?,?)";
 			pre = con.prepareStatement(sql);
 			pre.setString(1, bb.getName());
 			pre.setString(2, bb.getPass());
@@ -58,6 +58,7 @@ public class BoardDAO {
 			pre.setTimestamp(7, bb.getDate());
 			pre.setString(8, bb.getId());
 			pre.setString(9, bb.getFile());
+			pre.setString(10,bb.getCategory());
 
 			pre.executeUpdate();
 
@@ -116,7 +117,8 @@ public class BoardDAO {
 		return jbblist;
 	}//getboardList
 	
-	public List getboardList(String name) {
+	// 내글 가져오기
+	public List getboardList_mylst(int startRow,int pageSize,String id) {
 		List jbblist = new ArrayList();
 		ResultSet rs=null;
 		PreparedStatement pre=null;
@@ -126,9 +128,12 @@ public class BoardDAO {
 			
 			con = getConnection();
 
-			 String sql = "select * from board where name=? order by num desc";
+			 String sql = "select * from board where id=? order by num desc limit ?,?";
 			 pre = con.prepareStatement(sql); 
-			 pre.setString(1, name);
+			 pre.setString(1, id);
+			 pre.setInt(2, startRow-1); //startRow 시작을 포함하지 않기때문에 -1
+			 pre.setInt(3, pageSize);
+			 
 			 rs= pre.executeQuery();
 			 while(rs.next()) {
 				 BoardBean jbb = new BoardBean();
@@ -304,6 +309,41 @@ public class BoardDAO {
 		
 		
 	}//getBoardCount
+	
+	// 내글 카운트
+	public int getBoardCount_mylst(String id) {
+		int count=0;
+		ResultSet rs=null;
+		PreparedStatement pre=null;
+		Connection con=null;
+		
+		try {
+			con = getConnection();
+			String sql="select count(num) from board where id=?";
+			pre = con.prepareStatement(sql);
+			pre.setString(1, id);
+			rs= pre.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt("count(num)"); 
+			 }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			if(rs!=null) try {rs.close();}catch(SQLException ex) {}
+			if(pre!=null) try{pre.close();}catch(SQLException ex) {}
+			if(con!=null) try {con.close();}catch(SQLException ex) {}
+		}
+		
+		return count;
+		
+		
+	}//getBoardCount(String id)
+	
+	
+	
+	
+	
+	
 	
 	public int getBoardCommentCount(int p_num,String category) {
 		int count=0;
