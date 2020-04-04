@@ -10,4 +10,5 @@ Fax +82 64 123 4321</div>
 height="33" alt="Facebook">
 <img src="../images/twitter.gif" width="34" height="34"
 alt="Twitter"></div>
+
 </footer>

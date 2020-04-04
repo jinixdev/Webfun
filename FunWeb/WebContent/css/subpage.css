@@ -48,10 +48,30 @@ figcaption{text-align: center;color:#39F }
 /*글자정렬 가운데 글자색 #39F*/
 .clear{clear: both;}
 /*------------------*/
-#sub_img_center{width: 971px;height: 179px;
-background-image: url("../images/center/sub_back.png");
+#sub_img_gallery{width: 971px;height: 179px;
+background-image: url("../css/pic/info.jpg");
+background-size: cover;
 background-repeat: no-repeat;
-background-position: left top;}
+background-position: left top;
+margin: 10px 0 10px 0;}
+#sub_img_gallery{width: 971px;height: 179px;
+background-image: url("../css/pic/place1.jpg");
+background-size: cover;
+background-repeat: no-repeat;
+background-position: left top;
+margin: 10px 0 10px 0;}
+#sub_img_notice{width: 971px;height: 179px;
+background-image: url("../css/pic/community.jpg");
+background-size: cover;
+background-repeat: no-repeat;
+background-position: left top;
+margin: 10px 0 10px 0;}
+#sub_img_contact{width: 971px;height: 179px;
+background-image: url("../css/pic/contact.jpg");
+background-size: cover;
+background-repeat: no-repeat;
+background-position: left top;
+margin: 10px 0 10px 0;}
 /*너비 971 높이179 
 배경이미지 images/center/sub_back.png
 반복 no 위치left top */
@@ -88,9 +108,9 @@ border-bottom-left-radius:5px;
 왼쪽위 둥글게5px 왼쪽아래 둥글게5px*/
 article th.ttitle{width: 400px; letter-spacing: 0.7em}
 /*너비 400px 문자간격 0.7em*/
-article th.twrite{width: 100px;}
+article th.twrite{width: 80px;}
 /*너비 100px*/
-article th.tdate{width: 50px;}
+article th.tdate{width: 70px;}
 /*너비 50px*/
 article th.tread{width: 50px;
 border-top-right-radius:5px;
@@ -101,8 +121,10 @@ article #table_search{margin: 15px 0 10px 0;
 float: right;}
 /*밖여백 15px 0 10px 0 정렬 right*/
 #table_search .input_box{height: 20px; width: 200px;
-border-radius:10px;background-color: #FEFDED;
-border: 1px solid #333}
+border-radius:10px;
+/*  text-decoration: underline; */
+/* border: 1px solid #333 */
+}
 /*높이 20px 너비 200px
 테두리 1px solid #333 테두리둥글게 10px 배경색#FEFDED*/
 #table_search .btn{padding: 2px;margin: 0 0 0 5px;
@@ -132,7 +154,8 @@ cursor: pointer;cursor: hand;}
 커서 pointer 커서 hand*/
 /*------------------*/
 #sub_img_member{width: 971px;height: 179px;
-background-image: url("../images/member/sub_back.png");
+background-image: url("../css/pic/place1.jpg");
+background-size: cover;
 background-repeat: no-repeat;
 background-position: left top;}
 form#join {margin:10px 0 0 0; width: 670px}
@@ -148,10 +171,9 @@ width: 600px; padding: 5px 0;}
 form#join label{width: 140px;float: left;
 margin: 5px 0}
 /*너비 140px 정렬 왼쪽 밖여백 5px 0*/
-form#join input{margin: 5px 0; border: 1px solid #999;
-background-color:#FCFDEA }
 /*밖여백 5px 0 테두리 1px solid #999
 배경색 #FCFDEA*/
+form#join input{margin: 5px 0;  }
 form#join input.id{width: 100px;
 height: 18px;}/*너비 100px 높이 18px*/
 form#join input.dup{width: 120px; height: 23px;

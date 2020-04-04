@@ -1,6 +1,6 @@
+<%@page import="board.BoardDAO"%>
+<%@page import="board.BoardBean"%>
 <%@page import="java.sql.Timestamp"%>
-<%@page import="jboard.JBoardDAO"%>
-<%@page import="jboard.JBoardBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,17 +17,18 @@ String pass = request.getParameter("pass");
 String subject = request.getParameter("subject");
 String content = request.getParameter("content"); */
 
-JBoardBean jbb = new JBoardBean();
+BoardBean jbb = new BoardBean();
 System.out.print("writepro : "+request.getParameter("content"));
+jbb.setId(request.getParameter("id"));
 jbb.setName(request.getParameter("name"));
 jbb.setPass(request.getParameter("pass"));
 jbb.setSubject(request.getParameter("subject"));
 jbb.setContent(request.getParameter("content"));
-
+jbb.setCategory(request.getParameter("category"));
 Timestamp date = new Timestamp(System.currentTimeMillis());
 jbb.setDate(date);
 
-JBoardDAO jbDAO = new JBoardDAO();
+BoardDAO jbDAO = new BoardDAO();
 
 jbDAO.write(jbb);
 

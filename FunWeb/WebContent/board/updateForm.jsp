@@ -1,5 +1,5 @@
-<%@page import="jboard.JBoardBean"%>
-<%@page import="jboard.JBoardDAO"%>
+<%@page import="board.BoardBean"%>
+<%@page import="board.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -9,13 +9,32 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div id="wrap">
+<!-- 헤더들어가는 곳 -->
+<jsp:include page="../inc/top.jsp"></jsp:include>
+<!-- 헤더들어가는 곳 -->
+
+<!-- 본문들어가는 곳 -->
+<!-- 메인이미지 -->
+<div id="sub_img_notice"></div>
+<!-- 메인이미지 -->
+
+<!-- 왼쪽메뉴 -->
+<jsp:include page="../inc/notice_sub_menu.jsp"></jsp:include>
+<!-- 왼쪽메뉴 -->
+
+<!-- 게시판 -->
+<article>
+
+
 <%
+String category ="board";
 int num = Integer.parseInt(request.getParameter("num"));
-JBoardDAO jbDAO= new JBoardDAO();
-JBoardBean jbb= jbDAO.getboardContent(num);
+BoardDAO jbDAO= new BoardDAO();
+BoardBean jbb= jbDAO.getboardContent(num);
 %>
 <form action="updatePro.jsp" method="post">
-<table border="1">
+<table>
 
 <tr><td>글번호</td><td><input type="text" name="num" readonly="readonly" value="<%=jbb.getNum()%>"></td></tr>
 <tr><td>작성일</td><td><%=jbb.getDate() %></td></tr>
@@ -23,11 +42,19 @@ JBoardBean jbb= jbDAO.getboardContent(num);
 <tr><td>조회수</td><td><%=jbb.getReadcount() %></td></tr>
 <tr><td>제목</td><td colspan="3"><input type="text" name="subject" value="<%=jbb.getSubject() %>"></td></tr>
 <tr><td>내용</td><td colspan="3"><input type="text" name="content" value="<%=jbb.getContent() %>"></td></tr>
-<tr><td>내용2</td><td colspan="3"><input type="text" name="content2"></td></tr>
 <tr><td colspan="4"> <input type="submit" value="확인">
 <input type="button" value="취소" onclick="location.href='../center/notice.jsp'"></td></tr>
 	
 </table>
 </form>
+
+</article>
+<!-- 게시판 -->
+<!-- 본문들어가는 곳 -->
+<div class="clear"></div>
+<!-- 헤더들어가는 곳 -->
+<jsp:include page="../inc/bottom.jsp"></jsp:include>
+<!-- 헤더들어가는 곳 -->
+</div>
 </body>
 </html>

@@ -28,11 +28,14 @@ mb.setDetailAddress(request.getParameter("detailAddress"));
 mb.setExtraAddress(request.getParameter("extraAddress"));
 mb.setReg_date(reg_date);
 
+String REMOTE_ADDR = request.getRemoteAddr();
+mb.setIp(REMOTE_ADDR);
+
 MemberDAO mDAO = new MemberDAO();
 mDAO.insertMember(mb);
 %>
 <script type="text/javascript">
-alert("어서오세요! 가입을 축하합니다!");
+alert("가입을 축하합니다!");
 location.href="../main/main.jsp";
 </script>
 </body>

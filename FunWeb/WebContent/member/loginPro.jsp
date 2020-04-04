@@ -14,16 +14,19 @@ request.setCharacterEncoding("utf-8");
 //request 파라미터값 가져와서 변수에저장
 
 MemberBean mb = new MemberBean();
-mb.setId(request.getParameter("id"));
+String id = request.getParameter("id");
+mb.setId(id);
 mb.setPass(request.getParameter("pass"));
 
 MemberDAO mDAO = new MemberDAO();
 int check = mDAO.userCheck(mb);
 
 if(check ==1){
-session.setAttribute("id", request.getParameter("id"));%>
+mb = mDAO.getMember(id);
+session.setAttribute("id", mb.getId());
+session.setAttribute("name", mb.getName());%>
 <script type="text/javascript">
-alert("환영합니다");
+alert("<%=id%>님 환영합니다");
 location.href="../main/main.jsp";
 </script>
 <%

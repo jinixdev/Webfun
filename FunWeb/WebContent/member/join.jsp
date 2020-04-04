@@ -28,7 +28,7 @@
  <script type="text/javascript">
 
  function submitCheck(){
-		if(document.getElementById("id").value==""){
+		if(document.getElementById("id").value==null){
 			alert("아이디를 입력하세요");
 			document.fr.id.focus();
 			return false; //
@@ -88,11 +88,12 @@
 			 		document.getElementById("passsame").innerHTML="<font color=green>비밀번호가 일치합니다.</font>";
 			 	}else{
 					document.getElementById("passsame").innerHTML="<font color=red>비밀번호가 일치하지 않습니다.</font>";
+					document.getElementById("passDuplication").value ="passUncheck";
 		 		}
 			 }
 	 }else{
 		 document.getElementById("passcheck").innerHTML="<font color=red>비밀번호를 4자이상 입력해 주십시오.</font>";
-		 
+		 document.getElementById("passDuplication").value ="passUncheck";
 	 }
 	 
 	
@@ -106,6 +107,7 @@
 		 document.getElementById("emailsame").innerHTML="<font color=green>일치합니다.</font>";
 		 }else{
 		 document.getElementById("emailsame").innerHTML="<font color=red>이메일이 일치하지 않습니다.</font>";
+		 document.getElementById("emailDuplication").value ="emailUncheck";
 		 }
 	 }
 	 
@@ -116,16 +118,42 @@
  var checkpro;
  
  function userDupCheck(){
+	 
+	 var popupWidth = 400;
+	 var popupHeight = 200;
+
+	 var popupX = (window.screen.width / 2) - (popupWidth / 2);
+	 // 만들 팝업창 width 크기의 1/2 만큼 보정값으로 빼주었음
+
+	 var popupY= (window.screen.height / 2) - (popupHeight / 2);
+	 // 만들 팝업창 height 크기의 1/2 만큼 보정값으로 빼주었음
+	 
 	 var id = document.fr.id.value;
+	 if(id!=null&&id!==""){
 // 	window.name = "checkPro";
-	checkpro=window.open("checkPro.jsp?id="+id,"chkpro", "width=500, height=300, resizable = no, scrollbars = no");
+	window.open("checkPro.jsp?id="+id,"중복확인창",'height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY, "resizable = no, scrollbars = no");
+	
+	 }else{
+		 alert("중복확인 할 아이디를 입력해주십시오.");
+	 }
+	
  }
  
  
+ function iduncheck(){
+	 document.getElementById("idDuplication").value ="idUncheck";
+ }
  
 
 
 </script>
+<style>
+input {
+        border-style:none;
+        border-bottom:solid 1px #cacaca;
+        border-collapse:collapse;
+}
+</style>
  
 </head>
 <body>
@@ -137,7 +165,7 @@
 
 <!-- 본문들어가는 곳 -->
 <!-- 본문메인이미지 -->
-<div id="sub_img_member"></div>
+<div id="sub_img_info"></div>
 <!-- 본문메인이미지 -->
 
 <!-- 왼쪽메뉴 -->
@@ -152,7 +180,7 @@
 <fieldset>
 <legend>Basic Info</legend>
 <label>*User ID</label>
-<input type="text" name="id" class="id" id="id">
+<input type="text" name="id" class="id" id="id" onkeydown="iduncheck()">
 <input type="button" value="dup. check" class="dup" onclick="userDupCheck()"><br>
 <input type="hidden" name="idDuplication" id="idDuplication" value="idUncheck" ><br>
 
@@ -163,7 +191,7 @@
 <label>Retype Password</label>
 <input type="password" id="pass2" name="pass2" onkeyup="retype()"> <span id="passsame"></span>
 <input type="hidden"  id="passDuplication" value="passUncheck" ><br>
-<label>**Name</label>
+<label>*Name</label>
 <input type="text" id="name" name="name"><br>
 <label>E-Mail</label>
 <input type="email" id="email" name="email" onkeyup="retype()"><br>
@@ -232,10 +260,8 @@
     }
 </script>
 
-<label>Phone Number</label>
-<input type="text" name="phone"><br>
-<label>Mobile Phone Number</label>
-<input type="text" name="mobile"><br>
+
+
 </fieldset>
 <div class="clear"></div>
 <div id="buttons">

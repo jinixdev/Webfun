@@ -1,11 +1,43 @@
-package jboard;
+package board;
 
 import java.sql.Timestamp;
 
-public class JBoardBean {
+public class BoardBean {
 	
-	private String name,pass,subject,content;
+	private String name,pass,subject,content,id,file,category;
+	
+	
+	
+	
+	
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getFile() {
+		return file;
+	}
+
+	public void setFile(String file) {
+		this.file = file;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+
 	private Timestamp date;
+
+
 
 	public Timestamp getDate() {
 		return date;
@@ -14,6 +46,11 @@ public class JBoardBean {
 	public void setDate(Timestamp date) {
 		this.date = date;
 	}
+	
+	public void setDate1(Timestamp date) {
+		this.date = date;
+	}
+	
 
 	private int num,readcount;
 
