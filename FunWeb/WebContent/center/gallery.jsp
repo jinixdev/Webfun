@@ -2,8 +2,6 @@
 <%@page import="gallery.galleryBean"%>
 <%@page import="gallery.galleryDAO"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="board.BoardBean"%>
-<%@page import="board.BoardDAO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -37,7 +35,7 @@
 
 <!-- 본문들어가는 곳 -->
 <!-- 메인이미지 -->
-<div id="sub_img_center"></div>
+<div id="sub_img_gallery"></div>
 <!-- 메인이미지 -->
 
 <!-- 왼쪽메뉴 -->
@@ -95,12 +93,14 @@ List gallerylist = gDAO.getboardList(startRow,pageSize); //호출
 
 <!-- search -->
 <div id="table_search" style="margin: 0 0 0 50%;margin-bottom: 20px;">
-<input type="text" name="search" class="input_box">
-<input type="button" value="search" class="btn">
+<form action="gallerySearch.jsp" method="post">
+<input type="text" name="search" class="input_box" placeholder="장소명으로 검색하세요">
+<input type="submit" value="search" class="btn">
 <%String id = (String)session.getAttribute("id"); 
 if(id!=null){%>
 <input type="button" value="리뷰 작성" class="btn" onclick="location.href='../gallery/fwriteForm.jsp'">
 <%} %>
+	</form>
 </div>
 
 <div class="gwrap">
@@ -114,8 +114,13 @@ SimpleDateFormat time = new SimpleDateFormat("hh:mm");
 %>
 
 <div class="g_content" onclick="location.href='../gallery/content.jsp?num=<%=gb.getNum()%>'">
-<img src="../upload/<%=gb.getFile()%>" width="250" height="250" >
+<%if(gb.getFile()==null) {%>
+<img src="../images/myimage/reviewimage.png" width="250" height="250">
 
+<%}else{%>
+
+<img src="../upload/<%=gb.getFile()%>" width="250" height="250">
+<%} %>
 <div>
 <span><%=gb.getPlacename()%></span> <span>(<%=placeCount%>)</span> 
 	<%if (sdf.format(gb.getDate()).equals(sdf.format(nowtime))) {%>

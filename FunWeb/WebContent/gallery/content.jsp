@@ -22,16 +22,16 @@ window.addEventListener('DOMContentLoaded', function(){
 	
     
 //     checkbox
-	var foodtype = document.getElementById("foodtypes").value;
+	var eattype = document.getElementById("eattypes").value;
 
-	var food = document.getElementsByName("foodstyle");
+	var eat = document.getElementsByName("eatstyle");
 		
 
-		for (var i = 0; i < food.length; i++) {
-			if (foodtype.indexOf(food[i].value)==-1) {
-				food[i].checked = false;
+		for (var i = 0; i < eat.length; i++) {
+			if (eattype.indexOf(eat[i].value)==-1) {
+				eat[i].checked = false;
 			} else {
-				food[i].checked = true;
+				eat[i].checked = true;
 			}
 		}
 		
@@ -50,6 +50,14 @@ function showcomment(num){
 	}
 }
 	
+//content delete show and none
+function contentdelete(p_num,category){
+	var result = confirm("게시글을 삭제하시겠습니까?");
+	if(result){
+	   location.href="deletePro.jsp?p_num="+p_num+"&category="+category;
+	}
+	
+}
 	
 
 </script> 
@@ -63,18 +71,11 @@ function showcomment(num){
 
 <!-- 본문들어가는 곳 -->
 <!-- 메인이미지 -->
-<div id="sub_img_center"></div>
+<div id="sub_img_gallery"></div>
 <!-- 메인이미지 -->
 
 <!-- 왼쪽메뉴 -->
-<nav id="sub_menu">
-<ul>
-<li><a href="#">Notice</a></li>
-<li><a href="#">Public News</a></li>
-<li><a href="#">Driver Download</a></li>
-<li><a href="#">Service Policy</a></li>
-</ul>
-</nav>
+
 <!-- 왼쪽메뉴 -->
 
 <!-- 게시판 -->
@@ -99,14 +100,14 @@ String id = (String)session.getAttribute("id");
 /* int num2 = gb.getNum(); */
 %>
 
-<input type="hidden" id="foodtypes" value=<%=gb.getFoodtype()%>>
+<input type="hidden" id="eattypes" value=<%=gb.getEattype()%>>
 
 <table>
 <tr><td colspan="2">
 <a href="file_down.jsp?file_name=<%=gb.getFile()%>"></a></td></tr>
-<tr><td>장소</td><td><%= gb.getPlacename() %></td></tr>
-<tr><td>주소</td><td><%= gb.getPlaceaddr() %></td></tr>
-<tr><td>평점</td><td style="text-decoration: underline;"><%=rating %></td></tr>
+<tr><th>장소</th><td><%= gb.getPlacename() %></td></tr>
+<tr><th>주소</th><td><%= gb.getPlaceaddr() %></td></tr>
+<tr><th>평점</th><td style="text-decoration: underline;"><%=rating %></td></tr>
 
 
 </table>
@@ -114,7 +115,7 @@ String id = (String)session.getAttribute("id");
 <!-- 원래 comment자리 -->
 
 
-<!-- delete code -->
+<!-- <!-- delete code --> 
 <!-- <div id="showtable" style="display:none;"> -->
 <%-- <form action="fdeletePro.jsp?pageNum=<%=pageNum%>" method="post"> --%>
 <!-- <table> -->
@@ -128,9 +129,9 @@ String id = (String)session.getAttribute("id");
 <!-- </form> -->
 <!-- </div> -->
 
-<hr>
 
-<h1>같은 음식점 다른리뷰</h1>
+
+<h1>Review</h1>
 
 <!-- --------------------------content list------------------------------ -->
 
@@ -142,28 +143,36 @@ String id = (String)session.getAttribute("id");
 	<hr>
 
 <table>
-<tr><td rowspan="3">
-<%-- <a href="../upload/<%=gb.getFile()%>"><%=gb.getFile()%></a> --%> 
-<a href="" ></a><img src="../upload/<%=gb.getFile()%>" width="100" height="100"></a>
-<%-- <a href="file_down.jsp?file_name=<%=gb.getFile()%>"></a>  // download --%>
-</td><td>글쓴이</td><td><%= gb.getId() %></td>
+<tr><td rowspan="4">
+<%if(gb.getFile()==null) {%>
+<img src="../upload/<%=gb.getFile()%>" width="100" height="100">
+
+<%}else{%>
+
+<img src="../upload/<%=gb.getFile()%>" width="100" height="100">
+<%} %>
+</td><td>글쓴이</td><td><%= gb.getName() %></td>
 <td>평점</td><td><%=gb.getStar() %></td></tr>
 <tr><td>내용</td><td colspan="4" width='250px' style="word-break:break-all;"><%=gb.getContent() %></td></tr>
+
+
+<tr><td>음식 양</td><td><%=gb.getEattype() %></td></tr>
 <tr><td>작성일</td><td><%= sdf.format(gb.getDate())%></td></tr>
-<tr><td><input type="button" value="댓글" onclick="showcomment(<%=gb.getNum()%>);"></td></tr>
+<tr><td><input type="button" value="댓글" onclick="showcomment(<%=gb.getNum()%>);"></td>
 <%if(gb.getId().equals(id)){%>
-<tr><td colspan="4">
+<td>
 <input type="button" value="글수정" onclick="location.href='fupdateForm.jsp?num=<%=gb.getNum()%>&pageNum=<%=pageNum%>'">
-<input type="button" value="글삭제" onclick="showhide();">
-</td></tr>
+<input type="button" value="글삭제" onclick="javascript:contentdelete('<%=gb.getNum()%>','<%=category%>');">
+</td>
 <%}%>
+</tr>
 </table>
 
 <!-- ----------------comment code---------------------- -->
 <!-- comment insert code -->
 <!-- must have id -->
 
-<div id="commenttotal<%=gb.getNum()%>" style="display:block;">
+<div id="commenttotal<%=gb.getNum()%>" style="display:none;">
 <%
 
 commentDAO comDAO = new commentDAO();

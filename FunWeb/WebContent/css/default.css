@@ -27,7 +27,7 @@ font-size: 12px;word-spacing: 5px}
 .clear{clear: both;}/*영역구분*/
 #logo{float: left;width: 265px; margin: 40px 0 0 40px}
 /*정렬 왼쪽 너비 265px 밖여백 60px 0 0 40px*/
-header{height: 151px;margin: 0px;padding: 0px}
+header{height: 151px;margin-bottom: 10px;padding: 0px}
 /*높이 151px 밖여백 0 안여백 0*/
 nav#top_menu{width: 600px; margin: 50px 20px 0 0;
 float: right;}
@@ -87,6 +87,26 @@ footer #social img{margin: 0 7px}/*밖여백 0 7px*/
 }
 
 .g_content{
+	 width: 300px;
+}
+
+
+.mainwrap{
+	 width: 970px;
+	 height: auto;
+	 margin-top: 40px;
+}
+
+.maincontainer  {
+	width: 900px;
+	display: grid;
+	grid-template-columns: repeat(3, 300px);
+	grid-template-rows: repeat(2, 250px);
+	align-content: <align-content>;
+	
+	}
+
+.main_content{
 	 width: 300px;
 }
 

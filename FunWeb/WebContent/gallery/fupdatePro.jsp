@@ -27,8 +27,6 @@ System.out.print("writepro : "+multi.getParameter("content"));
 galleryBean gb = new galleryBean();
 gb.setName(multi.getParameter("name"));
 gb.setContent(multi.getParameter("content"));
-gb.setTastetype(multi.getParameter("hot"));
-gb.setPass(multi.getParameter("pass"));
 gb.setPlacename(multi.getParameter("placename"));
 gb.setPlaceaddr(multi.getParameter("placeaddr"));
 
@@ -38,19 +36,19 @@ String file = multi.getFilesystemName("file");
 //BoardBean에 file 추가
 gb.setFile(file);
 
-// foodstyle
-String foodstyles[] = multi.getParameterValues("foodstyle");
+// eatstyle
+String eatstyles[] = multi.getParameterValues("eatstyle");
  
-String foodstyle = String.join(",",foodstyles);
+String eatstyle = String.join(",",eatstyles);
 
-// String foodstyle="";
-// for(String s:foodstyles){
-// // 	foodstyle += s+",";
-// 	String.join(",",foodstyles);
+// String eatstyle="";
+// for(String s:eatstyles){
+// // 	eatstyle += s+",";
+// 	String.join(",",eatstyles);
 // }
 
-System.out.println("foodstyle : "+foodstyle);
-gb.setFoodtype(foodstyle);
+System.out.println("eatstyle : "+eatstyle);
+gb.setEattype(eatstyle);
 
 String star = multi.getParameter("starValue");
 System.out.print("starValue : "+star);

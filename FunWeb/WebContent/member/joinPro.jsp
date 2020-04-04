@@ -28,6 +28,9 @@ mb.setDetailAddress(request.getParameter("detailAddress"));
 mb.setExtraAddress(request.getParameter("extraAddress"));
 mb.setReg_date(reg_date);
 
+String REMOTE_ADDR = request.getRemoteAddr();
+mb.setIp(REMOTE_ADDR);
+
 MemberDAO mDAO = new MemberDAO();
 mDAO.insertMember(mb);
 %>

@@ -10,7 +10,20 @@
 <link href="../css/default.css" rel="stylesheet" type="text/css">
 <link href="../css/subpage.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
+function submitCheck(){
+	if(document.getElementById("file").value==""||document.getElementById("file").value==null){
+		alert("사진을 함께 올려주세요.");
+		return false; //
+	}
+	
+	if(document.getElementById("starValue").value==""||document.getElementById("starValue").value==null){
+		alert("별점을 등록해주세요");
+		document.getElementById("starValue").focus();
+		return false; //
+	}
+	
 
+}
 
 
 
@@ -25,16 +38,12 @@
 
 <!-- 본문들어가는 곳 -->
 <!-- 메인이미지 -->
-<div id="sub_img_center"></div>
+<div id="sub_img_gallery"></div>
 <!-- 메인이미지 -->
 
 <!-- 왼쪽메뉴 -->
 <nav id="sub_menu">
 <ul>
-<li><a href="#">Notice</a></li>
-<li><a href="#">Public News</a></li>
-<li><a href="#">Driver Download</a></li>
-<li><a href="#">Service Policy</a></li>
 </ul>
 </nav>
 
@@ -61,27 +70,15 @@ String id = (String)session.getAttribute("id");
 %>
 <form action="fwritePro.jsp" method="post" enctype="multipart/form-data" onsubmit="return submitCheck()">
 
-<table border="1">
+<table>
 <tr><td colspan="2"><input type="text" id="placename" name="placename">
 <input type="button" value="위치추가" class="dup" onclick="map()"></td></tr>
 <tr><td colspan="2"><input type="text" id="placeaddr" name="placeaddr" style="width:300px;"></td></tr>
-<tr><td>글 비밀번호</td><td><input type="password" name="pass"></td></tr>
+
 <tr><td colspan="2"><input type="file" name="file" id="file"></td></tr>
-<tr><td><%=jmb.getName()%></td></tr>
-<tr><td colspan="2"><textarea name="content" rows="10" cols="20"></textarea></td></tr>
-<tr><td>tastetype</td><td>
-<input type="button" onclick="showrating('hot');" value="hot">
-<div id="hot" style="display:none;">
-<p id="hot_grade" >
-       <img id=hot1 onmouseover="show('hot',1)" onclick="mark('hot',1)" onmouseout="noshow('hot',1)" src="../css/pic/hot0.png">
-       <img id=hot2 onmouseover="show('hot',2)" onclick="mark('hot',2)" onmouseout="noshow('hot',2)" src="../css/pic/hot0.png">
-       <img id=hot3 onmouseover="show('hot',3)" onclick="mark('hot',3)" onmouseout="noshow('hot',3)" src="../css/pic/hot0.png">
-       <img id=hot4 onmouseover="show('hot',4)" onclick="mark('hot',4)" onmouseout="noshow('hot',4)" src="../css/pic/hot0.png">
-       <img id=hot5 onmouseover="show('hot',5)" onclick="mark('hot',5)" onmouseout="noshow('hot',5)" src="../css/pic/hot0.png">
-       <span id="hottext">평가하기</span>
-</p>
-<input type="hidden" id="hot">
-</div>
+<tr><td colspan="2"><textarea name="content" rows="10" cols="50"></textarea></td></tr>
+<tr><td>평점</td><td>
+
 <div id="star">
 <span id="star_grade" >
        <img id=star1 onmouseover="show('star',1)" onclick="mark('star',1)" onmouseout="noshow('star',1)" src="../css/pic/star0.png">
@@ -96,12 +93,10 @@ String id = (String)session.getAttribute("id");
 
 
 </td></tr>
-<tr><td>foodtype</td>
-<td><input name="foodstyle" type="checkbox" value="한식" />한식
-<input name="foodstyle" type="checkbox" value="중식" />중식
-<input name="foodstyle" type="checkbox" value="양식" />양식
-<input name="foodstyle" type="checkbox" value="일식" />일식
-<input name="foodstyle" type="checkbox" value="기타" />기타
+<tr><td>음식 양</td>
+<td><input name="eatstyle" type="checkbox" value="양적음" />양적음
+<input name="eatstyle" type="checkbox" value="보통" />보통
+<input name="eatstyle" type="checkbox" value="양많음" />양많음
 </td>
 </tr>
 <tr><td><input type="submit" value="확인"></td></tr>

@@ -34,29 +34,22 @@
 
 <!-- 본문들어가는 곳 -->
 <!-- 메인이미지 -->
-<div id="sub_img_center"></div>
+<div id="sub_img_notice"></div>
 <!-- 메인이미지 -->
 
 <!-- 왼쪽메뉴 -->
-<nav id="sub_menu">
-<ul>
-<li><a href="#">Notice</a></li>
-<li><a href="#">Public News</a></li>
-<li><a href="#">Driver Download</a></li>
-<li><a href="#">Service Policy</a></li>
-</ul>
-</nav>
+<jsp:include page="../inc/notice_sub_menu.jsp"></jsp:include>
 <!-- 왼쪽메뉴 -->
 
 <!-- 게시판 -->
 <article>
-<h1>NoticeSearch</h1>
+<h1>Search Result</h1>
 <%
 // 한글처리
 request.setCharacterEncoding("utf-8");
 // 검색어 search 가져오기
 String search = request.getParameter("search");
-String category = request.getParameter("category");
+String category = request.getParameter("board");
 // 
 
 
@@ -134,16 +127,15 @@ List boardlist = jbDAO.getboardList_search(startRow, pageSize, search); //호출
 <form action="noticeSearch.jsp" method="post">
 	<input type="text" name="search" class="input_box"> 
 	<input type="submit" value="search" class="btn">
-	</form>
 	<%
 		String id = (String) session.getAttribute("id");
 		if (id != null) {
 	%>
 	<input type="button" value="글작성" class="btn"
 		onclick="location.href='../board/writeForm.jsp'">
-	<%
-		}
-	%>
+	<%}%>
+	</form>
+	
 </div>
 		<%// 한 화면에 보여줄 페이지 개수
 int pageBlock = 3;

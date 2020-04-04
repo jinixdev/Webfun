@@ -9,6 +9,24 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div id="wrap">
+<!-- 헤더들어가는 곳 -->
+<jsp:include page="../inc/top.jsp"></jsp:include>
+<!-- 헤더들어가는 곳 -->
+
+<!-- 본문들어가는 곳 -->
+<!-- 메인이미지 -->
+<div id="sub_img_notice"></div>
+<!-- 메인이미지 -->
+
+<!-- 왼쪽메뉴 -->
+<jsp:include page="../inc/notice_sub_menu.jsp"></jsp:include>
+<!-- 왼쪽메뉴 -->
+
+<!-- 게시판 -->
+<article>
+
+
 <%
 String category ="board";
 int num = Integer.parseInt(request.getParameter("num"));
@@ -29,5 +47,14 @@ BoardBean jbb= jbDAO.getboardContent(num);
 	
 </table>
 </form>
+
+</article>
+<!-- 게시판 -->
+<!-- 본문들어가는 곳 -->
+<div class="clear"></div>
+<!-- 헤더들어가는 곳 -->
+<jsp:include page="../inc/bottom.jsp"></jsp:include>
+<!-- 헤더들어가는 곳 -->
+</div>
 </body>
 </html>

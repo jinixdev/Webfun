@@ -23,7 +23,7 @@
 
 <!-- 본문들어가는 곳 -->
 <!-- 메인이미지 -->
-<div id="sub_img_center"></div>
+<div id="sub_img_info"></div>
 <!-- 메인이미지 -->
 
 <!-- 왼쪽메뉴 -->
@@ -76,7 +76,7 @@ SimpleDateFormat time = new SimpleDateFormat("hh:mm");%>
 	<hr>
 <div onclick="location.href='../gallery/content.jsp?num=<%=gb.getNum()%>'">
 <table>
-<tr><td rowspan="3">
+<tr><td rowspan="4">
 <%-- <a href="../upload/<%=gb.getFile()%>"><%=gb.getFile()%></a> --%> 
 <a href="" ></a><img src="../upload/<%=gb.getFile()%>" width="100" height="100"></a>
 <%-- <a href="file_down.jsp?file_name=<%=gb.getFile()%>"></a>  // download --%>
@@ -84,6 +84,7 @@ SimpleDateFormat time = new SimpleDateFormat("hh:mm");%>
 <td>평점</td><td><%=gb.getStar() %></td></tr>
 <tr><td>내용</td><td colspan="4" width='250px' style="word-break:break-all;"><%=gb.getContent() %></td></tr>
 <tr><td>작성일</td><td><%= sdf.format(gb.getDate())%></td></tr>
+<tr><td>장소</td><td><%= gb.getPlacename()%></td></tr>
 </table>
 </div>
 

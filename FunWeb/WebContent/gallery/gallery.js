@@ -1,13 +1,4 @@
 
-// content delete show and none
-function showhide(){
-	var obj=document.getElementById("showtable");
-	if(obj.style.display=="none"){
-		obj.style.display="block";
-	}else{
-		obj.style.display="none";
-	}
-}
 
 // content update value call
 function commentUpdate(id,comment,p_num,r_num){
@@ -32,7 +23,7 @@ function commentUpdate(id,comment,p_num,r_num){
 
 
 
-
+//=======================================================comment
 
 //comment update code show and none
 function hide(){
@@ -120,7 +111,6 @@ function mark(image1,star){
 	 }
 	 
 	 lock(image1,star);
-	 alert("선택 : "+star);
 	 document.getElementById("starValue").value =star;
 }
 
@@ -131,6 +121,7 @@ function map(){
 	window.open("map.jsp","chkpro", "width=800, height=600, resizable = no, scrollbars = no");
  }
 
-// ------------------------------------comment
 
+
+//=======================================================
 

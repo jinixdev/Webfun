@@ -147,6 +147,13 @@
 
 
 </script>
+<style>
+input {
+        border-style:none;
+        border-bottom:solid 1px #cacaca;
+        border-collapse:collapse;
+}
+</style>
  
 </head>
 <body>
@@ -158,7 +165,7 @@
 
 <!-- 본문들어가는 곳 -->
 <!-- 본문메인이미지 -->
-<div id="sub_img_member"></div>
+<div id="sub_img_info"></div>
 <!-- 본문메인이미지 -->
 
 <!-- 왼쪽메뉴 -->

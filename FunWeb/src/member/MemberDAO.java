@@ -49,7 +49,7 @@ public class MemberDAO {
 		Connection con=null;
 		try { //�삁�쇅媛� 諛쒖깮�븷 寃껉컳�� 援щЦ
 			con = getConnection();
-			String sql = "insert into member(id,pass,name,email,address,reg_date,postcode,detailAddress,extraAddress) values(?,?,?,?,?,?,?,?,?)";
+			String sql = "insert into member(id,pass,name,email,address,reg_date,postcode,detailAddress,extraAddress,ip) values(?,?,?,?,?,?,?,?,?,?)";
 			pre = con.prepareStatement(sql);
 			pre.setString(1, mb.getId());
 			pre.setString(2, mb.getPass());
@@ -60,6 +60,7 @@ public class MemberDAO {
 			pre.setString(7, mb.getPostcode());
 			pre.setString(8, mb.getDetailAddress());
 			pre.setString(9, mb.getExtraAddress());
+			pre.setString(10, mb.getIp());
 
 			pre.executeUpdate();
 
@@ -184,7 +185,7 @@ public class MemberDAO {
 		Connection con=null;
 		try {
 			con = getConnection();
-			String sql = "delete from member where id=?";
+			String sql = "delete from member where id=swim cascade";
 			pre = con.prepareStatement(sql);
 			pre.setString(1, id);
 
@@ -216,7 +217,6 @@ public class MemberDAO {
 				jmb.setId(rs.getString("id"));
 				jmb.setPass(rs.getString("pass"));
 				jmb.setName(rs.getString("name"));
-				jmb.setAge(rs.getInt("age"));
 				jmb.setEmail(rs.getString("email"));
 				jmb.setReg_date(rs.getTimestamp("reg_date"));
 

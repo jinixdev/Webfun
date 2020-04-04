@@ -4,7 +4,7 @@
 			 auth="Container" 
 			 type="javax.sql.DataSource"
 			 driverClassName ="com.mysql.jdbc.Driver"
-			 url ="jdbc:mysql://localhost:3306/jspdb1"
+			 url ="jdbc:mysql://localhost:3306/jinidb1"
 			 username="root"
 			 password="1234"
 	/>

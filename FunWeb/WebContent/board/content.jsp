@@ -70,18 +70,11 @@ function commentDelete(){
 
 <!-- 본문들어가는 곳 -->
 <!-- 메인이미지 -->
-<div id="sub_img_center"></div>
+<div id="sub_img_notice"></div>
 <!-- 메인이미지 -->
 
 <!-- 왼쪽메뉴 -->
-<nav id="sub_menu">
-<ul>
-<li><a href="#">Notice</a></li>
-<li><a href="#">Public News</a></li>
-<li><a href="#">Driver Download</a></li>
-<li><a href="#">Service Policy</a></li>
-</ul>
-</nav>
+<jsp:include page="../inc/notice_sub_menu.jsp"></jsp:include>
 <!-- 왼쪽메뉴 -->
 
 <!-- 게시판 -->
@@ -106,19 +99,14 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
 		SimpleDateFormat time = new SimpleDateFormat("hh:mm");
 %>
 
-<table border="1">
-<tr><td>글번호</td><td><%= jbb.getNum() %></td></tr>
+<table >
 <tr><td>작성일</td><td><%=jbb.getDate() %></td></tr>
 <tr><td>글쓴이</td><td><%= jbb.getName() %></td></tr>
 <tr><td>조회수</td><td><%=jbb.getReadcount() %></td></tr>
 <tr><td>제목</td><td colspan="3"><%=jbb.getSubject() %></td></tr>
 <tr><td>내용</td><td colspan="3" ><%=jbb.getContent() %></td></tr>
-<tr><td>파일</td><td colspan="3"><a href="../upload/<%=jbb.getFile()%>"><%=jbb.getFile()%></a>
-<img src="../upload/<%=jbb.getFile()%>" width="100" height="100">
-<a href="file_down.jsp?file_name=<%=jbb.getFile()%>"><%=jbb.getFile()%></a></td>
-</tr>
+
 <tr><td colspan="4">
-<input type="button" value="글목록" onclick="location.href='../center/notice.jsp?pageNum=<%=pageNum%>'">
 <%if(jbb.getId().equals(id)){%>
 <input type="button" value="글수정" onclick="location.href='updateForm.jsp?num=<%=jbb.getNum()%>&pageNum=<%=pageNum%>'">
 <input type="button" value="글삭제" onclick="showhide();">

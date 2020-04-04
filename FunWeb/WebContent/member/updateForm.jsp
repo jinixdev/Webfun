@@ -119,14 +119,14 @@
 
 <!-- 본문들어가는 곳 -->
 <!-- 본문메인이미지 -->
-<div id="sub_img_member"></div>
+<div id="sub_img_info"></div>
 <!-- 본문메인이미지 -->
 <!-- 왼쪽메뉴 -->
 <jsp:include page="../inc/info_sub_menu.jsp"></jsp:include>
 <!-- 왼쪽메뉴 -->
 <!-- 본문내용 -->
 <article>
-<h1>Join Us</h1>
+<h1>Update Info</h1>
 <form action="updatePro.jsp" id="join" name="fr" method="post" onsubmit="return submitCheck()">
 <!-- form태그에서만 post -->
 <%
@@ -136,7 +136,6 @@ MemberBean mb= mDAO.getMember(id);
 
 %>
 <fieldset>
-<legend>Update Info</legend>
 <label>*User ID</label>
 <input type="text" name="id" class="id" id="id" value="<%=mb.getId()%>" readonly="readonly"><br>
 
@@ -215,10 +214,6 @@ MemberBean mb= mDAO.getMember(id);
     }
 </script>
 
-<label>Phone Number</label>
-<input type="text" name="phone"><br>
-<label>Mobile Phone Number</label>
-<input type="text" name="mobile"><br>
 </fieldset>
 <div class="clear"></div>
 <div id="buttons">

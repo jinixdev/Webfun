@@ -16,7 +16,7 @@ if(id==null){
 <nav id="top_menu">
 <ul>
 	<li><a href="../main/main.jsp">Home</a></li>
-	<li><a href="../center/gallery.jsp">맛집 찾기</a></li>
+	<li><a href="../center/gallery.jsp">place</a></li>
 	<li><a href="../center/notice.jsp">Community</a></li>
 	<li><a href="../mail/mailForm.jsp">Contact us</a></li>
 </ul>

@@ -4,11 +4,16 @@ import java.sql.Timestamp;
 
 public class MemberBean {
 
-		private String id,pass,name,gender,email;
-		private String address,postcode,detailAddress,extraAddress;
-		private int phone,mobile;
+		private String id,pass,name,email;
+		private String address,postcode,detailAddress,extraAddress,ip;
+		private Timestamp reg_date;
 		
-		
+		public String getIp() {
+			return ip;
+		}
+		public void setIp(String ip) {
+			this.ip = ip;
+		}
 		public String getAddress() {
 			return address;
 		}
@@ -33,20 +38,8 @@ public class MemberBean {
 		public void setExtraAddress(String extraAddress) {
 			this.extraAddress = extraAddress;
 		}
-		public int getPhone() {
-			return phone;
-		}
-		public void setPhone(int phone) {
-			this.phone = phone;
-		}
-		public int getMobile() {
-			return mobile;
-		}
-		public void setMobile(int mobile) {
-			this.mobile = mobile;
-		}
-		private int age;
-		private Timestamp reg_date;
+
+		
 		
 		
 		public String getId() {
@@ -67,23 +60,11 @@ public class MemberBean {
 		public void setName(String name) {
 			this.name = name;
 		}
-		public String getGender() {
-			return gender;
-		}
-		public void setGender(String gender) {
-			this.gender = gender;
-		}
 		public String getEmail() {
 			return email;
 		}
 		public void setEmail(String email) {
 			this.email = email;
-		}
-		public int getAge() {
-			return age;
-		}
-		public void setAge(int age) {
-			this.age = age;
 		}
 		public Timestamp getReg_date() {
 			return reg_date;

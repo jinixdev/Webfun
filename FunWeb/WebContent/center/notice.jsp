@@ -35,7 +35,7 @@
 
 <!-- 본문들어가는 곳 -->
 <!-- 메인이미지 -->
-<div id="sub_img_center"></div>
+<div id="sub_img_notice"></div>
 <!-- 메인이미지 -->
 
 <!-- 왼쪽메뉴 -->
@@ -44,7 +44,7 @@
 
 <!-- 게시판 -->
 <article>
-<h1>Notice</h1>
+<h1>Community</h1>
 <%
 String category ="board";
 request.setCharacterEncoding("UTF-8");
