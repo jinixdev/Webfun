@@ -85,9 +85,10 @@ quis ante......</dd>
 // 최신글 5개
 // 1행 5개 가져오기
 // BoardDAO bdao 생성
+String category ="board";
 BoardDAO bDAO = new BoardDAO();
 // int count = getBoardCount()호출
-int count = bDAO.getBoardCount();
+int count = bDAO.getBoardCount(category);
 // 한 화면에 보여줄 가져올 글 갯수 생성
 int pageSize =5;
 // 현 페이지 번호가 없으면 "1"페이지로 설번
@@ -101,7 +102,7 @@ int currentPage =Integer.parseInt(pageNum);
 // 10개씩 잘라서 1페이지 시작하는 행 번호 구하기
  int startRow= (currentPage-1)*pageSize+1;
 // List boardlist = jbDAO.getboardList(startRow,pageSize); 호출
-List boardlist = bDAO.getboardList(startRow,pageSize); 
+List boardlist = bDAO.getboardList(startRow,pageSize,category); 
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
 for (int i = 0; i < boardlist.size(); i++) {
 	BoardBean jbb = (BoardBean) boardlist.get(i);

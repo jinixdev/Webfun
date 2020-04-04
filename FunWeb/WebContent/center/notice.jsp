@@ -51,7 +51,7 @@ request.setCharacterEncoding("UTF-8");
 BoardDAO jbDAO= new BoardDAO();
 // 게시판 글개수를 호출 getBoardCount() count() 
 // int count = getBoardCount() 호출
-int count = jbDAO.getBoardCount();
+int count = jbDAO.getBoardCount(category);
 
 // 한 화면에 보여줄 가져올 글 개수 설정
 int pageSize =8;
@@ -81,7 +81,7 @@ int endRow = currentPage*pageSize;
 // select * from board order by num desc limit 시작하는 행번호-1,글개수
 
 
-List boardlist = jbDAO.getboardList(startRow,pageSize); //호출
+List boardlist = jbDAO.getboardList(startRow,pageSize,category); //호출
 // List boardlist = jbDAO.getboardList();
 %>
 <table id="notice">

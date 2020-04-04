@@ -40,21 +40,15 @@
 <!-- 메인이미지 -->
 
 <!-- 왼쪽메뉴 -->
-<nav id="sub_menu">
-<ul>
-<li><a href="#">Notice</a></li>
-<li><a href="#">Public News</a></li>
-<li><a href="#">Driver Download</a></li>
-<li><a href="#">Service Policy</a></li>
-</ul>
-</nav>
+<jsp:include page="../inc/notice_sub_menu.jsp"></jsp:include>
 <!-- 왼쪽메뉴 -->
 
 <!-- 게시판 -->
 <article>
-<h1>Notice Write</h1>
+<h1>download Write</h1>
 <%
 String id = (String)session.getAttribute("id"); 
+String category = "download";
 %>
 <%if(id==null){%> 
  <script type="text/javascript"> 
@@ -66,9 +60,11 @@ String id = (String)session.getAttribute("id");
 <%	MemberDAO jmDAO = new MemberDAO();
 	MemberBean jmb = jmDAO.getMember(id);
 	System.out.println("jmb.getId() : " +jmb.getId());
+	boolean idcheck = id!=null;
+// 	id가 있으면 true , 없으면 false
 %>
-<form action="writePro.jsp" method="post">
-<input type="hidden" name="id" value="<%=jmb.getId()%>">
+<form action="writePro.jsp" method="post" enctype="multipart/form-data">
+<input type="hidden" name="id" value="<%=jmb.getId()%> ">
 <table border="1">
 <tr><td>글쓴이</td><td><input type="text" name="name" value="<%=jmb.getName()%>"></td></tr>
 <tr><td>비밀번호</td><td><input type="text" name="pass"></td></tr>

@@ -4,6 +4,7 @@
 <ul>
 
 <li><a href="#">공지사항</a></li>
+<li><a href="../center/notice.jsp">Community</a></li>
 <li><a href="../center/download.jsp">자료실</a></li>
 
 </ul>

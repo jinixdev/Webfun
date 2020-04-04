@@ -24,7 +24,7 @@ jbb.setName(request.getParameter("name"));
 jbb.setPass(request.getParameter("pass"));
 jbb.setSubject(request.getParameter("subject"));
 jbb.setContent(request.getParameter("content"));
-
+jbb.setCategory(request.getParameter("category"));
 Timestamp date = new Timestamp(System.currentTimeMillis());
 jbb.setDate(date);
 

@@ -56,7 +56,7 @@
 request.setCharacterEncoding("utf-8");
 // 검색어 search 가져오기
 String search = request.getParameter("search");
-
+String category = request.getParameter("category");
 // 
 
 
@@ -64,7 +64,7 @@ request.setCharacterEncoding("UTF-8");
 BoardDAO jbDAO= new BoardDAO();
 // 게시판 글개수를 호출 getBoardCount() count() 
 // int count = getBoardCount() 호출
-int count = jbDAO.getBoardCount(search);
+int count = jbDAO.getBoardCount(search,category);
 // getBoardCount 를 넘겨서 search값 받음
 
 
@@ -96,7 +96,7 @@ int endRow = currentPage*pageSize;
 // select * from board order by num desc limit 시작하는 행번호-1,글개수
 
 
-List boardlist = jbDAO.getboardList(startRow, pageSize, search); //호출
+List boardlist = jbDAO.getboardList_search(startRow, pageSize, search); //호출
 // List boardlist = jbDAO.getboardList();
 %>
 <table id="notice">

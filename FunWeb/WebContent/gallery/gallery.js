@@ -29,6 +29,11 @@ function commentUpdate(id,comment,p_num,r_num){
 	}
 }
 
+
+
+
+
+
 //comment update code show and none
 function hide(){
 	var update=document.getElementById("updatetable");
@@ -125,4 +130,7 @@ function mark(image1,star){
 function map(){
 	window.open("map.jsp","chkpro", "width=800, height=600, resizable = no, scrollbars = no");
  }
+
+// ------------------------------------comment
+
 

@@ -71,7 +71,7 @@ public class BoardDAO {
 		}
 	}//write
 	
-	public List getboardList(int startRow,int pageSize) {
+	public List getboardList(int startRow,int pageSize,String category) {
 		List jbblist = new ArrayList();
 		ResultSet rs=null;
 		PreparedStatement pre=null;
@@ -85,10 +85,11 @@ public class BoardDAO {
 
 			
 //			 String sql = "select * from board order by num desc";
-			String sql = "select * from board order by num desc limit ?,?";
+			String sql = "select * from board where category=? order by num desc limit ?,?";
 			 pre = con.prepareStatement(sql); 
-			 pre.setInt(1, startRow-1); //startRow 시작을 포함하지 않기때문에 -1
-			 pre.setInt(2, pageSize);
+			 pre.setString(1, category);
+			 pre.setInt(2, startRow-1); //startRow 시작을 포함하지 않기때문에 -1
+			 pre.setInt(3, pageSize);
 			 rs= pre.executeQuery();
 			 while(rs.next()) {
 				 BoardBean jbb = new BoardBean();
@@ -102,6 +103,7 @@ public class BoardDAO {
 				 jbb.setReadcount(rs.getInt("readcount"));
 				 jbb.setFile(rs.getString("file"));
 				 jbb.setId(rs.getString("id"));
+				 jbb.setCategory(rs.getString("category"));
 				 
 				 jbblist.add(jbb);
 			 }
@@ -283,7 +285,7 @@ public class BoardDAO {
 		
 	}//deleteBoard
 	
-	public int getBoardCount() {
+	public int getBoardCount(String category) {
 		int count=0;
 		ResultSet rs=null;
 		PreparedStatement pre=null;
@@ -291,8 +293,9 @@ public class BoardDAO {
 		
 		try {
 			con = getConnection();
-			String sql="select count(num) from board";
+			String sql="select count(num) from board where category=?";
 			pre = con.prepareStatement(sql);
+			pre.setString(1, category);
 			rs= pre.executeQuery();
 			if(rs.next()) {
 				count = rs.getInt("count(num)"); 
@@ -375,7 +378,7 @@ public class BoardDAO {
 	}//getBoardCount
 	
 	// ===================================search=====================================
-	public int getBoardCount(String search) {
+	public int getBoardCount(String search,String category) {
 		int count=0;
 		ResultSet rs=null;
 		PreparedStatement pre=null;
@@ -383,9 +386,10 @@ public class BoardDAO {
 		
 		try {
 			con = getConnection();
-			String sql="select count(num) from board where subject like ? ";
+			String sql="select count(num) from board where category=?&&subject like ? ";
 			pre = con.prepareStatement(sql);
-			pre.setString(1, "%"+search+"%");
+			pre.setString(1, category);
+			pre.setString(2, "%"+search+"%");
 			rs= pre.executeQuery();
 			if(rs.next()) {
 				count = rs.getInt("count(num)"); 
@@ -404,7 +408,7 @@ public class BoardDAO {
 	}//getBoardCount
 
 	
-	public List getboardList(int startRow,int pageSize,String search) {
+	public List getboardList_search(int startRow,int pageSize,String search) {
 		List jbblist = new ArrayList();
 		ResultSet rs=null;
 		PreparedStatement pre=null;

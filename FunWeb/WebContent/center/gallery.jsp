@@ -54,6 +54,7 @@
 <!-- 게시판 -->
 <div class="gwrap">
 <%
+
 request.setCharacterEncoding("UTF-8");
 galleryDAO gDAO = new galleryDAO();
 // 게시판 글개수를 호출 getBoardCount() count() 

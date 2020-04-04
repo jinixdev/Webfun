@@ -10,6 +10,7 @@
 </head>
 <body>
 <%
+String category ="board";
 int num = Integer.parseInt(request.getParameter("num"));
 BoardDAO jbDAO= new BoardDAO();
 BoardBean jbb= jbDAO.getboardContent(num);

@@ -51,7 +51,7 @@ request.setCharacterEncoding("UTF-8");
 BoardDAO jbDAO= new BoardDAO();
 // 게시판 글개수를 호출 getBoardCount() count() 
 // int count = getBoardCount() 호출
-int count = jbDAO.getBoardCount();
+int count = jbDAO.getBoardCount(category);
 
 // 한 화면에 보여줄 가져올 글 개수 설정
 int pageSize =8;
@@ -81,7 +81,7 @@ int endRow = currentPage*pageSize;
 // select * from board order by num desc limit 시작하는 행번호-1,글개수
 
 
-List boardlist = jbDAO.getboardList(startRow,pageSize); //호출
+List boardlist = jbDAO.getboardList(startRow,pageSize,category); //호출
 // List boardlist = jbDAO.getboardList();
 %>
 <table id="notice">
@@ -110,7 +110,7 @@ List boardlist = jbDAO.getboardList(startRow,pageSize); //호출
 	%>
 	<tr>
 		<td><%=num--%></td>
-		<td class="left"><a href="../board/content.jsp?num=<%=jbb.getNum()%>&pageNum=<%=pageNum%>"><%=jbb.getSubject()%></a> 
+		<td class="left"><a href="../download/content.jsp?num=<%=jbb.getNum()%>&pageNum=<%=pageNum%>"><%=jbb.getSubject()%></a> 
 		<%if (sdf.format(jbb.getDate()).equals(sdf.format(nowtime))) {%>
 				<span style="color: red;"><sup>Ν</sup></span> <%}%>
 				(<%=commentCount %>)
@@ -137,7 +137,7 @@ List boardlist = jbDAO.getboardList(startRow,pageSize); //호출
 		if (id != null) {
 	%>
 	<input type="button" value="글작성" class="btn"
-		onclick="location.href='../board/writeForm.jsp'">
+		onclick="location.href='../download/writeForm.jsp'">
 	<%
 		}
 	%>
@@ -173,7 +173,7 @@ if(endPage>pageCount){
 // [이전] 10페이지 이전
 if(startPage > pageBlock){%> 
 
-	<a href="notice.jsp?pageNum=<%=startPage-pageBlock%>">[이전]</a> 
+	<a href="download.jsp?pageNum=<%=startPage-pageBlock%>">[이전]</a> 
 	<!-- 10페이지씩 앞으로 감 -->
 <%}%>
 
@@ -183,14 +183,14 @@ for(int i = startPage; i <= endPage; i++){
 	if(i == currentPage){%>
 		<u><b>[<%=i %>]</b></u>
 <%	} else {%>
-		[<a href="notice.jsp?pageNum=<%=i %>"><%=i %></a>]
+		[<a href="download.jsp?pageNum=<%=i %>"><%=i %></a>]
 <%	}
 }%>
 
 
 <%// [다음] 10페이지 다음
 if(endPage < pageCount){%>
-	<a href="notice.jsp?pageNum=<%=startPage+pageBlock%>">[다음]</a> 
+	<a href="download.jsp?pageNum=<%=startPage+pageBlock%>">[다음]</a> 
 <%}%>
 
 

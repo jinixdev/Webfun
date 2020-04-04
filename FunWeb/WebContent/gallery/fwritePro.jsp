@@ -2,8 +2,6 @@
 <%@page import="gallery.galleryDAO"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
-<%@page import="board.BoardDAO"%>
-<%@page import="board.BoardBean"%>
 <%@page import="java.sql.Timestamp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -31,7 +29,7 @@ MultipartRequest multi = new MultipartRequest(request,uploadPath,maxSize,"utf-8"
 // p.310 request 정보가 multi에 들어감
 // request --> multi 로 바꾸기
 galleryBean gb = new galleryBean();
-System.out.print("writepro : "+multi.getParameter("content"));
+System.out.print("writepro : "+multi.getParameter("category"));
 gb.setId(multi.getParameter("id"));
 gb.setName(multi.getParameter("name"));
 gb.setContent(multi.getParameter("content"));

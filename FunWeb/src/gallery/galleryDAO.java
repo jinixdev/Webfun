@@ -436,6 +436,35 @@ private Connection getConnection() throws Exception{
 			
 			
 		}//getBoardCount(String id)
+		
+		// place 평점
+			public int getPlaceRating(String placename) {
+				int rating=0;
+				ResultSet rs=null;
+				PreparedStatement pre=null;
+				Connection con=null;
+				
+				try {
+					con = getConnection();
+					String sql="select avg(star) rating from g_board group by placename having placename=?";
+					pre = con.prepareStatement(sql);
+					pre.setString(1, placename);
+					rs= pre.executeQuery();
+					if(rs.next()) {
+						rating = rs.getInt("rating"); 
+					 }
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally{
+					if(rs!=null) try {rs.close();}catch(SQLException ex) {}
+					if(pre!=null) try{pre.close();}catch(SQLException ex) {}
+					if(con!=null) try {con.close();}catch(SQLException ex) {}
+				}
+				
+				return rating;
+				
+				
+			}//getPlaceRating(String placename)
 	
 	
 	
