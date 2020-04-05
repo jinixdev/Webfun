@@ -10,12 +10,14 @@
 </head>
 <body>
 <%
+request.setCharacterEncoding("utf-8");
 int num = Integer.parseInt(request.getParameter("num"));
-System.out.print("updatepro2 : "+request.getParameter("num"));
 
 BoardBean jbb = new BoardBean();
+jbb.setNum(num);
 jbb.setSubject(request.getParameter("subject"));
 jbb.setContent(request.getParameter("content"));
+jbb.setCategory(request.getParameter("category"));
 BoardDAO jbDAO = new BoardDAO();
 jbDAO.updateBoard(num, jbb); 
 

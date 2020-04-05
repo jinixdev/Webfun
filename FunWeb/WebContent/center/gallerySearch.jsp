@@ -92,7 +92,7 @@ List gallerylist = gDAO.getboardList_search(startRow, pageSize, search); //호�
 %>
 <!-- search -->
 <div id="table_search" style="margin: 0 0 0 50%;margin-bottom: 20px;">
-<input type="text" name="search" class="input_box" placeholder="장소명으로 검색하세요">
+<input type="text" name="search" class="input_box" placeholder="<%=search%>">
 <input type="button" value="search" class="btn">
 <%String id = (String)session.getAttribute("id"); 
 if(id!=null){%>

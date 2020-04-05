@@ -90,7 +90,7 @@ int p_num = Integer.parseInt(request.getParameter("num"));
 String pageNum = request.getParameter("pageNum"); // 계산할것이 아니므로 String으로 받아도 됨
 System.out.println("num : "+p_num);
 BoardDAO jbDAO= new BoardDAO();
-BoardBean jbb= jbDAO.getboardContent(p_num);
+BoardBean jbb= jbDAO.getboardContent(p_num,category);
 String id = (String)session.getAttribute("id");
 /* int num2 = jbb.getNum(); */
 
@@ -99,23 +99,31 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
 		SimpleDateFormat time = new SimpleDateFormat("hh:mm");
 %>
 
-<table >
-<tr><td>글번호</td><td><%= jbb.getNum() %></td></tr>
-<tr><td>작성일</td><td><%=sdf.format(jbb.getDate()) %></td></tr>
-<tr><td>글쓴이</td><td><%= jbb.getName() %></td></tr>
-<tr><td>조회수</td><td><%=jbb.getReadcount() %></td></tr>
-<tr><td>제목</td><td colspan="3"><%=jbb.getSubject() %></td></tr>
-<tr><td>내용</td><td colspan="3" ><%=jbb.getContent() %></td></tr>
-<tr><td>파일</td>
-<td colspan="3"><a href="../upload/<%=jbb.getFile()%>"><img src="../upload/<%=jbb.getFile()%>" width="100" height="100"></a></td></tr>
-<tr><td colspan="3"><a href="file_down.jsp?file_name=<%=jbb.getFile()%>"><%=jbb.getFile()%></a></td>
+<table id="content">
+<tr><th>글번호</th><td><%= jbb.getNum() %></td></tr>
+<tr><th>작성일</th><td><%=sdf.format(jbb.getDate()) %></td></tr>
+<tr><th>글쓴이</th><td><%= jbb.getName() %></td></tr>
+<tr><th>조회수</th><td><%=jbb.getReadcount() %></td></tr>
+<tr><th>제목</th><td colspan="3"><%=jbb.getSubject() %></td></tr>
+<tr><th>파일</th>
+<td><a href="file_down.jsp?file_name=<%=jbb.getFile()%>"><%=jbb.getFile()%></a></td>
 </tr>
-<%if(jbb.getId().equals(id)){%>
-<tr><td colspan="4">
+<tr><th>내용</th><td height="100" style="word-break:break-all;"><%=jbb.getContent() %></td></tr>
+
+<%
+System.out.print(jbb.getId());
+System.out.print(id);
+if(id.equals("admin")){
+%>
+<tr>
+<td rowspan="2">
 <input type="button" value="글수정" onclick="location.href='updateForm.jsp?num=<%=jbb.getNum()%>&pageNum=<%=pageNum%>'">
 <input type="button" value="글삭제" onclick="showhide();">
-</td></tr>
-<%}%>
+</td>
+</tr>
+<%} %>
+<%-- <%}%> --%>
+
 
 </table>
 

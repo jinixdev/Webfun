@@ -25,6 +25,7 @@ cb.setContent(request.getParameter("content"));
 cb.setCategory(category);
 cb.setP_num(p_num);
 cb.setReg_date(date);
+cb.setName(request.getParameter("name"));
 
 commentDAO cDAO = new commentDAO();
 cDAO.insertComment(cb,"board");

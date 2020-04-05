@@ -48,12 +48,7 @@ figcaption{text-align: center;color:#39F }
 /*글자정렬 가운데 글자색 #39F*/
 .clear{clear: both;}
 /*------------------*/
-#sub_img_gallery{width: 971px;height: 179px;
-background-image: url("../css/pic/info.jpg");
-background-size: cover;
-background-repeat: no-repeat;
-background-position: left top;
-margin: 10px 0 10px 0;}
+
 #sub_img_gallery{width: 971px;height: 179px;
 background-image: url("../css/pic/place1.jpg");
 background-size: cover;
@@ -86,13 +81,21 @@ src: local(""),
 article table#notice th{height: 20px;
 text-transform: capitalize;font-size: 14px;
 font-family: seo; font-weight: bold;padding: 5px;
-background-image: url("../images/center/t_back.jpg");
+/* background-image: url("../images/center/t_back.jpg"); */
+background-color : gray;
 background-repeat: repeat-x;
 background-position: center center; color:#FFF }
 /*높이 20 첫글자대문자
 글자크기 14 글자모양 seo 굵기 bold 안여백 5px
 배경이미지 images/center/t_back.jpg 반복 x 
 위치 center center 글자색 #FFF*/
+article table#content th{height: 20px;
+text-transform: capitalize;font-size: 14px;
+font-family: seo; font-weight: bold;padding: 5px;
+/* background-image: url("../images/center/t_back.jpg"); */
+background-repeat: repeat-x;
+background-position: center center;  }
+
 article table#notice td{text-align: center;
 padding: 6px 0; border-bottom-width: 1px;
 border-bottom-style: dotted;border-bottom-color: #999}

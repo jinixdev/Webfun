@@ -142,7 +142,7 @@ String id = (String)session.getAttribute("id");
 	%>
 	<hr>
 
-<table>
+<table >
 <tr><td rowspan="4">
 <%if(gb.getFile()==null) {%>
 <img src="../upload/<%=gb.getFile()%>" width="100" height="100">
@@ -151,13 +151,13 @@ String id = (String)session.getAttribute("id");
 
 <img src="../upload/<%=gb.getFile()%>" width="100" height="100">
 <%} %>
-</td><td>글쓴이</td><td><%= gb.getName() %></td>
-<td>평점</td><td><%=gb.getStar() %></td></tr>
-<tr><td>내용</td><td colspan="4" width='250px' style="word-break:break-all;"><%=gb.getContent() %></td></tr>
+</td><th>글쓴이</th><td><%= gb.getName() %></td>
+<th>평점</th><td><%=gb.getStar() %></td></tr>
+<tr><td colspan="4" width='350' style='word-break:break-all;'><%=gb.getContent() %></td></tr>
 
 
-<tr><td>음식 양</td><td><%=gb.getEattype() %></td></tr>
-<tr><td>작성일</td><td><%= sdf.format(gb.getDate())%></td></tr>
+<tr><th>음식 양</th><td><%=gb.getEattype() %></td></tr>
+<tr><th>작성일</th><td><%= sdf.format(gb.getDate())%></td></tr>
 <tr><td><input type="button" value="댓글" onclick="showcomment(<%=gb.getNum()%>);"></td>
 <%if(gb.getId().equals(id)){%>
 <td>
@@ -184,7 +184,7 @@ List comList= comDAO.getCommentList(gb.getNum(),category);%>
 	commentBean cb = (commentBean)comList.get(j);
 	%>
 	
-<tr><td><%=cb.getId() %></td><td><%=cb.getContent() %></td> 
+<tr><th><%=cb.getId() %></th><td><%=cb.getContent() %></td> 
 <td><%if (sdf.format(gb.getDate()).equals(sdf.format(nowtime))) {%>
 <span><%=time.format(cb.getReg_date()) %></span>
 			<span style="color: red;"><sup>Ν</sup></span> 

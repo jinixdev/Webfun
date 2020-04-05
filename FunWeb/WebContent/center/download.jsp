@@ -134,7 +134,7 @@ List boardlist = jbDAO.getboardList(startRow,pageSize,category); //호출
 	<input type="submit" value="search" class="btn">
 		<%
 		String id = (String) session.getAttribute("id");
-		if (id != null) {
+		if (id.equals("admin")) {
 	%>
 	<input type="button" value="글작성" class="btn"
 		onclick="location.href='../download/writeForm.jsp'">

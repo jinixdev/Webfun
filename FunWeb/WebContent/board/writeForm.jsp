@@ -36,18 +36,11 @@
 
 <!-- 본문들어가는 곳 -->
 <!-- 메인이미지 -->
-<div id="sub_img_center"></div>
+<div id="sub_img_notice"></div>
 <!-- 메인이미지 -->
 
 <!-- 왼쪽메뉴 -->
-<nav id="sub_menu">
-<ul>
-<li><a href="#">Notice</a></li>
-<li><a href="#">Public News</a></li>
-<li><a href="#">Driver Download</a></li>
-<li><a href="#">Service Policy</a></li>
-</ul>
-</nav>
+<jsp:include page="../inc/notice_sub_menu.jsp"></jsp:include>
 <!-- 왼쪽메뉴 -->
 
 <!-- 게시판 -->
@@ -69,11 +62,11 @@ String id = (String)session.getAttribute("id");
 %>
 <form action="writePro.jsp" method="post">
 <input type="hidden" name="id" value="<%=jmb.getId()%>">
-<table border="1">
-<tr><td>글쓴이</td><td><input type="text" name="name" value="<%=jmb.getName()%>"></td></tr>
-<tr><td>비밀번호</td><td><input type="text" name="pass"></td></tr>
-<tr><td>제목</td><td><input type="text" name="subject"></td></tr>
-<tr><td>내용</td><td><textarea name="content" rows="10" cols="20"></textarea></td></tr>
+<table id="content">
+<tr><th>글쓴이</th><td><input type="text" name="name" value="<%=jmb.getName()%>"></td></tr>
+<tr><th>비밀번호</th><td><input type="text" name="pass"></td></tr>
+<tr><th>제목</th><td><input type="text" name="subject"></td></tr>
+<tr><th>내용</th><td><textarea name="content" rows="10" cols="20"></textarea></td></tr>
 <tr><td><input type="submit" value="확인"></td>
 <td><input type="button" value="취소" onclick="history.back()"></td></tr>
 

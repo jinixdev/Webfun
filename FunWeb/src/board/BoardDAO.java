@@ -162,7 +162,7 @@ public class BoardDAO {
 		return jbblist;
 	}//getboardList(String id)
 	
-	public BoardBean getboardContent(int num) {
+	public BoardBean getboardContent(int num,String category) {
 		BoardBean jbb = new BoardBean();
 		ResultSet rs=null;
 		PreparedStatement pre=null;
@@ -177,9 +177,10 @@ public class BoardDAO {
 			 pre.setInt(1, num);
 			 pre.executeUpdate();
 			
-			 sql = "select * from board where num=?"; 
+			 sql = "select * from board where num=?&&category=?"; 
 			 pre = con.prepareStatement(sql); 
 			 pre.setInt(1, num);
+			 pre.setString(2, category);
 			 rs= pre.executeQuery();
 			 if(rs.next()) {
 				 jbb.setNum(rs.getInt("num"));
@@ -211,12 +212,13 @@ public class BoardDAO {
 		
 		try {
 			con = getConnection();
-			String sql="update board set subject=?,content=? where num=?";
+			String sql="update board set subject=?,content=? where num=?&&category=?";
 			pre = con.prepareStatement(sql);
-			System.out.print(jbb.getSubject());
+			
 			pre.setString(1, jbb.getSubject());
 			pre.setString(2, jbb.getContent());
 			pre.setInt(3, num);
+			pre.setString(4, jbb.getCategory());
 			pre.executeUpdate();
 			
 		} catch (Exception e) {

@@ -55,8 +55,11 @@ src: url("../images/segoeui.eot");
 src: local(""),
      url("../images/segoeui.woff")format("woff"),
      url("../images/segoeui.ttf")format("truetype");}
-footer{margin: 50px 0 0 0; height: 80px;
-background-image: url("../images/under_logo.gif");
+footer{margin: 30px 0 0 0; 
+/* height: 80px; */
+width: 971px;height: 80px;
+background-image: url("../images/facebook_cover_photo_1.png");
+background-size: contain;
 background-repeat: no-repeat;
 background-position: 40px center;}
 /*밖여백 50px 0 0 0 높이 80px 배경이미지under_logo.gif

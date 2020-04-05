@@ -179,19 +179,19 @@ input {
 <!-- form태그에서만 post -->
 <fieldset>
 <legend>Basic Info</legend>
-<label>*User ID</label>
+<label>User ID</label>
 <input type="text" name="id" class="id" id="id" onkeydown="iduncheck()">
 <input type="button" value="dup. check" class="dup" onclick="userDupCheck()"><br>
 <input type="hidden" name="idDuplication" id="idDuplication" value="idUncheck" ><br>
 
 
-<label>*Password</label>
+<label>Password</label>
 <input type="password" id="pass" name="pass" onkeyup="retype()"><span id="passcheck"></span><br>
 
 <label>Retype Password</label>
 <input type="password" id="pass2" name="pass2" onkeyup="retype()"> <span id="passsame"></span>
 <input type="hidden"  id="passDuplication" value="passUncheck" ><br>
-<label>*Name</label>
+<label>Name</label>
 <input type="text" id="name" name="name"><br>
 <label>E-Mail</label>
 <input type="email" id="email" name="email" onkeyup="retype()"><br>

@@ -65,11 +65,11 @@ String category = "download";
 %>
 <form action="writePro.jsp" method="post" enctype="multipart/form-data">
 <input type="hidden" name="id" value="<%=jmb.getId()%> ">
-<table border="1">
-<tr><td>글쓴이</td><td><input type="text" name="name" value="<%=jmb.getName()%>"></td></tr>
-<tr><td>비밀번호</td><td><input type="text" name="pass"></td></tr>
-<tr><td>제목</td><td><input type="text" name="subject"></td></tr>
-<tr><td>내용</td><td><textarea name="content" rows="10" cols="20"></textarea></td></tr>
+<table id="content">
+<tr><th>글쓴이</th><td><input type="text" name="name" value="<%=jmb.getName()%>"></td></tr>
+<tr><th>비밀번호</th><td><input type="text" name="pass"></td></tr>
+<tr><th>제목</th><td><input type="text" name="subject"></td></tr>
+<tr><th>내용</th><td><textarea name="content" rows="10" cols="20"></textarea></td></tr>
 <tr><td colspan="2"><input type="file" name="file" id="file"></td></tr>
 <tr><td><input type="submit" value="확인"></td>
 <td><input type="button" value="취소" onclick="history.back()"></td></tr>

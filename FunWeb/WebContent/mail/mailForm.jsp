@@ -30,6 +30,12 @@
 	h1{
 		text-align: center;
 	}
+	tr{
+	text-decoration: underline;
+	}
+	td{
+	text-decoration: underline;
+	}
 
 </style>
 </head>
@@ -56,25 +62,22 @@
 
 			<form action="mailSend.jsp" method="post">
 				<h1>Contact us</h1>
-				<table border="1">
+				<table>
 					<tr>
-						<td>보내는 사람 메일 :</td>
-						<td><input type="text" name="sender" style="border:none" ></td>
+						<td><input type="text" name="sender" style="border:none" placeholder="Your email"></td>
 					</tr>
 <!-- 					<tr> -->
 <!-- 						<td>받는 사람 메일 :</td> -->
 <!-- 						<td><input type="text" name="receiver"></td> -->
 <!-- 					</tr> -->
 					<tr>
-						<td>제목 :</td>
-						<td><input type="text" name="subject" style="border:none" ></td>
+						<td><input type="text" name="subject" style="border:none" placeholder="Subject"></td>
 					</tr>
 					<tr>
-						<td>내용 :</td>
-						<td><textarea name="content" cols=40 rows=20 style="border:none" ></textarea></td>
+						<td><textarea name="content" cols=50 rows=10 style="border:none" placeholder="Content"></textarea></td>
 					</tr>
 					<tr>
-						<td align=center colspan=2><input type="submit" value="보내기"></td>
+						<td align=center colspan=2><input type="submit" value="Submit"></td>
 					</tr>
 				</table>
 			</form>

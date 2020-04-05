@@ -6,8 +6,14 @@ public class commentBean {
 	
 	
 		private int num,p_num,r_num,re_r_num;
-		private String id,content,category;
+		private String id,content,category,name;
 		
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
 		public String getCategory() {
 			return category;
 		}

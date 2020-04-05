@@ -66,19 +66,18 @@ int endRow = currentPage*pageSize;
 List boardlist = jbDAO.getboardList_mylst(startRow,pageSize,id);
 %>
 
-<table border="1">
-<tr><td>글번호</td><td>조회수</td><td>글쓴이</td><td>비밀번호</td><td>제목</td><td>내용</td><td>작성날짜</td></tr>
+<table id="notice">
+<tr><th>글번호</th><th>글쓴이</th><th>비밀번호</th><th>제목</th><th>내용</th><th>작성날짜</th><th>조회수</th></tr>
 <%
 for(int i =0;i<boardlist.size();i++){
 	BoardBean jbb = (BoardBean)boardlist.get(i);%>
-	<tr><td><%=jbb.getNum() %></td><td><%=jbb.getReadcount() %></td>
+	<tr><td><%=jbb.getNum() %></td>
 	<td><%=jbb.getName() %></td><td><%=jbb.getPass() %></td>
-	<td><a href="content.jsp?num=<%=jbb.getNum()%>"><%= jbb.getSubject() %></a></td>
+	<td><a href="../board/content.jsp?num=<%=jbb.getNum()%>&pageNum=<%=pageNum%>"><%= jbb.getSubject() %></a></td>
 	<td><%=jbb.getContent() %></td><td><%=jbb.getDate()%></td>
+	<td><%=jbb.getReadcount() %></td>
 	</tr>
 <%} %>
-<tr><td><input type="button" value="글작성" onclick="location.href='writeForm.jsp'"></td></tr>
-
 </table>
 
 <br>

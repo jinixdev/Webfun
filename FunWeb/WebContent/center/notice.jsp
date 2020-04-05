@@ -130,7 +130,7 @@ List boardlist = jbDAO.getboardList(startRow,pageSize,category); //호출
 <!-- searchcode -->
 <div id="table_search">
 <form action="noticeSearch.jsp" method="post">
-	<input type="text" name="search" class="input_box"> 
+	<input type="text" name="search" class="input_box" placeholder="제목명으로 검색하세요"> 
 	<input type="submit" value="search" class="btn">
 		<%
 		String id = (String) session.getAttribute("id");

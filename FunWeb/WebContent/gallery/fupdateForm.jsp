@@ -12,7 +12,6 @@
 <script type="text/javascript">
 function submitCheck(file){
 	if(document.getElementById("file").value==""||document.getElementById("file").value==null){
-		alert(file);
 		document.getElementById("file").value ="../upload/"+file;
 		return false;
 	}

@@ -90,7 +90,7 @@ int p_num = Integer.parseInt(request.getParameter("num"));
 String pageNum = request.getParameter("pageNum"); // 계산할것이 아니므로 String으로 받아도 됨
 System.out.println("num : "+p_num);
 BoardDAO jbDAO= new BoardDAO();
-BoardBean jbb= jbDAO.getboardContent(p_num);
+BoardBean jbb= jbDAO.getboardContent(p_num,category);
 String id = (String)session.getAttribute("id");
 /* int num2 = jbb.getNum(); */
 
@@ -99,12 +99,12 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
 		SimpleDateFormat time = new SimpleDateFormat("hh:mm");
 %>
 
-<table >
-<tr><td>작성일</td><td><%=jbb.getDate() %></td></tr>
-<tr><td>글쓴이</td><td><%= jbb.getName() %></td></tr>
-<tr><td>조회수</td><td><%=jbb.getReadcount() %></td></tr>
-<tr><td>제목</td><td colspan="3"><%=jbb.getSubject() %></td></tr>
-<tr><td>내용</td><td colspan="3" ><%=jbb.getContent() %></td></tr>
+<table id="content">
+<tr><th>작성일</th><td><%=jbb.getDate() %></td></tr>
+<tr><th>글쓴이</th><td><%= jbb.getName() %></td></tr>
+<tr><th>조회수</th><td><%=jbb.getReadcount() %></td></tr>
+<tr><th>제목</th><td colspan="3"><%=jbb.getSubject() %></td></tr>
+<tr><th>내용</th><td colspan="3" ><%=jbb.getContent() %></td></tr>
 
 <tr><td colspan="4">
 <%if(jbb.getId().equals(id)){%>
@@ -118,7 +118,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
 <div id="showtable" style="display:none;">
 <form action="deletePro.jsp?pageNum=<%=pageNum%>" method="post">
 <table>
-<tr><td>비밀번호</td><td><input type="password" name="pass"></td>
+<tr><th>비밀번호</th><td><input type="password" name="pass"></td>
 <% session.setAttribute("num", jbb.getNum());%>
 <td><button type="submit" value="확인">확인</button></td></tr>
 </table>

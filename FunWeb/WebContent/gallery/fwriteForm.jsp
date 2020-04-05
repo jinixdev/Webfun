@@ -77,7 +77,7 @@ String id = (String)session.getAttribute("id");
 
 <tr><td colspan="2"><input type="file" name="file" id="file"></td></tr>
 <tr><td colspan="2"><textarea name="content" rows="10" cols="50"></textarea></td></tr>
-<tr><td>평점</td><td>
+<tr><th>평점</th><td>
 
 <div id="star">
 <span id="star_grade" >
@@ -93,7 +93,7 @@ String id = (String)session.getAttribute("id");
 
 
 </td></tr>
-<tr><td>음식 양</td>
+<tr><th>음식 양</th>
 <td><input name="eatstyle" type="checkbox" value="양적음" />양적음
 <input name="eatstyle" type="checkbox" value="보통" />보통
 <input name="eatstyle" type="checkbox" value="양많음" />양많음
