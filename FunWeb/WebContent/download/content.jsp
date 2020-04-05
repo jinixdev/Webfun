@@ -109,19 +109,21 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
 <td><a href="file_down.jsp?file_name=<%=jbb.getFile()%>"><%=jbb.getFile()%></a></td>
 </tr>
 <tr><th>내용</th><td height="100" style="word-break:break-all;"><%=jbb.getContent() %></td></tr>
-
+<tr>
+<td rowspan="2">
 <%
 System.out.print(jbb.getId());
 System.out.print(id);
+if(id!=null){
 if(id.equals("admin")){
 %>
-<tr>
-<td rowspan="2">
+
 <input type="button" value="글수정" onclick="location.href='updateForm.jsp?num=<%=jbb.getNum()%>&pageNum=<%=pageNum%>'">
 <input type="button" value="글삭제" onclick="showhide();">
+
+<%}}%>
 </td>
 </tr>
-<%} %>
 <%-- <%}%> --%>
 
 

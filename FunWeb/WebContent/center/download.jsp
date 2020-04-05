@@ -83,7 +83,15 @@ int endRow = currentPage*pageSize;
 
 List boardlist = jbDAO.getboardList(startRow,pageSize,category); //호출
 // List boardlist = jbDAO.getboardList();
+String id = (String)session.getAttribute("id"); 
 %>
+<%if(id==null){%> 
+ <script type="text/javascript"> 
+ alert("자료실은 회원만 이용가능합니다.");
+ location.href="../member/login.jsp";
+ </script> 
+<%} %>
+
 <table id="notice">
 	<tr>
 		<th class="tno">No.</th>
@@ -132,15 +140,9 @@ List boardlist = jbDAO.getboardList(startRow,pageSize,category); //호출
 <form action="noticeSearch.jsp" method="post">
 	<input type="text" name="search" class="input_box"> 
 	<input type="submit" value="search" class="btn">
-		<%
-		String id = (String) session.getAttribute("id");
-		if (id.equals("admin")) {
-	%>
 	<input type="button" value="글작성" class="btn"
 		onclick="location.href='../download/writeForm.jsp'">
-	<%
-		}
-	%>
+	
 	</form>
 
 </div>

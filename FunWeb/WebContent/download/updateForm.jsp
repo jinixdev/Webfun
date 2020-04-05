@@ -35,7 +35,7 @@ int num = Integer.parseInt(request.getParameter("num"));
 BoardDAO jbDAO= new BoardDAO();
 BoardBean jbb= jbDAO.getboardContent(num,category);
 %>
-<form action="updatePro.jsp" method="post">
+<form action="updatePro.jsp" method="post" enctype="multipart/form-data">
 <table id="content">
 
 <tr><th>작성일</th><td><%=jbb.getDate() %></td></tr>
@@ -51,6 +51,7 @@ BoardBean jbb= jbDAO.getboardContent(num,category);
 </table>
 <input type="hidden" name="category" value="download">
 <input type="hidden" name="id" value="<%=jbb.getId()%>">
+<input type="hidden" name="num" value="<%=jbb.getNum()%>">
 </form>
 
 </article>

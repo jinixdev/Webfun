@@ -27,7 +27,7 @@ jbb.setNum(num);
 jbb.setName(multi.getParameter("name"));
 jbb.setSubject(multi.getParameter("subject"));
 jbb.setContent(multi.getParameter("content"));
-jbb.setCategory(multi.getParameter("catogory"));
+jbb.setCategory(multi.getParameter("category"));
 
 //폴더에 업로드 된 파일이름
 String file = multi.getFilesystemName("file");
@@ -37,7 +37,7 @@ jbb.setFile(file);
 BoardDAO jbDAO = new BoardDAO();
 jbDAO.updateBoard(num, jbb); 
 
-response.sendRedirect("../center/download.jsp");
+response.sendRedirect("../center/download.jsp?num="+num);
 
 %>
 </body>
