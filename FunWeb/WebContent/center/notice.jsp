@@ -54,7 +54,7 @@ BoardDAO jbDAO= new BoardDAO();
 int count = jbDAO.getBoardCount(category);
 
 // 한 화면에 보여줄 가져올 글 개수 설정
-int pageSize =8;
+int pageSize =10;
 
 
 // 현 페이지 번호 가져오기 pageNum 파라미터 가져오기 (처음엔 없기때문에 "1")

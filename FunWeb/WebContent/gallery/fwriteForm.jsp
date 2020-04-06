@@ -25,6 +25,11 @@ function submitCheck(){
 
 }
 
+function map(){
+// 	window.name = "checkPro";
+	checkpro=window.open("map.jsp","chkpro", "width=800, height=600, resizable = no, scrollbars = no");
+ }
+
 
 
 </script>

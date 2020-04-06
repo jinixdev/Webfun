@@ -66,7 +66,7 @@ String id = (String)session.getAttribute("id");
 <tr><th>글쓴이</th><td><input type="text" name="name" value="<%=jmb.getName()%>"></td></tr>
 <tr><th>비밀번호</th><td><input type="text" name="pass"></td></tr>
 <tr><th>제목</th><td><input type="text" name="subject"></td></tr>
-<tr><th>내용</th><td><textarea name="content" rows="10" cols="20"></textarea></td></tr>
+<tr><th>내용</th><td><textarea name="content" rows="10" cols="50"></textarea></td></tr>
 <tr><td><input type="submit" value="확인"></td>
 <td><input type="button" value="취소" onclick="history.back()"></td></tr>
 

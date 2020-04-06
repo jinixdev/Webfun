@@ -35,6 +35,27 @@ window.addEventListener('DOMContentLoaded', function(){
 			}
 		}
 		
+		var loop = document.getElementById("listSize").value;
+
+		for(j=0;j<=loop;j++){
+
+
+		var stars = document.getElementById("stars"+j).value;
+		var name = document.getElementById("stars"+j).id;
+
+		for(i=1; i<=stars; i++){
+			 image = "star"+i+j;
+			 el = document.getElementById(image);
+			 el.src= "../css/pic/star1.png";
+		}
+
+
+		}
+	
+		
+		
+	
+	
 		
 		
 
@@ -62,6 +83,10 @@ function contentdelete(p_num,category){
 
 </script> 
 <script src="gallery.js"></script>
+<style type="text/css">
+th{
+color: orange;
+}</style>
 </head>
 <body>
 <div id="wrap">
@@ -100,14 +125,16 @@ String id = (String)session.getAttribute("id");
 /* int num2 = gb.getNum(); */
 %>
 
-<input type="hidden" id="eattypes" value=<%=gb.getEattype()%>>
 
-<table>
+<input type="hidden" id="rating" value=<%=rating%>>
+
+<table style="font-size:15px;padding-bottom:10;">
 <tr><td colspan="2">
 <a href="file_down.jsp?file_name=<%=gb.getFile()%>"></a></td></tr>
 <tr><th>장소</th><td><%= gb.getPlacename() %></td></tr>
 <tr><th>주소</th><td><%= gb.getPlaceaddr() %></td></tr>
-<tr><th>평점</th><td style="text-decoration: underline;"><%=rating %></td></tr>
+<tr><th>평점</th><td style="font-size:15px ;color:orange;">
+<b><%=rating %></b></td></tr>
 
 
 </table>
@@ -137,14 +164,26 @@ String id = (String)session.getAttribute("id");
 
 <%List contentList= gDAO.getContentList(gb.getPlacename()); %>
 
+<input type="hidden" id="listSize" value="<%=contentList.size()%>">
+
 <% for(int i=0;i<contentList.size();i++){
 	gb = (galleryBean)contentList.get(i);
-	%>
+	
+%>
+	
+<input type="hidden" id="stars<%=i%>" value="<%=gb.getStar()%>">
+
 	<hr>
+<input type="hidden" id="eattypes" value="<%=gb.getEattype()%>">
+<input type="hidden" id="loop" value="<%=contentList.size()%>">
+
+
+	
 
 <table >
 <tr><td rowspan="4">
 <%if(gb.getFile()==null) {%>
+
 <img src="../upload/<%=gb.getFile()%>" width="100" height="100">
 
 <%}else{%>
@@ -152,7 +191,28 @@ String id = (String)session.getAttribute("id");
 <img src="../upload/<%=gb.getFile()%>" width="100" height="100">
 <%} %>
 </td><th>글쓴이</th><td><%= gb.getName() %></td>
-<th>평점</th><td><%=gb.getStar() %></td></tr>
+<th>평점</th><td style="font-size:30;">
+
+<div id="star">
+<span id="star_grade" >
+       <img id="star1<%=i%>" src="../css/pic/star0.png">
+       <img id="star2<%=i%>" src="../css/pic/star0.png">
+       <img id="star3<%=i%>" src="../css/pic/star0.png">
+       <img id="star4<%=i%>" src="../css/pic/star0.png">
+       <img id="star5<%=i%>" src="../css/pic/star0.png">
+</span>
+<input type="hidden" id="starValue" name="starValue" value="<%=gb.getStar()%>">
+</div>
+
+
+
+</td></tr>
+
+
+
+
+
+
 <tr><td colspan="4" width='350' style='word-break:break-all;'><%=gb.getContent() %></td></tr>
 
 
@@ -199,7 +259,7 @@ List comList= comDAO.getCommentList(gb.getNum(),category);%>
 <td><a href="../comment/deletePro.jsp?num=<%=cb.getNum()%>&p_num=<%=cb.getP_num()%>&category=<%=category%>">삭제</a></td> <%}} %></tr>
 </table>
 
-
+<%if(id!=null){ %>
 
 <div id="commenttable" style="display:block;">
 <form action="../comment/commentPro.jsp">
@@ -210,6 +270,7 @@ List comList= comDAO.getCommentList(gb.getNum(),category);%>
 <input type="submit">
 </form>
 </div>
+<%} %>
 
 </div>
 

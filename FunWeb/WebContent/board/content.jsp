@@ -100,7 +100,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
 %>
 
 <table id="content">
-<tr><th>작성일</th><td><%=jbb.getDate() %></td></tr>
+<tr><th width="50">작성일</th><td><%=jbb.getDate() %></td></tr>
 <tr><th>글쓴이</th><td><%= jbb.getName() %></td></tr>
 <tr><th>조회수</th><td><%=jbb.getReadcount() %></td></tr>
 <tr><th>제목</th><td colspan="3"><%=jbb.getSubject() %></td></tr>
@@ -128,6 +128,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
 </div>
 
 <hr>
+<br>
 
 
 

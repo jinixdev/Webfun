@@ -16,11 +16,11 @@ function submitCheck(file){
 		return false;
 	}
 	
-	if(document.getElementById("starValue").value==""||document.getElementById("starValue").value==null){
-		alert("별점을 등록해주세요");
-		document.getElementById("starValue").focus();
-		return false; //
-	}
+// 	if(document.getElementById("starValue").value==""||document.getElementById("starValue").value==null){
+// 		alert("별점을 등록해주세요");
+// 		document.getElementById("starValue").focus();
+// 		return false; //
+// 	}
 	
 	
 	
@@ -45,6 +45,29 @@ window.addEventListener('DOMContentLoaded', function(){
 				eat[i].checked = true;
 			}
 		}
+		
+		
+		var i,image,el;
+		
+
+
+		var stars = document.getElementById("starValue").value;
+
+		alert(stars);
+		star(stars);
+
+
+		function star(num){
+			
+
+		 for(i=1; i<=stars; i++){
+			 image = "star"+i;
+			 el = document.getElementById(image);
+			 el.src= "../css/pic/star1.png";
+		 }
+		}
+
+		
 		
 		
 		

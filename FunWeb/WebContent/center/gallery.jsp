@@ -94,7 +94,7 @@ List gallerylist = gDAO.getboardList(startRow,pageSize); //호출
 <!-- search -->
 <div id="table_search" style="margin: 0 0 0 50%;margin-bottom: 20px;">
 <form action="gallerySearch.jsp" method="post">
-<input type="text" name="search" class="input_box" placeholder="장소명으로 검색하세요">
+<input type="text" name="search" class="input_box" placeholder="음식점이름으로 검색하세요">
 <input type="submit" value="search" class="btn">
 <%String id = (String)session.getAttribute("id"); 
 if(id!=null){%>
@@ -112,7 +112,6 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
 Timestamp nowtime = new Timestamp(System.currentTimeMillis());
 SimpleDateFormat time = new SimpleDateFormat("hh:mm");
 %>
-
 <div class="g_content" onclick="location.href='../gallery/content.jsp?num=<%=gb.getNum()%>'">
 <%if(gb.getFile()==null) {%>
 <img src="../images/myimage/reviewimage.png" width="250" height="250">
@@ -129,7 +128,6 @@ SimpleDateFormat time = new SimpleDateFormat("hh:mm");
 <%-- <strong><%=gb.getReadcount() %></strong> --%>
 
 </div>
-
 
 </div>
 <%} %>
