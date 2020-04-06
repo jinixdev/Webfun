@@ -71,8 +71,8 @@ String category = "download";
 <tr><th>제목</th><td><input type="text" name="subject"></td></tr>
 <tr><th>내용</th><td><textarea name="content" rows="10" cols="20"></textarea></td></tr>
 <tr><td colspan="2"><input type="file" name="file" id="file"></td></tr>
-<tr><td><input type="submit" value="확인"></td>
-<td><input type="button" value="취소" onclick="history.back()"></td></tr>
+<tr><td><input type="submit" class="btn" value="Upload"></td>
+<td><input type="button" value="취소" class="btn" onclick="history.back()"></td></tr>
 
 </table>
 <input type="hidden" name="category" value="download">

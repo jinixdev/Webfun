@@ -108,8 +108,8 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
 
 <tr><td colspan="4">
 <%if(jbb.getId().equals(id)){%>
-<input type="button" value="글수정" onclick="location.href='updateForm.jsp?num=<%=jbb.getNum()%>&pageNum=<%=pageNum%>'">
-<input type="button" value="글삭제" onclick="showhide();">
+<input type="button" value="글수정" class="btn" onclick="location.href='updateForm.jsp?num=<%=jbb.getNum()%>&pageNum=<%=pageNum%>'">
+<input type="button" value="글삭제" class="btn" onclick="showhide();">
 <%}%>
 </td></tr>
 </table>
@@ -120,10 +120,10 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
 <table>
 <tr><th>비밀번호</th><td><input type="password" name="pass"></td>
 <% session.setAttribute("num", jbb.getNum());%>
-<td><button type="submit" value="확인">확인</button></td></tr>
+<td><button class="btn" type="submit" class="btn" value="확인">확인</button></td></tr>
 </table>
-<input type="hidden" name="p_num" value="<%=p_num%>">
-<input type="hidden" name="category" value="<%=category%>">
+<input  type="hidden" name="p_num" value="<%=p_num%>">
+<input type="hidden"  name="category" value="<%=category%>">
 </form>
 </div>
 
@@ -135,7 +135,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
 <!-- ----------------comment code---------------------- -->
 <!-- comment insert code -->
 <!-- must have id -->
-<% if(id!=null){ %>
+
 <%
 commentDAO comDAO = new commentDAO();
 List comList= comDAO.getCommentList(p_num,category);%>
@@ -150,17 +150,17 @@ List comList= comDAO.getCommentList(p_num,category);%>
 <td><a href="../comment/deletePro.jsp?num=<%=cb.getNum()%>&p_num=<%=cb.getP_num()%>&category=<%=category%>">삭제</a></td> <%}} %></tr>
 </table>
 
-
+<% if(id!=null){ %>
 <div id="commenttable" style="display:block;">
 <form action="../comment/commentPro.jsp">
 <input type="hidden" name="id" value="<%=id%>">
 <textarea name="content" cols="50" rows="2"></textarea>
 <input type="hidden" name="p_num" value="<%=p_num%>">
 <input type="hidden" name="category" value="<%=category%>">
-<input type="submit">
+<input type="submit" class="btn">
 </form>
 </div>
-
+<%} %>
 
 <!-- comment update code -->
 <div id="updatetable" style="display:none;">
@@ -170,13 +170,13 @@ List comList= comDAO.getCommentList(p_num,category);%>
 <textarea name="comment" id="comment" cols="50" rows="2"></textarea>
 <input type="hidden" name="p_num" id="p_num"><input type="hidden" name="r_num" id="r_num">
 <input type="hidden" name="category" value=<%=category %>>
-<input type="submit" value="수정" >
-<input type="button" value="취소" onclick="hide();">
+<input type="submit" value="수정" class="btn">
+<input type="button" class="btn" value="취소" onclick="hide();">
 </form>
 </div>
 
 
-<%} %>
+
 
 
 

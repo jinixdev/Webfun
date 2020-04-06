@@ -218,11 +218,11 @@ String id = (String)session.getAttribute("id");
 
 <tr><th>음식 양</th><td><%=gb.getEattype() %></td></tr>
 <tr><th>작성일</th><td><%= sdf.format(gb.getDate())%></td></tr>
-<tr><td><input type="button" value="댓글" onclick="showcomment(<%=gb.getNum()%>);"></td>
+<tr><td><input type="button" value="댓글" class="btn" onclick="showcomment(<%=gb.getNum()%>);"></td>
 <%if(gb.getId().equals(id)){%>
 <td>
-<input type="button" value="글수정" onclick="location.href='fupdateForm.jsp?num=<%=gb.getNum()%>&pageNum=<%=pageNum%>'">
-<input type="button" value="글삭제" onclick="javascript:contentdelete('<%=gb.getNum()%>','<%=category%>');">
+<input type="button" class="btn" value="글수정" onclick="location.href='fupdateForm.jsp?num=<%=gb.getNum()%>&pageNum=<%=pageNum%>'">
+<input type="button" class="btn" value="글삭제" onclick="javascript:contentdelete('<%=gb.getNum()%>','<%=category%>');">
 </td>
 <%}%>
 </tr>
@@ -283,7 +283,7 @@ List comList= comDAO.getCommentList(gb.getNum(),category);%>
 <input type="hidden" name="p_num" id="p_num"><input type="hidden" name="r_num" id="r_num">
 <input type="hidden" name="category" value="<%=category%>">
 <input type="submit" value="수정" >
-<input type="button" value="취소" onclick="hide();">
+<input type="button" class="btn" value="취소" onclick="hide();">
 </form>
 </div>
 

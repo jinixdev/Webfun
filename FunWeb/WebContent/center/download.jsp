@@ -140,8 +140,12 @@ String id = (String)session.getAttribute("id");
 <form action="noticeSearch.jsp" method="post">
 	<input type="text" name="search" class="input_box"> 
 	<input type="submit" value="search" class="btn">
+	
+	<%if(id.equals("admin")){%> 
 	<input type="button" value="글작성" class="btn"
 		onclick="location.href='../download/writeForm.jsp'">
+	<%} %>
+	
 	
 	</form>
 

@@ -133,7 +133,7 @@ border-radius:10px;
 #table_search .btn{padding: 2px;margin: 0 0 0 5px;
 width: 90px;height: 23px;border: 1px solid #999;
 border-radius:10px;color: #FFF;
-background-image: url("../images/center/t_back.jpg");
+background-color : #e87735;
 background-repeat: repeat-x;
 background-position: center center}
 /*안여백 2px 밖여백 0 0 0 5px
@@ -215,6 +215,23 @@ color: #fff;
 /*밖여백 0 0 0 20px
 배경이미지 images/member/cancel_back.jpg
 repeat-x center center*/
+table .btn{
+padding: 2px;margin: 0 0 0 5px;
+width: 80px;height: 23px;border: 1px solid #999;
+border-radius:10px;color: #FFF;
+background-color : #e69b32;
+background-repeat: repeat-x;
+background-position: center center
+	
+}
 
+
+
+form .btn{padding: 2px;margin: 0 0 0 5px;
+width: 80px;height: 23px;border: 1px solid #999;
+border-radius:10px;color: #FFF;
+background-color : #e87735;
+background-repeat: repeat-x;
+background-position: center center}
 
 

@@ -45,8 +45,8 @@ BoardBean jbb= jbDAO.getboardContent(num,category);
 <tr><th>내용</th><td colspan="3"><textarea name="content" rows="10" cols="50"><%=jbb.getContent() %></textarea></td></tr>
 <tr><td>파일</td><td><img src="../upload/<%=jbb.getFile()%>" width="100" height="100"></td></tr>
 <tr><td colspan="2"><input type="file" name="file" id="file"></td></tr>
-<tr><td colspan="4"> <input type="submit" value="확인">
-<input type="button" value="취소" onclick="location.href='../center/download.jsp'"></td></tr>
+<tr><td colspan="4"> <input type="submit" class="btn" value="확인">
+<input type="button" class="btn"value="취소" onclick="location.href='../center/download.jsp'"></td></tr>
 	
 </table>
 <input type="hidden" name="category" value="download">

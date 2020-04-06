@@ -118,8 +118,8 @@ if(id!=null){
 if(id.equals("admin")){
 %>
 
-<input type="button" value="글수정" onclick="location.href='updateForm.jsp?num=<%=jbb.getNum()%>&pageNum=<%=pageNum%>'">
-<input type="button" value="글삭제" onclick="showhide();">
+<input type="button" value="글수정" class="btn" onclick="location.href='updateForm.jsp?num=<%=jbb.getNum()%>&pageNum=<%=pageNum%>'">
+<input type="button" value="글삭제" class="btn" onclick="showhide();">
 
 <%}}%>
 </td>
@@ -135,7 +135,8 @@ if(id.equals("admin")){
 <table>
 <tr><td>비밀번호</td><td><input type="password" name="pass"></td>
 <% session.setAttribute("num", jbb.getNum());%>
-<td><button type="submit" value="확인">확인</button></td></tr>
+<td><button type="submit" value="확인" class="btn">확인</button></td></tr>
+<td><button type="button" value="확인" class="btn" onclick="showhide();">취소</button></td></tr>
 </table>
 <input type="hidden" name="p_num" value="<%=p_num%>">
 <input type="hidden" name="category" value="<%=category%>">
@@ -184,8 +185,8 @@ List comList= comDAO.getCommentList(p_num,category);%>
 <textarea name="comment" id="comment" cols="50" rows="2"></textarea>
 <input type="hidden" name="p_num" id="p_num"><input type="hidden" name="r_num" id="r_num">
 <input type="hidden" name="category" value=<%=category %>>
-<input type="submit" value="수정" >
-<input type="button" value="취소" onclick="hide();">
+<input type="submit" value="수정" class="btn">
+<input type="button" value="취소" class="btn" onclick="hide();">
 </form>
 </div>
 

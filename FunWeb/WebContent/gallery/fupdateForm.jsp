@@ -12,21 +12,12 @@
 <script type="text/javascript">
 function submitCheck(file){
 	if(document.getElementById("file").value==""||document.getElementById("file").value==null){
-		document.getElementById("file").value ="../upload/"+file;
-		return false;
+		document.getElementById("file").value =file;
+		return;
 	}
 	
-// 	if(document.getElementById("starValue").value==""||document.getElementById("starValue").value==null){
-// 		alert("별점을 등록해주세요");
-// 		document.getElementById("starValue").focus();
-// 		return false; //
-// 	}
 	
-	
-	
-	
-	
-}
+// }
 
 	
 window.addEventListener('DOMContentLoaded', function(){
@@ -53,7 +44,6 @@ window.addEventListener('DOMContentLoaded', function(){
 
 		var stars = document.getElementById("starValue").value;
 
-		alert(stars);
 		star(stars);
 
 
@@ -112,7 +102,8 @@ galleryDAO gDAO= new galleryDAO();
 galleryBean gb= gDAO.getboardContent(p_num);
 %>
 <input type="hidden" id="eattypes" value=<%=gb.getEattype()%>>
-<form action="fupdatePro.jsp" method="post" enctype="multipart/form-data" onsubmit="return submitCheck('<%=gb.getFile()%>');">
+<form action="fupdatePro.jsp" method="post" enctype="multipart/form-data" >
+
 <table >
 
 <tr><td>작성일</td><td><%=gb.getDate() %></td></tr>
@@ -121,7 +112,7 @@ galleryBean gb= gDAO.getboardContent(p_num);
 <tr><td colspan="2"><input type="text" id="placeaddr" name="placeaddr" style="width:300px;"
 value="<%=gb.getPlaceaddr()%>"></td></tr>
 <tr><td colspan="2"><img src="../upload/<%=gb.getFile()%>" width="300" height="250"></td></tr>
-<tr><td colspan="2"><input type="file" name="file" id="file" value="../upload/<%=gb.getFile()%>"></td></tr>
+<tr><td colspan="2"><input type="file" name="file" id="file" value="<%=gb.getFile()%>"></td></tr>
 
 
 <tr><td colspan="2"><textarea name="content" rows="10" cols="50" ><%=gb.getContent() %></textarea></td></tr>
@@ -152,6 +143,7 @@ value="<%=gb.getPlaceaddr()%>"></td></tr>
 <input type="hidden" name="name" value="<%=gb.getName()%>">
 <input type="hidden" name="num" value="<%=gb.getNum()%>">
 </form>
+
 
 </article>
 <!-- 게시판 -->

@@ -65,19 +65,19 @@ function show(image1,star){
 	 }
 	 switch (star){
 	 case 1:
-		 stateMsg ="1";
+		 stateMsg ="다신 안가고 싶어요";
 		 break;
 	 case 2:
-		 stateMsg ="2";
+		 stateMsg ="별로에요";
 		 break;
 	 case 3:
-		 stateMsg ="3";
+		 stateMsg ="보통이에요";
 		 break;
 	 case 4:
-		 stateMsg ="4";
+		 stateMsg ="괜찮아요";
 		 break;
 	 case 5:
-		 stateMsg ="5";
+		 stateMsg ="또가고싶어요";
 		 break;
 	default :
 		stateMsg = "";

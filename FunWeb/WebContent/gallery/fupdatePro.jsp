@@ -34,8 +34,15 @@ gb.setPlaceaddr(multi.getParameter("placeaddr"));
 // 폴더에 업로드 된 파일이름
 String file = multi.getFilesystemName("file");
 //BoardBean에 file 추가
+String file1 = multi.getFilesystemName("file1");
+System.out.println(file);
+System.out.println(file1);
+if(file==null){
+	
+	gb.setFile(file1);
+}else{
 gb.setFile(file);
-
+}
 // eatstyle
 String eatstyles[] = multi.getParameterValues("eatstyle");
  

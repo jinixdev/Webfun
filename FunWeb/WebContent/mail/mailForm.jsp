@@ -30,12 +30,8 @@
 	h1{
 		text-align: center;
 	}
-	tr{
-	text-decoration: underline;
-	}
-	td{
-	text-decoration: underline;
-	}
+	
+
 
 </style>
 </head>
@@ -64,17 +60,17 @@
 				<h1>Contact us</h1>
 				<table>
 					<tr>
-						<td><input type="text" name="sender" style="border:none" placeholder="Your email"></td>
+						<td><input type="email" name="sender" style="border:none;border-bottom: 1px solid gray;" placeholder="Your email"></td>
 					</tr>
 <!-- 					<tr> -->
 <!-- 						<td>받는 사람 메일 :</td> -->
 <!-- 						<td><input type="text" name="receiver"></td> -->
 <!-- 					</tr> -->
 					<tr>
-						<td><input type="text" name="subject" style="border:none" placeholder="Subject"></td>
+						<td><input type="text" name="subject" style="border:none;border-bottom:1px solid gray;" placeholder="Subject"></td>
 					</tr>
 					<tr>
-						<td><textarea name="content" cols=50 rows=10 style="border:none" placeholder="Content"></textarea></td>
+						<td><textarea name="content" cols=50 rows=10 style="border:none;border-bottom: 1px solid gray;" placeholder="Content"></textarea></td>
 					</tr>
 					<tr>
 						<td align=center colspan=2><input type="submit" value="Submit"></td>
